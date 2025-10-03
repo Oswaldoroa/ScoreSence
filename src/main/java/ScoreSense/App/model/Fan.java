@@ -18,7 +18,6 @@ public class Fan {
     @JoinColumn(name = "team_id")
     private Team team;
 
-    // Constructors
     public Fan() {}
 
     public Fan(String username, String socialMedia, Team team) {
