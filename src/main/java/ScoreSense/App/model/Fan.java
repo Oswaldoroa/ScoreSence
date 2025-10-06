@@ -21,9 +21,10 @@ public class Fan {
 
     public Fan() {}
 
-    public Fan(String username, String socialMedia, Team team) {
+    public Fan(String username, String socialMedia, String profilePictureUrl, Team team) {
         this.username = username;
         this.socialMedia = socialMedia;
+        this.profilePictureUrl = profilePictureUrl;
         this.team = team;
     }
 
@@ -36,6 +37,9 @@ public class Fan {
 
     public String getSocialMedia() { return socialMedia; }
     public void setSocialMedia(String socialMedia) { this.socialMedia = socialMedia; }
+
+    public String getProfilePictureUrl() { return profilePictureUrl; }
+    public void setProfilePictureUrl(String profilePictureUrl) { this.profilePictureUrl = profilePictureUrl; }
 
     public LocalDateTime getRegisteredAt() { return registeredAt; }
     public void setRegisteredAt(LocalDateTime registeredAt) { this.registeredAt = registeredAt; }
