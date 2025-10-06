@@ -12,6 +12,7 @@ public class Fan {
 
     private String username;
     private String socialMedia;
+    private String profilePictureUrl;
     private LocalDateTime registeredAt = LocalDateTime.now();
 
     @ManyToOne
