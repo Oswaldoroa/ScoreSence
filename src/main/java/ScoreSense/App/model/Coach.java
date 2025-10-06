@@ -1,7 +1,6 @@
 package ScoreSense.App.model;
 
 import jakarta.persistence.*;
-import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "coaches")
@@ -14,7 +13,6 @@ public class Coach {
     private String name;
     private String nationality;
     private Integer experiencedYears;
-    private LocalDateTime registeredAt = LocalDateTime.now();
 
     @ManyToOne
     @JoinColumn(name = "team_id")
