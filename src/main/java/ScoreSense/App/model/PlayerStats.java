@@ -13,7 +13,7 @@ import jakarta.persistence.Table;
 public class PlayerStats {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long statId;
+    private Long playerStatId;
 
     private Integer goals;
     private Integer assists;
@@ -42,8 +42,8 @@ public class PlayerStats {
         this.match = match;
     }
 
-    public Long getStatId() { return statId; }
-    public void setStatId(Long statId) { this.statId = statId; }
+    public Long getPlayerStatId() { return playerStatId; }
+    public void setPlayerStatId(Long statId) { this.playerStatId = statId; }
     public Integer getGoals() { return goals; }
     public void setGoals(Integer goals) { this.goals = goals; }
     public Integer getAssists() { return assists; }
