@@ -27,4 +27,42 @@ public class Team {
     @JoinColumn(name = "league_id")
     private League league;
 
+    public Team() {}
+
+    public Team(String name, String country, String founded_year, String stadium, String logo_url, League league) {
+        this.name = name;
+        this.country = country;
+        this.founded_year = founded_year;
+        this.stadium = stadium;
+        this.logo_url = logo_url;
+        this.league = league;
+    }
+
+    public Long getTeamId() { return teamId; }
+    public void setTeamId(Long teamId) { this.teamId = teamId; }
+
+    public String getName() { return name; }
+    public void setName(String name) { this.name = name; }
+
+    public String getCountry() { return country; }
+    public void setCountry(String country) { this.country = country; }
+
+    public String getFounded_year() { return founded_year; }
+    public void setFounded_year(String founded_year) { this.founded_year = founded_year;}
+
+    public String getStadium() { return stadium; }
+    public void setStadium(String stadium) { this.stadium = stadium; }
+
+    public String getLogo_url() { return logo_url; }
+    public void setLogo_url(String logo_url) { this.logo_url = logo_url; }
+
+    public List<Player> getPlayers() { return players; }
+    public void setPlayers(List<Player> players) { this.players = players; }
+
+    public List<Sentiment> getSentiments() { return sentiments; }
+    public void setSentiments(List<Sentiment> sentiments) { this.sentiments = sentiments;}
+
+    public League getLeague() { return league; }
+    public void setLeague(League league) { this.league = league; }
+
 }
