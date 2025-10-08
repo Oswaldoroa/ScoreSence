@@ -10,6 +10,7 @@ import java.util.List;
 public class PlayerController {
 
     private final PlayerRepository playerRepository;
+
     public PlayerController(PlayerRepository playerRepository) {
         this.playerRepository = playerRepository;
     }

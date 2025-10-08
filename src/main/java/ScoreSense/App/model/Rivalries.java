@@ -15,7 +15,7 @@ public class Rivalries {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long rivalrieId;
 
-    private String description; // Twitter, Facebook, etc.
+    private String description; // redes sociales
 
     @ManyToOne
     @JoinColumn(name = "team_id")

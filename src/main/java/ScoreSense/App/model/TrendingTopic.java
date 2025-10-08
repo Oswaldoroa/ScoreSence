@@ -13,7 +13,7 @@ public class TrendingTopic {
     private String topic;
     private LocalDateTime createdAt = LocalDateTime.now();
 
-    // Constructors
+
     public TrendingTopic() {}
 
     public TrendingTopic(String socialMedia, String topic) {
