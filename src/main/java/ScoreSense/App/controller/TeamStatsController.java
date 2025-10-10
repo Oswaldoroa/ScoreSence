@@ -38,7 +38,7 @@ public class TeamStatsController {
                     teamStat.setPossesion(updatedTeamStat.getPossesion());
                     teamStat.setShots(updatedTeamStat.getShots());
                     teamStat.setFouls(updatedTeamStat.getFouls());
-                    teamStat.setComers(updatedTeamStat.getComers());
+                    teamStat.setCorners(updatedTeamStat.getCorners());
                     teamStat.setTeam(updatedTeamStat.getTeam());
                     teamStat.setMatch(updatedTeamStat.getMatch());
                     return teamStatRepository.save(teamStat);

@@ -18,7 +18,7 @@ public class TeamStats {
     private Integer possesion;
     private Integer shots;
     private Integer fouls;
-    private Integer comers;
+    private Integer corners;
 
     @ManyToOne
     @JoinColumn(name = "team_id")
@@ -31,11 +31,11 @@ public class TeamStats {
 
     public TeamStats() {}
 
-    public TeamStats(Integer possesion, Integer shots, Integer fouls, Integer comers, Team team, Match match) {
+    public TeamStats(Integer possesion, Integer shots, Integer fouls, Integer corners, Team team, Match match) {
         this.possesion = possesion;
         this.shots = shots;
         this.fouls = fouls;
-        this.comers = comers;
+        this.corners = corners;
         this.team = team;
         this.match = match;
     }
@@ -48,8 +48,8 @@ public class TeamStats {
     public void setShots(Integer shots) { this.shots = shots; }
     public Integer getFouls() { return fouls; }
     public void setFouls(Integer fouls) { this.fouls = fouls; }
-    public Integer getComers() { return comers; }
-    public void setComers(Integer comers) { this.comers = comers; }
+    public Integer getCorners() { return corners; }
+    public void setCorners(Integer corners) { this.corners = corners; }
     public Team getTeam() { return team; }
     public void setTeam(Team team) { this.team = team; }
     public Match getMatch() { return match; }
