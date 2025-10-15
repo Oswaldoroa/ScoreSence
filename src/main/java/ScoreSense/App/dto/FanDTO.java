@@ -6,6 +6,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
 public class FanDTO {
+
     private Long id;
     @NotBlank(message = "DTO must not be null or empty")
     @Size(min = 2, max = 100, message = "DTO must be between 2 and 100 characters")
@@ -13,35 +14,53 @@ public class FanDTO {
     private String socialMedia;
     private String profilePictureUrl;
     private LocalDateTime registeredAt = LocalDateTime.now();
+    private Long teamId;
 
     public Long getId() {
         return id;
     }
+
     public void setId(Long id) {
         this.id = id;
     }
+
     public String getUsername() {
         return username;
     }
+
     public void setUsername(String username) {
         this.username = username;
     }
+
     public String getSocialMedia() {
         return socialMedia;
     }
+
     public void setSocialMedia(String socialMedia) {
         this.socialMedia = socialMedia;
     }
+
     public String getProfilePictureUrl() {
         return profilePictureUrl;
     }
+
     public void setProfilePictureUrl(String profilePictureUrl) {
         this.profilePictureUrl = profilePictureUrl;
     }
+
     public LocalDateTime getRegisteredAt() {
         return registeredAt;
     }
+
     public void setRegisteredAt(LocalDateTime registeredAt) {
         this.registeredAt = registeredAt;
+    }
+
+    public Long getTeamId() {
+        return teamId;
+    }
+
+    public void setTeamId(Long teamId) {
+        this.teamId = teamId;
     }
 }
