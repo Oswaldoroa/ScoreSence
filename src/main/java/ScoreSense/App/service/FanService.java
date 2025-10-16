@@ -1,7 +1,9 @@
 package ScoreSense.App.service;
 import java.util.List;
 import ScoreSense.App.model.Fan;
+
 public interface FanService {
+
     List<Fan> findAll();
     Fan findById(Long id);
     Fan create(Fan fan);
