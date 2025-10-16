@@ -1,5 +1,8 @@
 package ScoreSense.App.model;
 
+import org.hibernate.annotations.Collate;
+
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -7,17 +10,29 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 @Entity
 @Table(name = "team_stats")
 public class TeamStats {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "team_stat_id")
     private Long teamStatId;
 
+    @Column(name = "possesion")
     private Integer possesion;
+
+    @Column(name = "shots")
     private Integer shots;
+
+    @Column(name = "fouls")
     private Integer fouls;
+
+    @Column(name = "corners")
     private Integer corners;
 
     @ManyToOne
@@ -27,31 +42,4 @@ public class TeamStats {
     @ManyToOne
     @JoinColumn(name = "match_id")
     private Match match;
-
-
-    public TeamStats() {}
-
-    public TeamStats(Integer possesion, Integer shots, Integer fouls, Integer corners, Team team, Match match) {
-        this.possesion = possesion;
-        this.shots = shots;
-        this.fouls = fouls;
-        this.corners = corners;
-        this.team = team;
-        this.match = match;
-    }
-
-    public Long getTeamStatId() { return teamStatId; }
-    public void setTeamStatId(Long teamStatId) { this.teamStatId = teamStatId; }
-    public Integer getPossesion() { return possesion; }
-    public void setPossesion(Integer possesion) { this.possesion = possesion; }
-    public Integer getShots() { return shots; }
-    public void setShots(Integer shots) { this.shots = shots; }
-    public Integer getFouls() { return fouls; }
-    public void setFouls(Integer fouls) { this.fouls = fouls; }
-    public Integer getCorners() { return corners; }
-    public void setCorners(Integer corners) { this.corners = corners; }
-    public Team getTeam() { return team; }
-    public void setTeam(Team team) { this.team = team; }
-    public Match getMatch() { return match; }
-    public void setMatch(Match match) { this.match = match; }
 }

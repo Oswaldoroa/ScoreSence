@@ -1,36 +1,26 @@
 package ScoreSense.App.model;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 @Entity
 @Table(name = "trending_topics")
 public class TrendingTopic {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "topic_id")
     private Long topicId;
 
+    @Column(name = "social_media")
     private String socialMedia;
+
+    @Column(name = "topic")
     private String topic;
+
+    @Column(name = "created_at")
     private LocalDateTime createdAt = LocalDateTime.now();
 
-
-    public TrendingTopic() {}
-
-    public TrendingTopic(String socialMedia, String topic) {
-        this.socialMedia = socialMedia;
-        this.topic = topic;
-    }
-
-
-    public Long getTopicId() { return topicId; }
-    public void setTopicId(Long topicId) { this.topicId = topicId; }
-
-    public String getSocialMedia() { return socialMedia; }
-    public void setSocialMedia(String socialMedia) { this.socialMedia = socialMedia; }
-
-    public String getTopic() { return topic; }
-    public void setTopic(String topic) { this.topic = topic; }
-
-    public LocalDateTime getCreatedAt() { return createdAt; }
-    public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
 }
