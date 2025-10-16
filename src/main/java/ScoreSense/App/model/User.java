@@ -3,9 +3,6 @@ package ScoreSense.App.model;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import org.hibernate.annotations.Collate;
-import org.hibernate.annotations.CollectionId;
-
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
