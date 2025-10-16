@@ -3,64 +3,44 @@ package ScoreSense.App.mapper;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import ScoreSense.App.dto.TrendingTopicDTO;
+import ScoreSense.App.dto.TrendingTopicRequest;
+import ScoreSense.App.dto.TrendingTopicResponse;
 import ScoreSense.App.model.TrendingTopic;
 
 public final class TrendingTopicMapper {
+    public static TrendingTopicResponse toResponse(TrendingTopic topic) {
+        if (topic == null) return null;
 
-    public static TrendingTopicDTO toDTO(TrendingTopic topic) {
-        if (topic == null) {
-            return null;
-        }
+        TrendingTopicResponse response = new TrendingTopicResponse();
+        response.setTopicId(topic.getTopicId());
+        response.setSocialMedia(topic.getSocialMedia());
+        response.setTopic(topic.getTopic());
+        response.setCreatedAt(topic.getCreatedAt());
 
-        TrendingTopicDTO dto = new TrendingTopicDTO();
-
-        dto.setId(topic.getTopicId());
-        dto.setSocialMedia(topic.getSocialMedia());
-        dto.setTopic(topic.getTopic());
-
-        dto.setCreatedAt(topic.getCreatedAt());
-
-        return dto;
+        return response;
     }
 
-    public static TrendingTopic toEntity(TrendingTopicDTO dto) {
-        if (dto == null) {
-            return null;
-        }
-
-        TrendingTopic entity = new TrendingTopic();
-
-        if (dto.getId() != null) {
-            entity.setTopicId(dto.getId());
-        }
-
-        entity.setSocialMedia(dto.getSocialMedia());
-        entity.setTopic(dto.getTopic());
-
-        if (dto.getCreatedAt() != null) {
-            entity.setCreatedAt(dto.getCreatedAt());
-        }
-
-        return entity;
-    }
-
-    public static void copyToEntity(TrendingTopicDTO dto, TrendingTopic entity) {
-        if (dto == null || entity == null) {
-            return;
-        }
-
-        entity.setSocialMedia(dto.getSocialMedia());
-        entity.setTopic(dto.getTopic());
-
-    }
-
-    public static List<TrendingTopicDTO> toDTOList(List<TrendingTopic> topicsList) {
-        if (topicsList == null) {
-            return List.of();
-        }
-        return topicsList.stream()
-                .map(TrendingTopicMapper::toDTO)
+    public static List<TrendingTopicResponse> toResponseList(List<TrendingTopic> topics) {
+        if (topics == null) return List.of();
+        return topics.stream()
+                .map(TrendingTopicMapper::toResponse)
                 .collect(Collectors.toList());
+    }
+
+    public static TrendingTopic toEntity(TrendingTopicRequest request) {
+        if (request == null) return null;
+
+        TrendingTopic topic = new TrendingTopic();
+        topic.setSocialMedia(request.getSocialMedia());
+        topic.setTopic(request.getTopic());
+
+        return topic;
+    }
+
+    public static void copyToEntity(TrendingTopicRequest request, TrendingTopic entity) {
+        if (request == null || entity == null) return;
+
+        entity.setSocialMedia(request.getSocialMedia());
+        entity.setTopic(request.getTopic());
     }
 }

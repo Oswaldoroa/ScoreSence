@@ -3,71 +3,51 @@ package ScoreSense.App.mapper;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import ScoreSense.App.dto.TeamStatsDTO;
+import ScoreSense.App.dto.TeamStatsRequest;
+import ScoreSense.App.dto.TeamStatsResponse;
 import ScoreSense.App.model.TeamStats;
 
 public final class TeamStatsMapper {
+    public static TeamStatsResponse toResponse(TeamStats stats) {
+        if (stats == null) return null;
 
-    public static TeamStatsDTO toDTO(TeamStats stats) {
-        if (stats == null) {
-            return null;
-        }
+        TeamStatsResponse response = new TeamStatsResponse();
+        response.setTeamStatId(stats.getTeamStatId());
+        response.setPossession(stats.getPossesion()); // mapeo del modelo al DTO
+        response.setShots(stats.getShots());
+        response.setFouls(stats.getFouls());
+        response.setCorners(stats.getCorners());
+        response.setTeamId(stats.getTeam() != null ? stats.getTeam().getTeamId() : null);
+        response.setMatchId(stats.getMatch() != null ? stats.getMatch().getMatchId() : null);
 
-        TeamStatsDTO dto = new TeamStatsDTO();
-
-        dto.setId(stats.getTeamStatId());
-        dto.setPossesion(stats.getPossesion());
-        dto.setShots(stats.getShots());
-        dto.setFouls(stats.getFouls());
-        dto.setCorners(stats.getCorners());
-
-        if (stats.getTeam() != null) {
-            dto.setTeamId(stats.getTeam().getTeamId());
-        }
-
-        if (stats.getMatch() != null) {
-            dto.setMatchId(stats.getMatch().getMatchId());
-        }
-
-        return dto;
+        return response;
     }
 
-    public static TeamStats toEntity(TeamStatsDTO dto) {
-        if (dto == null) {
-            return null;
-        }
-
-        TeamStats entity = new TeamStats();
-
-        if (dto.getId() != null) {
-            entity.setTeamStatId(dto.getId());
-        }
-
-        entity.setPossesion(dto.getPossesion());
-        entity.setShots(dto.getShots());
-        entity.setFouls(dto.getFouls());
-        entity.setCorners(dto.getCorners());
-
-        return entity;
-    }
-
-    public static void copyToEntity(TeamStatsDTO dto, TeamStats entity) {
-        if (dto == null || entity == null) {
-            return;
-        }
-
-        entity.setPossesion(dto.getPossesion());
-        entity.setShots(dto.getShots());
-        entity.setFouls(dto.getFouls());
-        entity.setCorners(dto.getCorners());
-    }
-
-    public static List<TeamStatsDTO> toDTOList(List<TeamStats> statsList) {
-        if (statsList == null) {
-            return List.of();
-        }
+    public static List<TeamStatsResponse> toResponseList(List<TeamStats> statsList) {
+        if (statsList == null) return List.of();
         return statsList.stream()
-                .map(TeamStatsMapper::toDTO)
+                .map(TeamStatsMapper::toResponse)
                 .collect(Collectors.toList());
+    }
+
+    public static TeamStats toEntity(TeamStatsRequest request) {
+        if (request == null) return null;
+
+        TeamStats stats = new TeamStats();
+        stats.setPossesion(request.getPossesion());
+        stats.setShots(request.getShots());
+        stats.setFouls(request.getFouls());
+        stats.setCorners(request.getCorners());
+
+        return stats;
+    }
+
+    public static void copyToEntity(TeamStatsRequest request, TeamStats entity) {
+        if (request == null || entity == null) return;
+
+        entity.setPossesion(request.getPossesion());
+        entity.setShots(request.getShots());
+        entity.setFouls(request.getFouls());
+        entity.setCorners(request.getCorners());
     }
 }

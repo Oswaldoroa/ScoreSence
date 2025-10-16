@@ -3,70 +3,52 @@ package ScoreSense.App.mapper;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import ScoreSense.App.dto.SentimentsDTO;
+import ScoreSense.App.dto.SentimentRequest;
+import ScoreSense.App.dto.SentimentResponse;
 import ScoreSense.App.model.Sentiment;
 
 public final class SentimentMapper {
 
-    public static SentimentsDTO toDTO(Sentiment sentiment) {
-        if (sentiment == null) {
-            return null;
-        }
+    public static SentimentResponse toResponse(Sentiment sentiment) {
+        if (sentiment == null) return null;
 
-        SentimentsDTO dto = new SentimentsDTO();
-
-        dto.setId(sentiment.getSentimentId());
-        dto.setSource(sentiment.getSource());
-        dto.setSentiment(sentiment.getSentiment());
-        dto.setComment(sentiment.getComment());
-        dto.setCreatedAt(sentiment.getCreatedAt());
-
-        if (sentiment.getTeam() != null) {
-            dto.setTeamId(sentiment.getTeam().getTeamId());
-        }
-
-        return dto;
+        return SentimentResponse.builder()
+                .sentimentId(sentiment.getSentimentId())
+                .source(sentiment.getSource())
+                .sentiment(sentiment.getSentiment())
+                .comment(sentiment.getComment())
+                .createdAt(sentiment.getCreatedAt())
+                .teamId(sentiment.getTeam() != null ? sentiment.getTeam().getTeamId() : null)
+                .build();
     }
 
-    public static Sentiment toEntity(SentimentsDTO dto) {
-        if (dto == null) {
-            return null;
-        }
 
-        Sentiment entity = new Sentiment();
-
-        if (dto.getId() != null) {
-            entity.setSentimentId(dto.getId());
-        }
-
-        entity.setSource(dto.getSource());
-        entity.setSentiment(dto.getSentiment());
-        entity.setComment(dto.getComment());
-
-        if (dto.getCreatedAt() != null) {
-            entity.setCreatedAt(dto.getCreatedAt());
-        }
-
-        return entity;
-    }
-
-    public static void copyToEntity(SentimentsDTO dto, Sentiment entity) {
-        if (dto == null || entity == null) {
-            return;
-        }
-
-        entity.setSource(dto.getSource());
-        entity.setSentiment(dto.getSentiment());
-        entity.setComment(dto.getComment());
-
-    }
-
-    public static List<SentimentsDTO> toDTOList(List<Sentiment> sentimentsList) {
-        if (sentimentsList == null) {
-            return List.of();
-        }
-        return sentimentsList.stream()
-                .map(SentimentMapper::toDTO)
+    public static List<SentimentResponse> toResponseList(List<Sentiment> sentiments) {
+        if (sentiments == null) return List.of();
+        return sentiments.stream()
+                .map(SentimentMapper::toResponse)
                 .collect(Collectors.toList());
+    }
+
+
+    public static Sentiment toEntity(SentimentRequest request) {
+        if (request == null) return null;
+
+        Sentiment sentiment = new Sentiment();
+        sentiment.setSource(request.getSource());
+        sentiment.setSentiment(request.getSentiment());
+        sentiment.setComment(request.getComment());
+
+        return sentiment;
+    }
+
+
+    public static void copyToEntity(SentimentRequest request, Sentiment entity) {
+        if (request == null || entity == null) return;
+
+        entity.setSource(request.getSource());
+        entity.setSentiment(request.getSentiment());
+        entity.setComment(request.getComment());
+
     }
 }

@@ -3,62 +3,44 @@ package ScoreSense.App.mapper;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import ScoreSense.App.dto.RivalriesDTO;
+import ScoreSense.App.dto.RivalriesRequest;
+import ScoreSense.App.dto.RivalriesResponse;
 import ScoreSense.App.model.Rivalries;
 
 public final class RivalriesMapper {
+    public static RivalriesResponse toResponse(Rivalries rivalries) {
+        if (rivalries == null) return null;
 
-    public static RivalriesDTO toDTO(Rivalries rivalry) {
-        if (rivalry == null) {
-            return null;
-        }
-
-        RivalriesDTO dto = new RivalriesDTO();
-
-        dto.setId(rivalry.getRivalrieId());
-
-        dto.setDescription(rivalry.getDescription());
-
-        if (rivalry.getTeamLocalId() != null) {
-            dto.setTeam1Id(rivalry.getTeamLocalId().getTeamId());
-        }
-
-        if (rivalry.getTeamVisitorId() != null) {
-            dto.setTeam2Id(rivalry.getTeamVisitorId().getTeamId());
-        }
-        return dto;
+        return RivalriesResponse.builder()
+                .rivalrieId(rivalries.getRivalrieId())
+                .description(rivalries.getDescription())
+                .teamVisitorId(rivalries.getTeamVisitorId() != null ? rivalries.getTeamVisitorId().getTeamId() : null)
+                .teamLocalId(rivalries.getTeamLocalId() != null ? rivalries.getTeamLocalId().getTeamId() : null)
+                .build();
     }
 
-    public static Rivalries toEntity(RivalriesDTO dto) {
-        if (dto == null) {
-            return null;
-        }
 
-        Rivalries entity = new Rivalries();
-
-        if (dto.getId() != null) {
-            entity.setRivalrieId(dto.getId());
-        }
-
-        entity.setDescription(dto.getDescription());
-
-        return entity;
-    }
-
-    public static void copyToEntity(RivalriesDTO dto, Rivalries entity) {
-        if (dto == null || entity == null) {
-            return;
-        }
-
-        entity.setDescription(dto.getDescription());
-    }
-
-    public static List<RivalriesDTO> toDTOList(List<Rivalries> rivalriesList) {
-        if (rivalriesList == null) {
-            return List.of();
-        }
+    public static List<RivalriesResponse> toResponseList(List<Rivalries> rivalriesList) {
+        if (rivalriesList == null) return List.of();
         return rivalriesList.stream()
-                .map(RivalriesMapper::toDTO)
+                .map(RivalriesMapper::toResponse)
                 .collect(Collectors.toList());
+    }
+
+
+    public static Rivalries toEntity(RivalriesRequest request) {
+        if (request == null) return null;
+
+        Rivalries rivalries = new Rivalries();
+        rivalries.setDescription(request.getDescription());
+        return rivalries;
+    }
+
+
+    public static void copyToEntity(RivalriesRequest request, Rivalries entity) {
+        if (request == null || entity == null) return;
+
+        entity.setDescription(request.getDescription());
+
     }
 }

@@ -1,53 +1,47 @@
 package ScoreSense.App.mapper;
-
 import java.util.List;
 import java.util.stream.Collectors;
 
-import ScoreSense.App.dto.FavoriteDTO;
+import ScoreSense.App.dto.FavoriteRequest;
+import ScoreSense.App.dto.FavoriteResponse;
 import ScoreSense.App.model.Favorite;
 
 public final class FavoriteMapper {
+    public static FavoriteResponse toResponse(Favorite favorite) {
+        if (favorite == null) return null;
 
-    public static FavoriteDTO toDTO(Favorite favorite) {
-        if (favorite == null) {
-            return null;
-        }
-
-        FavoriteDTO dto = new FavoriteDTO();
-
-        dto.setEntity_type(favorite.getEntity_type());
-        dto.setEntity_id(favorite.getEntity_id());
-
-        if (favorite.getUser() != null) {
-            dto.setUserId(favorite.getUser().getUserId());
-        }
-
-        return dto;
+        return FavoriteResponse.builder()
+                .favoriteId(favorite.getFavoriteId())
+                .entity_type(favorite.getEntity_type())
+                .entity_id(favorite.getEntity_id())
+                .userId(favorite.getUser() != null ? favorite.getUser().getUserId() : null)
+                .build();
     }
 
-    public static Favorite toEntity(FavoriteDTO dto) {
-        if (dto == null) {
-            return null;
-        }
 
-        Favorite entity = new Favorite();
-
-        if (dto.getId() != null) {
-            entity.setFavoriteId(dto.getId());
-        }
-
-        entity.setEntity_type(dto.getEntity_type());
-        entity.setEntity_id(dto.getEntity_id());
-
-        return entity;
-    }
-
-    public static List<FavoriteDTO> toDTOList(List<Favorite> favorites) {
-        if (favorites == null) {
-            return List.of();
-        }
+    public static List<FavoriteResponse> toResponseList(List<Favorite> favorites) {
+        if (favorites == null) return List.of();
         return favorites.stream()
-                .map(FavoriteMapper::toDTO)
+                .map(FavoriteMapper::toResponse)
                 .collect(Collectors.toList());
+    }
+
+
+    public static Favorite toEntity(FavoriteRequest request) {
+        if (request == null) return null;
+
+        Favorite favorite = new Favorite();
+        favorite.setEntity_type(request.getEntityType());
+        favorite.setEntity_id(request.getEntityId());
+
+        return favorite;
+    }
+
+
+    public static void copyToEntity(FavoriteRequest request, Favorite entity) {
+        if (request == null || entity == null) return;
+
+        entity.setEntity_type(request.getEntityType());
+        entity.setEntity_id(request.getEntityId());
     }
 }

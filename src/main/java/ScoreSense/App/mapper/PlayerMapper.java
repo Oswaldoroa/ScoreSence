@@ -3,85 +3,56 @@ package ScoreSense.App.mapper;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import ScoreSense.App.dto.PlayerDTO;
+import ScoreSense.App.dto.PlayerRequest;
+import ScoreSense.App.dto.PlayerResponse;
 import ScoreSense.App.model.Player;
 
 public final class PlayerMapper {
+    public static PlayerResponse toResponse(Player player) {
+        if (player == null) return null;
 
-    public static PlayerDTO toDTO(Player player) {
-        if (player == null) {
-            return null;
-        }
-
-        PlayerDTO dto = new PlayerDTO();
-
-        dto.setId(player.getPlayerId());
-        dto.setName(player.getName());
-        dto.setPosition(player.getPosition());
-        dto.setAge(player.getAge());
-        dto.setNationality(player.getNationality());
-        dto.setHeight(player.getHeight());
-        dto.setWeight(player.getWeight());
-
-        if (player.getTeam() != null) {
-            dto.setTeamId(player.getTeam().getTeamId());
-        }
-
-        return dto;
+        return PlayerResponse.builder()
+                .playerId(player.getPlayerId())
+                .name(player.getName())
+                .position(player.getPosition())
+                .age(player.getAge())
+                .nationality(player.getNationality())
+                .height(player.getHeight())
+                .weight(player.getWeight())
+                .teamId(player.getTeam() != null ? player.getTeam().getTeamId() : null)
+                .build();
     }
 
-    public static Player toEntity(PlayerDTO dto) {
-        if (dto == null) {
-            return null;
-        }
 
-        Player entity = new Player();
-
-        if (dto.getId() != null) {
-            entity.setPlayerId(dto.getId());
-        }
-
-        entity.setName(dto.getName());
-        entity.setPosition(dto.getPosition());
-        if (dto.getAge() != null) {
-            entity.setAge(dto.getAge());
-        }
-        entity.setNationality(dto.getNationality());
-        if (dto.getHeight() != null) {
-            entity.setHeight(dto.getHeight());
-        }
-        if (dto.getWeight() != null) {
-            entity.setWeight(dto.getWeight());
-        }
-
-        return entity;
-    }
-
-    public static void copyToEntity(PlayerDTO dto, Player entity) {
-        if (dto == null || entity == null) {
-            return;
-        }
-
-        entity.setName(dto.getName());
-        entity.setPosition(dto.getPosition());
-        if (dto.getAge() != null) {
-            entity.setAge(dto.getAge());
-        }
-        entity.setNationality(dto.getNationality());
-        if (dto.getHeight() != null) {
-            entity.setHeight(dto.getHeight());
-        }
-        if (dto.getWeight() != null) {
-            entity.setWeight(dto.getWeight());
-        }
-    }
-
-    public static List<PlayerDTO> toDTOList(List<Player> playersList) {
-        if (playersList == null) {
-            return List.of();
-        }
-        return playersList.stream()
-                .map(PlayerMapper::toDTO)
+    public static List<PlayerResponse> toResponseList(List<Player> players) {
+        if (players == null) return List.of();
+        return players.stream()
+                .map(PlayerMapper::toResponse)
                 .collect(Collectors.toList());
+    }
+
+
+    public static Player toEntity(PlayerRequest request) {
+        if (request == null) return null;
+
+        Player player = new Player();
+        player.setPosition(request.getPosition());
+        player.setAge(request.getAge());
+        player.setNationality(request.getNationality());
+        player.setHeight(request.getHeight());
+        player.setWeight(request.getWeight());
+        return player;
+    }
+
+
+    public static void copyToEntity(PlayerRequest request, Player entity) {
+        if (request == null || entity == null) return;
+
+        entity.setPosition(request.getPosition());
+        entity.setAge(request.getAge());
+        entity.setNationality(request.getNationality());
+        entity.setHeight(request.getHeight());
+        entity.setWeight(request.getWeight());
+
     }
 }

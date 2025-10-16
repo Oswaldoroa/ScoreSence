@@ -3,74 +3,57 @@ package ScoreSense.App.mapper;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import ScoreSense.App.dto.PlayerStatsDTO;
+import ScoreSense.App.dto.PlayerStatsRequest;
+import ScoreSense.App.dto.PlayerStatsResponse;
 import ScoreSense.App.model.PlayerStats;
 
 public final class PlayerStatsMapper {
+    public static PlayerStatsResponse toResponse(PlayerStats stats) {
+        if (stats == null) return null;
 
-    public static PlayerStatsDTO toDTO(PlayerStats stats) {
-        if (stats == null) {
-            return null;
-        }
-
-        PlayerStatsDTO dto = new PlayerStatsDTO();
-
-        dto.setId(stats.getPlayerStatId());
-        dto.setGoals(stats.getGoals());
-        dto.setAssists(stats.getAssists());
-        dto.setYellowCards(stats.getYellowCards());
-        dto.setRedCards(stats.getRedCards());
-        dto.setMinutesPlayed(stats.getMinutesPlayed());
-
-        if (stats.getPlayer() != null) {
-            dto.setPlayerId(stats.getPlayer().getPlayerId());
-        }
-
-        if (stats.getMatch() != null) {
-            dto.setMatchId(stats.getMatch().getMatchId());
-        }
-
-        return dto;
+        return PlayerStatsResponse.builder()
+                .playerStatId(stats.getPlayerStatId())
+                .goals(stats.getGoals())
+                .assists(stats.getAssists())
+                .yellowCards(stats.getYellowCards())
+                .redCards(stats.getRedCards())
+                .minutesPlayed(stats.getMinutesPlayed())
+                .playerId(stats.getPlayer() != null ? stats.getPlayer().getPlayerId() : null)
+                .matchId(stats.getMatch() != null ? stats.getMatch().getMatchId() : null)
+                .build();
     }
 
-    public static PlayerStats toEntity(PlayerStatsDTO dto) {
-        if (dto == null) {
-            return null;
-        }
 
-        PlayerStats entity = new PlayerStats();
-
-        if (dto.getId() != null) {
-            entity.setPlayerStatId(dto.getId());
-        }
-
-        entity.setGoals(dto.getGoals());
-        entity.setAssists(dto.getAssists());
-        entity.setYellowCards(dto.getYellowCards());
-        entity.setRedCards(dto.getRedCards());
-        entity.setMinutesPlayed(dto.getMinutesPlayed());
-
-        return entity;
-    }
-
-    public static void copyToEntity(PlayerStatsDTO dto, PlayerStats entity) {
-        if (dto == null || entity == null) {
-            return;
-        }
-
-        entity.setGoals(dto.getGoals());
-        entity.setAssists(dto.getAssists());
-        entity.setYellowCards(dto.getYellowCards());
-        entity.setRedCards(dto.getRedCards());
-        entity.setMinutesPlayed(dto.getMinutesPlayed());
-    }
-
-    public static List<PlayerStatsDTO> toDTOList(List<PlayerStats> statsList) {
-        if (statsList == null) {
-            return List.of();
-        }
+    public static List<PlayerStatsResponse> toResponseList(List<PlayerStats> statsList) {
+        if (statsList == null) return List.of();
         return statsList.stream()
-                .map(PlayerStatsMapper::toDTO)
+                .map(PlayerStatsMapper::toResponse)
                 .collect(Collectors.toList());
+    }
+
+
+    public static PlayerStats toEntity(PlayerStatsRequest request) {
+        if (request == null) return null;
+
+        PlayerStats stats = new PlayerStats();
+        stats.setGoals(request.getGoals());
+        stats.setAssists(request.getAssists());
+        stats.setYellowCards(request.getYellowCards());
+        stats.setRedCards(request.getRedCards());
+        stats.setMinutesPlayed(request.getMinutesPlayed());
+
+        return stats;
+    }
+
+
+    public static void copyToEntity(PlayerStatsRequest request, PlayerStats entity) {
+        if (request == null || entity == null) return;
+
+        entity.setGoals(request.getGoals());
+        entity.setAssists(request.getAssists());
+        entity.setYellowCards(request.getYellowCards());
+        entity.setRedCards(request.getRedCards());
+        entity.setMinutesPlayed(request.getMinutesPlayed());
+
     }
 }

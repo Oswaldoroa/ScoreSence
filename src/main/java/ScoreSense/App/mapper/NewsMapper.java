@@ -3,76 +3,56 @@ package ScoreSense.App.mapper;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import ScoreSense.App.dto.NewsDTO;
+import ScoreSense.App.dto.NewsRequest;
+import ScoreSense.App.dto.NewsResponse;
 import ScoreSense.App.model.News;
 
 public final class NewsMapper {
+    public static NewsResponse toResponse(News news) {
+        if (news == null) return null;
 
-    public static NewsDTO toDTO(News news) {
-        if (news == null) {
-            return null;
-        }
-
-        NewsDTO dto = new NewsDTO();
-        dto.setId(news.getNewsId());
-        dto.setTitle(news.getTitle());
-        dto.setContent(news.getContent());
-        dto.setPublishedAt(news.getPublishDate());
-
-        dto.setAuthor(news.getAuthor());
-        dto.setSource_url(news.getSource_url());
-        dto.setImage_url(news.getImage_url());
-
-        if (news.getTeam() != null) {
-            dto.setTeamId(news.getTeam().getTeamId());
-        }
-
-        return dto;
+        return NewsResponse.builder()
+                .newsId(news.getNewsId())
+                .title(news.getTitle())
+                .content(news.getContent())
+                .publishDate(news.getPublishDate())
+                .author(news.getAuthor())
+                .sourceUrl(news.getSource_url())
+                .imageUrl(news.getImage_url())
+                .teamId(news.getTeam() != null ? news.getTeam().getTeamId() : null)
+                .build();
     }
 
-    public static News toEntity(NewsDTO dto) {
-        if (dto == null) {
-            return null;
-        }
 
-        News entity = new News();
-
-        if (dto.getId() != null) {
-            entity.setNewsId(dto.getId());
-        }
-
-        entity.setTitle(dto.getTitle());
-        entity.setContent(dto.getContent());
-
-        if (dto.getPublishedAt() != null) {
-            entity.setPublishDate(dto.getPublishedAt());
-        }
-
-        entity.setAuthor(dto.getAuthor());
-        entity.setSource_url(dto.getSource_url());
-        entity.setImage_url(dto.getImage_url());
-
-        return entity;
-    }
-
-    public static void copyToEntity(NewsDTO dto, News entity) {
-        if (dto == null || entity == null) {
-            return;
-        }
-
-        entity.setTitle(dto.getTitle());
-        entity.setContent(dto.getContent());
-        entity.setAuthor(dto.getAuthor());
-        entity.setSource_url(dto.getSource_url());
-        entity.setImage_url(dto.getImage_url());
-    }
-
-    public static List<NewsDTO> toDTOList(List<News> newsList) {
-        if (newsList == null) {
-            return List.of();
-        }
+    public static List<NewsResponse> toResponseList(List<News> newsList) {
+        if (newsList == null) return List.of();
         return newsList.stream()
-                .map(NewsMapper::toDTO)
+                .map(NewsMapper::toResponse)
                 .collect(Collectors.toList());
+    }
+
+
+    public static News toEntity(NewsRequest request) {
+        if (request == null) return null;
+
+        News news = new News();
+        news.setTitle(request.getTitle());
+        news.setContent(request.getContent());
+        news.setAuthor(request.getAuthor());
+        news.setSource_url(request.getSourceUrl());
+        news.setImage_url(request.getImageUrl());
+        return news;
+    }
+
+
+    public static void copyToEntity(NewsRequest request, News entity) {
+        if (request == null || entity == null) return;
+
+        entity.setTitle(request.getTitle());
+        entity.setContent(request.getContent());
+        entity.setAuthor(request.getAuthor());
+        entity.setSource_url(request.getSourceUrl());
+        entity.setImage_url(request.getImageUrl());
+
     }
 }

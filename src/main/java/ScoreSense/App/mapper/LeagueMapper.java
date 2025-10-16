@@ -3,76 +3,58 @@ package ScoreSense.App.mapper;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import ScoreSense.App.dto.LeagueDTO;
+import ScoreSense.App.dto.LeagueRequest;
+import ScoreSense.App.dto.LeagueResponse;
 import ScoreSense.App.model.League;
-import ScoreSense.App.model.Team;
 
 public final class LeagueMapper {
+    public static LeagueResponse toResponse(League league) {
+        if (league == null) return null;
 
-    public static LeagueDTO toDTO(League league) {
-        if (league == null) {
-            return null;
+        List<Long> teamIds = null;
+        if (league.getTeams() != null) {
+            teamIds = league.getTeams().stream()
+                    .map(team -> team.getTeamId())
+                    .collect(Collectors.toList());
         }
 
-        LeagueDTO dto = new LeagueDTO();
-
-        dto.setId(league.getLeagueId());
-        dto.setName(league.getName());
-        dto.setCountry(league.getCountry());
-        dto.setSeason(league.getSeason());
-        dto.setLevel(league.getLevel());
-
-        List<Team> teams = league.getTeams();
-
-        if (teams != null && !teams.isEmpty()) {
-
-            dto.setTeamsDTO(TeamMapper.toDTOList(teams));
-
-            dto.setNumberOfTeams(teams.size());
-        } else {
-            dto.setTeamsDTO(List.of());
-            dto.setNumberOfTeams(0);
-        }
-
-        return dto;
+        return LeagueResponse.builder()
+                .leagueId(league.getLeagueId())
+                .name(league.getName())
+                .country(league.getCountry())
+                .season(league.getSeason())
+                .level(league.getLevel())
+                .teamIds(teamIds)
+                .build();
     }
 
-    public static League toEntity(LeagueDTO dto) {
-        if (dto == null) {
-            return null;
-        }
 
-        League entity = new League();
-
-        if (dto.getId() != null) {
-            entity.setLeagueId(dto.getId());
-        }
-
-        entity.setName(dto.getName());
-        entity.setCountry(dto.getCountry());
-        entity.setSeason(dto.getSeason());
-        entity.setLevel(dto.getLevel());
-
-        return entity;
-    }
-
-    public static void copyToEntity(LeagueDTO dto, League entity) {
-        if (dto == null || entity == null) {
-            return;
-        }
-
-        entity.setName(dto.getName());
-        entity.setCountry(dto.getCountry());
-        entity.setSeason(dto.getSeason());
-        entity.setLevel(dto.getLevel());
-    }
-
-    public static List<LeagueDTO> toDTOList(List<League> leagueList) {
-        if (leagueList == null) {
-            return List.of();
-        }
-        return leagueList.stream()
-                .map(LeagueMapper::toDTO)
+    public static List<LeagueResponse> toResponseList(List<League> leagues) {
+        if (leagues == null) return List.of();
+        return leagues.stream()
+                .map(LeagueMapper::toResponse)
                 .collect(Collectors.toList());
+    }
+
+
+    public static League toEntity(LeagueRequest request) {
+        if (request == null) return null;
+
+        League league = new League();
+        league.setName(request.getName());
+        league.setCountry(request.getCountry());
+        league.setSeason(request.getSeason());
+        league.setLevel(request.getLevel());
+        return league;
+    }
+
+
+    public static void copyToEntity(LeagueRequest request, League entity) {
+        if (request == null || entity == null) return;
+
+        entity.setName(request.getName());
+        entity.setCountry(request.getCountry());
+        entity.setSeason(request.getSeason());
+        entity.setLevel(request.getLevel());
     }
 }

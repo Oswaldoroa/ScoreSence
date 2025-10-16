@@ -3,75 +3,49 @@ package ScoreSense.App.mapper;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import ScoreSense.App.dto.UserDTO;
-import ScoreSense.App.model.Favorite;
+import ScoreSense.App.dto.UserRequest;
+import ScoreSense.App.dto.UserResponse;
 import ScoreSense.App.model.User;
 
 public final class UserMapper {
+    public static UserResponse toResponse(User user) {
+        if (user == null) return null;
 
-    public static UserDTO toDTO(User user) {
-        if (user == null) {
-            return null;
-        }
+        UserResponse response = new UserResponse();
+        response.setUserId(user.getUserId());
+        response.setUsername(user.getUsername());
+        response.setEmail(user.getEmail());
+        response.setCreatedAt(user.getCreatedAt());
+        response.setFavoriteIds(user.getFavorites() != null
+                ? user.getFavorites().stream().map(f -> f.getFavoriteId()).toList()
+                : List.of());
 
-        UserDTO dto = new UserDTO();
-
-        dto.setId(user.getUserId());
-        dto.setUsername(user.getUsername());
-        dto.setEmail(user.getEmail());
-        dto.setPassword_hash(user.getPassword_hash());
-        dto.setCreatedAt(user.getCreatedAt());
-
-        List<Favorite> favorites = user.getFavorites();
-        if (favorites != null && !favorites.isEmpty()) {
-            dto.setFavorites(FavoriteMapper.toDTOList(favorites));
-        } else {
-            dto.setFavorites(List.of());
-        }
-
-        return dto;
+        return response;
     }
 
-    public static User toEntity(UserDTO dto) {
-        if (dto == null) {
-            return null;
-        }
-
-        User entity = new User();
-
-        if (dto.getId() != null) {
-            entity.setUserId(dto.getId());
-        }
-
-        entity.setUsername(dto.getUsername());
-        entity.setEmail(dto.getEmail());
-        entity.setPassword_hash(dto.getPassword_hash());
-
-        if (dto.getCreatedAt() != null) {
-            entity.setCreatedAt(dto.getCreatedAt());
-        }
-
-        return entity;
-    }
-
-    public static void copyToEntity(UserDTO dto, User entity) {
-        if (dto == null || entity == null) {
-            return;
-        }
-
-        entity.setUsername(dto.getUsername());
-        entity.setEmail(dto.getEmail());
-        if (dto.getPassword_hash() != null) {
-            entity.setPassword_hash(dto.getPassword_hash());
-        }
-    }
-
-    public static List<UserDTO> toDTOList(List<User> userList) {
-        if (userList == null) {
-            return List.of();
-        }
-        return userList.stream()
-                .map(UserMapper::toDTO)
+    public static List<UserResponse> toResponseList(List<User> users) {
+        if (users == null) return List.of();
+        return users.stream()
+                .map(UserMapper::toResponse)
                 .collect(Collectors.toList());
+    }
+
+    public static User toEntity(UserRequest request) {
+        if (request == null) return null;
+
+        User user = new User();
+        user.setUsername(request.getUsername());
+        user.setEmail(request.getEmail());
+        user.setPassword_hash(request.getPassword()); // mapeamos password directamente al hash
+
+        return user;
+    }
+
+    public static void copyToEntity(UserRequest request, User entity) {
+        if (request == null || entity == null) return;
+
+        entity.setUsername(request.getUsername());
+        entity.setEmail(request.getEmail());
+        entity.setPassword_hash(request.getPassword());
     }
 }

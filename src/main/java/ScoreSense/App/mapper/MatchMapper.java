@@ -1,88 +1,52 @@
 package ScoreSense.App.mapper;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import ScoreSense.App.dto.MatchDTO;
+import ScoreSense.App.dto.MatchRequest;
+import ScoreSense.App.dto.MatchResponse;
 import ScoreSense.App.model.Match;
 
 public final class MatchMapper {
+    public static MatchResponse toResponse(Match match) {
+        if (match == null) return null;
 
-    public static MatchDTO toDTO(Match match) {
-        if (match == null) {
-            return null;
-        }
-
-        MatchDTO dto = new MatchDTO();
-
-        dto.setId(match.getMatchId());
-        dto.setHomeScore(match.getHomeScore());
-        dto.setAwayScore(match.getAwayScore());
-
-        if (match.getMatchDate() != null) {
-            dto.setMatchDate(match.getMatchDate().toString());
-        }
-
-        if (match.getHomeTeam() != null) {
-            dto.setTeamLocalId(match.getHomeTeam().getTeamId());
-        }
-
-        if (match.getAwayTeam() != null) {
-            dto.setTeamVisitorId(match.getAwayTeam().getTeamId());
-        }
-
-        return dto;
+        return MatchResponse.builder()
+                .matchId(match.getMatchId())
+                .matchDate(match.getMatchDate())
+                .homeScore(match.getHomeScore())
+                .awayScore(match.getAwayScore())
+                .homeTeamId(match.getHomeTeam() != null ? match.getHomeTeam().getTeamId() : null)
+                .awayTeamId(match.getAwayTeam() != null ? match.getAwayTeam().getTeamId() : null)
+                .build();
     }
 
-    public static Match toEntity(MatchDTO dto) {
-        if (dto == null) {
-            return null;
-        }
 
-        Match entity = new Match();
-
-        if (dto.getId() != null) {
-            entity.setMatchId(dto.getId());
-        }
-
-        entity.setHomeScore(dto.getHomeScore());
-        entity.setAwayScore(dto.getAwayScore());
-
-        if (dto.getMatchDate() != null && !dto.getMatchDate().isBlank()) {
-            try {
-                entity.setMatchDate(LocalDate.parse(dto.getMatchDate()));
-            } catch (Exception e) {
-                System.err.println("Error parsing matchDate: " + dto.getMatchDate());
-            }
-        }
-
-        return entity;
-    }
-
-    public static void copyToEntity(MatchDTO dto, Match entity) {
-        if (dto == null || entity == null) {
-            return;
-        }
-
-        entity.setHomeScore(dto.getHomeScore());
-        entity.setAwayScore(dto.getAwayScore());
-
-        if (dto.getMatchDate() != null && !dto.getMatchDate().isBlank()) {
-            try {
-                entity.setMatchDate(LocalDate.parse(dto.getMatchDate()));
-            } catch (Exception e) {
-
-            }
-        }
-    }
-
-    public static List<MatchDTO> toDTOList(List<Match> matchList) {
-        if (matchList == null) {
-            return List.of();
-        }
-        return matchList.stream()
-                .map(MatchMapper::toDTO)
+    public static List<MatchResponse> toResponseList(List<Match> matches) {
+        if (matches == null) return List.of();
+        return matches.stream()
+                .map(MatchMapper::toResponse)
                 .collect(Collectors.toList());
+    }
+
+
+    public static Match toEntity(MatchRequest request) {
+        if (request == null) return null;
+
+        Match match = new Match();
+        match.setMatchDate(request.getMatchDate());
+        match.setHomeScore(request.getHomeScore());
+        match.setAwayScore(request.getAwayScore());
+        return match;
+    }
+
+
+    public static void copyToEntity(MatchRequest request, Match entity) {
+        if (request == null || entity == null) return;
+
+        entity.setMatchDate(request.getMatchDate());
+        entity.setHomeScore(request.getHomeScore());
+        entity.setAwayScore(request.getAwayScore());
+
     }
 }
