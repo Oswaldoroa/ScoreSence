@@ -1,46 +1,66 @@
 package ScoreSense.App.controller;
 
-import ScoreSense.App.model.Coach;
-import ScoreSense.App.repository.CoachRepository;
-import org.springframework.web.bind.annotation.*;
 import java.util.List;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import ScoreSense.App.dto.CoachRequest;
+import ScoreSense.App.dto.CoachResponse;
+import ScoreSense.App.service.CoachService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/api/coaches")
-
+@Tag(name = "Coaches", description = "Operaciones CRUD sobre entrenadores")
 public class CoachController {
 
-    private final CoachRepository coachRepository;
-    public CoachController(CoachRepository coachRepository){
-        this.coachRepository = coachRepository;
+    private final CoachService coachService;
+
+    public CoachController(CoachService coachService) {
+        this.coachService = coachService;
     }
 
-    @GetMapping public List<Coach> getAllCoaches() {
-        return coachRepository.findAll(); }
+    @GetMapping
+    @Operation(summary = "Listar todos los coaches", description = "Devuelve una lista de todos los entrenadores")
+    public ResponseEntity<List<CoachResponse>> getAll() {
+        return ResponseEntity.ok(coachService.getAll());
+    }
 
     @GetMapping("/{id}")
-    public Coach getCoachById(@PathVariable Long id) {
-        return coachRepository.findById(id).orElse(null);
+    @Operation(summary = "Obtener coach por ID", description = "Devuelve los datos de un coach según su ID")
+    public ResponseEntity<CoachResponse> getById(@PathVariable Long id) {
+        return ResponseEntity.ok(coachService.getById(id));
     }
 
     @PostMapping
-    public Coach createCoach(@RequestBody Coach coach){
-        return  coachRepository.save(coach);
+    @Operation(summary = "Crear un nuevo coach", description = "Crea un nuevo coach asociado a un equipo existente")
+    public ResponseEntity<CoachResponse> create(@Valid @RequestBody CoachRequest req) {
+        CoachResponse created = coachService.create(req);
+        return ResponseEntity.status(HttpStatus.CREATED).body(created);
     }
 
     @PutMapping("/{id}")
-    public Coach updateCoach(@PathVariable Long id, @RequestBody Coach coachDetails) {
-        return coachRepository.findById(id).map(coach -> {
-            coach.setName(coachDetails.getName());
-            coach.setNationality(coachDetails.getNationality());
-            coach.setExperiencedYears(coachDetails.getExperiencedYears());
-            coach.setTeam(coachDetails.getTeam());
-            return coachRepository.save(coach);
-        }).orElse(null);
+    @Operation(summary = "Actualizar un coach", description = "Actualiza la información de un coach existente")
+    public ResponseEntity<CoachResponse> update(@PathVariable Long id, @Valid @RequestBody CoachRequest req) {
+        CoachResponse updated = coachService.update(id, req);
+        return ResponseEntity.ok(updated);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteCoach(@PathVariable Long id) {
-        coachRepository.deleteById(id); }
-
+    @Operation(summary = "Eliminar un coach", description = "Elimina un coach por su ID")
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+        coachService.delete(id);
+        return ResponseEntity.noContent().build();
+    }
 }

@@ -16,20 +16,20 @@ import lombok.Setter;
 @Entity
 @Table(name = "rivalries")
 public class Rivalries {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "rivalrie_id")
     private Long rivalrieId;
 
     @Column(name = "description")
-    private String description; // redes sociales
+    private String description;
 
     @ManyToOne
-    @JoinColumn(name = "team_id")
-    private Team teamVisitorId;
+    @JoinColumn(name = "team_visitor_id")
+    private Team teamVisitor;
 
     @ManyToOne
-    @JoinColumn(name = "team_id")
-    private Team teamLocalId;   
-
+    @JoinColumn(name = "team_local_id")
+    private Team teamLocal;
 }

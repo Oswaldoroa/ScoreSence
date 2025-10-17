@@ -7,6 +7,7 @@ import lombok.Data;
 
 @Data
 public class UserRequest {
+
     @NotBlank
     @Size(max = 50)
     private String username;
