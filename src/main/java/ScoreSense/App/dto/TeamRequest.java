@@ -7,28 +7,24 @@ import lombok.Data;
 
 @Data
 public class TeamRequest {
+
     @NotBlank
     @Size(max = 100)
     private String name;
 
     @NotBlank
-    @Size(max = 60)
+    @Size(max = 50)
     private String country;
 
-    @NotBlank
-    @Size(max = 4)
-    private String foundedYear;
+    @NotNull
+    private Short foundedYear;
 
     @NotBlank
-    @Size(max = 100)
+    @Size(max = 50)
     private String stadium;
 
-    @Size(max = 255)
     private String logoUrl;
 
     @NotNull
     private Long leagueId;
-
-    @NotNull
-    private Long coachId;
 }

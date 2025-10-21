@@ -1,9 +1,6 @@
 package ScoreSense.App.dto;
 
-import java.util.List;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -16,23 +13,23 @@ import lombok.NoArgsConstructor;
 public class TeamResponse {
 
     @JsonProperty("team_id")
-    Long teamId;
+    private Long teamId;
+
     @JsonProperty("name")
-    String name;
+    private String name;
+
     @JsonProperty("country")
-    String country;
+    private String country;
+
     @JsonProperty("founded_year")
-    String foundedYear;
+    private Short foundedYear;
+
     @JsonProperty("stadium")
-    String stadium;
+    private String stadium;
+
     @JsonProperty("logo_url")
-    String logoUrl;
-    @JsonProperty("player_ids")
-    List<Long> playerIds;
-    @JsonProperty("sentiment_ids")
-    List<Long> sentimentIds;
+    private String logoUrl;
+
     @JsonProperty("league_id")
-    Long leagueId;
-    @JsonProperty("coach_id")
-    Long coachId;
+    private Long leagueId;
 }

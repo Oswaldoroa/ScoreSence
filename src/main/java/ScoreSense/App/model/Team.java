@@ -1,18 +1,6 @@
 package ScoreSense.App.model;
 
-import java.util.List;
-
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -27,32 +15,22 @@ public class Team {
     @Column(name = "team_id")
     private Long teamId;
 
-    @Column(name = "name")
+    @Column(name = "name", nullable = false, unique = true)
     private String name;
 
-    @Column(name = "country")
+    @Column(name = "country", nullable = false)
     private String country;
 
-    @Column(name = "founded_year")
-    private String founded_year;
+    @Column(name = "founded_year", nullable = false)
+    private Short foundedYear;
 
-    @Column(name = "stadium")
+    @Column(name = "stadium", nullable = false)
     private String stadium;
 
     @Column(name = "logo_url")
-    private String logo_url;
-
-    @OneToMany(mappedBy = "team", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Player> players;
-
-    @OneToMany(mappedBy = "team", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Sentiment> sentiments;
+    private String logoUrl;
 
     @ManyToOne
     @JoinColumn(name = "league_id")
     private League league;
-
-    @OneToOne
-    @JoinColumn(name = "coach_id")
-    private Coach coach;
 }
