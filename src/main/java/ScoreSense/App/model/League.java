@@ -1,15 +1,6 @@
 package ScoreSense.App.model;
 
-import java.util.List;
-
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -18,24 +9,21 @@ import lombok.Setter;
 @Entity
 @Table(name = "leagues")
 public class League {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "league_id")
     private Long leagueId;
 
-    @Column(name = "name")
+    @Column(name = "name", nullable = false, unique = true)
     private String name;
 
-    @Column(name = "country")
+    @Column(name = "country", nullable = false)
     private String country;
 
-    @Column(name = "season")
+    @Column(name = "season", nullable = false)
     private String season;
 
-    @Column(name = "level")
+    @Column(name = "level", nullable = false)
     private String level;
-    
-    @OneToMany(mappedBy = "league", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Team> teams;
-
 }

@@ -5,14 +5,14 @@ import jakarta.validation.constraints.Size;
 import lombok.Data;
 
 @Data
-
 public class LeagueRequest {
+
     @NotBlank
     @Size(max = 100)
     private String name;
 
     @NotBlank
-    @Size(max = 60)
+    @Size(max = 50)
     private String country;
 
     @NotBlank
@@ -20,6 +20,6 @@ public class LeagueRequest {
     private String season;
 
     @NotBlank
-    @Size(max = 30)
+    @Size(max = 20)
     private String level;
 }

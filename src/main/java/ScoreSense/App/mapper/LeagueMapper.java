@@ -8,15 +8,9 @@ import ScoreSense.App.dto.LeagueResponse;
 import ScoreSense.App.model.League;
 
 public final class LeagueMapper {
+
     public static LeagueResponse toResponse(League league) {
         if (league == null) return null;
-
-        List<Long> teamIds = null;
-        if (league.getTeams() != null) {
-            teamIds = league.getTeams().stream()
-                    .map(team -> team.getTeamId())
-                    .collect(Collectors.toList());
-        }
 
         return LeagueResponse.builder()
                 .leagueId(league.getLeagueId())
@@ -24,18 +18,8 @@ public final class LeagueMapper {
                 .country(league.getCountry())
                 .season(league.getSeason())
                 .level(league.getLevel())
-                .teamIds(teamIds)
                 .build();
     }
-
-
-    public static List<LeagueResponse> toResponseList(List<League> leagues) {
-        if (leagues == null) return List.of();
-        return leagues.stream()
-                .map(LeagueMapper::toResponse)
-                .collect(Collectors.toList());
-    }
-
 
     public static League toEntity(LeagueRequest request) {
         if (request == null) return null;
@@ -48,7 +32,6 @@ public final class LeagueMapper {
         return league;
     }
 
-
     public static void copyToEntity(LeagueRequest request, League entity) {
         if (request == null || entity == null) return;
 
@@ -56,5 +39,13 @@ public final class LeagueMapper {
         entity.setCountry(request.getCountry());
         entity.setSeason(request.getSeason());
         entity.setLevel(request.getLevel());
+    }
+
+    public static List<LeagueResponse> toResponseList(List<League> leagues) {
+        if (leagues == null) return List.of();
+
+        return leagues.stream()
+                .map(LeagueMapper::toResponse)
+                .collect(Collectors.toList());
     }
 }
