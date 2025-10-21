@@ -7,6 +7,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
@@ -32,7 +33,7 @@ public class Coach {
     @Column(name = "experienced_years")
     private Integer experiencedYears;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "team_id")
     private Team team;
 
