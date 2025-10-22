@@ -74,4 +74,10 @@ public class TeamService {
     private TeamResponse toResponse(Team team) {
         return TeamMapper.toResponse(team);
     }
+    public List<TeamResponse> findTeamsWithoutCoach() {
+    return teamRepository.findTeamsWithoutCoach()
+            .stream()
+            .map(TeamMapper::toResponse)
+            .collect(Collectors.toList());
+}
 }

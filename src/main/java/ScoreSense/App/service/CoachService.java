@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import ScoreSense.App.dto.CoachRequest;
 import ScoreSense.App.dto.CoachResponse;
 import ScoreSense.App.exception.ResourceNotFoundException;
+import ScoreSense.App.mapper.CoachMapper;
 import ScoreSense.App.model.Coach;
 import ScoreSense.App.model.Team;
 import ScoreSense.App.repository.CoachRepository;
@@ -77,4 +78,18 @@ public class CoachService {
                 .teamId(coach.getTeam() != null ? coach.getTeam().getTeamId() : null)
                 .build();
     }
+
+    public List<CoachResponse> findByName(String name) {
+    return coachRepository.findByNameIgnoreCase(name)
+            .stream()
+            .map(CoachMapper::toResponse)
+            .collect(Collectors.toList());
+}
+
+public List<CoachResponse> findExperiencedCoaches(int years) {
+    return coachRepository.findByExperiencedYearsGreaterThan(years)
+            .stream()
+            .map(CoachMapper::toResponse)
+            .collect(Collectors.toList());
+}
 }
