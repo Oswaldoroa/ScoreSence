@@ -90,11 +90,12 @@ public class CoachService {
     }
 
     public List<CoachResponse> findExperiencedCoaches(int years) {
-        return coachRepository.findByExperiencedYearsGreaterThan(years)
+        return coachRepository.findByExperiencedYearsGreaterThanEqual(years)
                 .stream()
                 .map(CoachMapper::toResponse)
                 .collect(Collectors.toList());
     }
+
     public Page<CoachResponse> getAllPaged(Pageable pageable) {
     return coachRepository.findAll(pageable)
             .map(CoachMapper::toResponse);

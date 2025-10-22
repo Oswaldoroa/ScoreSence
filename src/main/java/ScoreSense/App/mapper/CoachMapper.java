@@ -10,16 +10,17 @@ import ScoreSense.App.model.Coach;
 public final class CoachMapper {
 
     public static CoachResponse toResponse(Coach coach) {
-    if (coach == null) return null;
+        if (coach == null) return null;
 
-    return CoachResponse.builder()
-            .coachId(coach.getCoachId())
-            .name(coach.getName())
-            .nationality(coach.getNationality())
-            .experiencedYears(coach.getExperiencedYears())
-            .teamId(coach.getTeam() != null ? coach.getTeam().getTeamId() : null)
-            .build();
+        return CoachResponse.builder()
+                .coachId(coach.getCoachId())
+                .name(coach.getName())
+                .nationality(coach.getNationality())
+                .experiencedYears(coach.getExperiencedYears())
+                .teamId(coach.getTeam() != null ? coach.getTeam().getTeamId() : null)
+                .build();
     }
+
 
 
     public static Coach toEntity(CoachRequest request) {

@@ -67,10 +67,11 @@ public class CoachController {
     }
 
     @GetMapping("/experienced")
-    @Operation(summary = "Search coaches by experience")
+    @Operation(summary = "Buscar coaches con experiencia mínima")
     public ResponseEntity<List<CoachResponse>> searchByExperience(@RequestParam int years) {
         return ResponseEntity.ok(coachService.findExperiencedCoaches(years));
     }
+
 
     @GetMapping("/paged")
     public ResponseEntity<Page<CoachResponse>> getAllPaged(Pageable pageable) {

@@ -9,7 +9,7 @@ import ScoreSense.App.model.Coach;
 
 public interface CoachRepository extends JpaRepository<Coach, Long> {
     List<Coach> findByNameIgnoreCase(String name);
-    List<Coach> findByExperiencedYearsGreaterThan(Integer years);
+    List<Coach> findByExperiencedYearsGreaterThanEqual(Integer years);
     Page<Coach> findAll(Pageable pageable);
     List<Coach> findByNationalityIgnoreCase(String nationality);
 
