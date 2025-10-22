@@ -22,7 +22,7 @@ import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/api/coaches")
-@Tag(name = "Coaches", description = "Operaciones CRUD sobre entrenadores")
+@Tag(name = "Coaches", description = "Coach API Endpoints")
 public class CoachController {
 
     private final CoachService coachService;
@@ -31,34 +31,28 @@ public class CoachController {
         this.coachService = coachService;
     }
 
-    @GetMapping
-    @Operation(summary = "Listar todos los coaches", description = "Devuelve una lista de todos los entrenadores")
-    public ResponseEntity<List<CoachResponse>> getAll() {
-        return ResponseEntity.ok(coachService.getAll());
-    }
-
     @GetMapping("/{id}")
-    @Operation(summary = "Obtener coach por ID", description = "Devuelve los datos de un coach según su ID")
+    @Operation(summary = "Get Coach by ID", description = "Return coach by using ID")
     public ResponseEntity<CoachResponse> getById(@PathVariable Long id) {
         return ResponseEntity.ok(coachService.getById(id));
     }
 
     @PostMapping
-    @Operation(summary = "Crear un nuevo coach", description = "Crea un nuevo coach asociado a un equipo existente")
+    @Operation(summary = "Create a new coach", description = "Create a new coach with the provided information")
     public ResponseEntity<CoachResponse> create(@Valid @RequestBody CoachRequest req) {
         CoachResponse created = coachService.create(req);
         return ResponseEntity.status(HttpStatus.CREATED).body(created);
     }
 
     @PutMapping("/{id}")
-    @Operation(summary = "Actualizar un coach", description = "Actualiza la información de un coach existente")
+    @Operation(summary = "Update coach", description = "Update coach information by ID")
     public ResponseEntity<CoachResponse> update(@PathVariable Long id, @Valid @RequestBody CoachRequest req) {
         CoachResponse updated = coachService.update(id, req);
         return ResponseEntity.ok(updated);
     }
 
     @DeleteMapping("/{id}")
-    @Operation(summary = "Eliminar un coach", description = "Elimina un coach por su ID")
+    @Operation(summary = "Delete a coach", description = "Delete a coach by ID")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         coachService.delete(id);
         return ResponseEntity.noContent().build();

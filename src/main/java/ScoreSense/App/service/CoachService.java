@@ -26,13 +26,6 @@ public class CoachService {
         this.teamRepository = teamRepository;
     }
 
-    public List<CoachResponse> getAll() {
-        return coachRepository.findAll()
-                .stream()
-                .map(this::toResponse)
-                .collect(Collectors.toList());
-    }
-
     public CoachResponse getById(Long id) {
         Coach coach = coachRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Coach", "id", id));
