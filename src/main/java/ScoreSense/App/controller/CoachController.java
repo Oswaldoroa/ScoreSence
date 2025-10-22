@@ -67,7 +67,7 @@ public class CoachController {
     }
 
     @GetMapping("/experienced")
-    @Operation(summary = "Buscar coaches con experiencia mínima")
+    @Operation(summary = "Search coache with minimum experience years")
     public ResponseEntity<List<CoachResponse>> searchByExperience(@RequestParam int years) {
         return ResponseEntity.ok(coachService.findExperiencedCoaches(years));
     }
@@ -78,7 +78,7 @@ public class CoachController {
         return ResponseEntity.ok(coachService.getAllPaged(pageable));
     }
     @GetMapping("/by-nationality")
-    @Operation(summary = "Buscar coaches por nacionalidad")
+    @Operation(summary = "Serach coachs by nationality")
     public ResponseEntity<List<CoachResponse>> getByNationality(@RequestParam String nationality) {
         return ResponseEntity.ok(coachService.findByNationality(nationality));
     }
