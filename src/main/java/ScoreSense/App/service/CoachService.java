@@ -14,6 +14,9 @@ import ScoreSense.App.model.Coach;
 import ScoreSense.App.model.Team;
 import ScoreSense.App.repository.CoachRepository;
 import ScoreSense.App.repository.TeamRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
 
 @Service
 @Transactional
@@ -80,16 +83,21 @@ public class CoachService {
     }
 
     public List<CoachResponse> findByName(String name) {
-    return coachRepository.findByNameIgnoreCase(name)
-            .stream()
-            .map(CoachMapper::toResponse)
-            .collect(Collectors.toList());
-}
+        return coachRepository.findByNameIgnoreCase(name)
+                .stream()
+                .map(CoachMapper::toResponse)
+                .collect(Collectors.toList());
+    }
 
-public List<CoachResponse> findExperiencedCoaches(int years) {
-    return coachRepository.findByExperiencedYearsGreaterThan(years)
-            .stream()
-            .map(CoachMapper::toResponse)
-            .collect(Collectors.toList());
-}
+    public List<CoachResponse> findExperiencedCoaches(int years) {
+        return coachRepository.findByExperiencedYearsGreaterThan(years)
+                .stream()
+                .map(CoachMapper::toResponse)
+                .collect(Collectors.toList());
+    }
+    public Page<CoachResponse> getAllPaged(Pageable pageable) {
+        return coachRepository.findAll(pageable)
+                .map(CoachMapper::toResponse);
+    }
+
 }

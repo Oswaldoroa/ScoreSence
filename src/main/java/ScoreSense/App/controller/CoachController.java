@@ -13,7 +13,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import ScoreSense.App.dto.CoachRequest;
 import ScoreSense.App.dto.CoachResponse;
 import ScoreSense.App.service.CoachService;
@@ -60,14 +61,21 @@ public class CoachController {
     }
 
     @GetMapping("/search")
-@Operation(summary = "Search coaches by name")
-public ResponseEntity<List<CoachResponse>> searchByName(@RequestParam String name) {
-    return ResponseEntity.ok(coachService.findByName(name));
-}
+    @Operation(summary = "Search coaches by name")
+    public ResponseEntity<List<CoachResponse>> searchByName(@RequestParam String name) {
+        return ResponseEntity.ok(coachService.findByName(name));
+    }
 
-@GetMapping("/experienced")
-@Operation(summary = "Search coaches by experience")
-public ResponseEntity<List<CoachResponse>> searchByExperience(@RequestParam int years) {
-    return ResponseEntity.ok(coachService.findExperiencedCoaches(years));
-}
+    @GetMapping("/experienced")
+    @Operation(summary = "Search coaches by experience")
+    public ResponseEntity<List<CoachResponse>> searchByExperience(@RequestParam int years) {
+        return ResponseEntity.ok(coachService.findExperiencedCoaches(years));
+    }
+
+    @GetMapping("/paged")
+    @Operation(summary = "Listar coaches paginados", description = "Devuelve una página de entrenadores")
+    public ResponseEntity<Page<CoachResponse>> getAllPaged(Pageable pageable) {
+        return ResponseEntity.ok(coachService.getAllPaged(pageable));
+    }
+
 }
