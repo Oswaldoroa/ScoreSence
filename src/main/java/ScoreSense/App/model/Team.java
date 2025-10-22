@@ -33,8 +33,4 @@ public class Team {
     @ManyToOne
     @JoinColumn(name = "league_id")
     private League league;
-
-    @ManyToOne
-    @JoinColumn(name = "coach_id")
-    private Coach coach;
 }

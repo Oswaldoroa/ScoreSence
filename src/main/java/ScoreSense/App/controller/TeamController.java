@@ -56,9 +56,4 @@ public class TeamController {
         teamService.delete(id);
         return ResponseEntity.noContent().build();
     }
-    @GetMapping("/without-coach")
-@Operation(summary = "List coach without teams", description = "Get all teams that do not have a coach assigned")
-public ResponseEntity<List<TeamResponse>> getTeamsWithoutCoach() {
-    return ResponseEntity.ok(teamService.findTeamsWithoutCoach());
-}
 }

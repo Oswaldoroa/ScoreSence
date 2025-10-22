@@ -73,9 +73,13 @@ public class CoachController {
     }
 
     @GetMapping("/paged")
-    @Operation(summary = "Listar coaches paginados", description = "Devuelve una página de entrenadores")
     public ResponseEntity<Page<CoachResponse>> getAllPaged(Pageable pageable) {
         return ResponseEntity.ok(coachService.getAllPaged(pageable));
+    }
+    @GetMapping("/by-nationality")
+    @Operation(summary = "Buscar coaches por nacionalidad")
+    public ResponseEntity<List<CoachResponse>> getByNationality(@RequestParam String nationality) {
+        return ResponseEntity.ok(coachService.findByNationality(nationality));
     }
 
 }

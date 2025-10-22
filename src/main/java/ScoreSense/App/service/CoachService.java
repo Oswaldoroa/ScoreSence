@@ -96,8 +96,13 @@ public class CoachService {
                 .collect(Collectors.toList());
     }
     public Page<CoachResponse> getAllPaged(Pageable pageable) {
-        return coachRepository.findAll(pageable)
-                .map(CoachMapper::toResponse);
+    return coachRepository.findAll(pageable)
+            .map(CoachMapper::toResponse);
     }
-
+    public List<CoachResponse> findByNationality(String nationality) {
+        return coachRepository.findByNationalityIgnoreCase(nationality)
+                .stream()
+                .map(CoachMapper::toResponse)
+                .collect(Collectors.toList());
+    }
 }
