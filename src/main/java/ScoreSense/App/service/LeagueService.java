@@ -3,6 +3,9 @@ package ScoreSense.App.service;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -60,11 +63,18 @@ public class LeagueService {
         return toResponse(updated);
     }
 
+    public Page<LeagueResponse> getAllPaged(Pageable pageable) {
+        return leagueRepository.findAll(pageable)
+                .map(LeagueMapper::toResponse);
+    }
+
     public void delete(Long id) {
         League league = leagueRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("League", "id", id));
         leagueRepository.delete(league);
     }
+
+
 
     private LeagueResponse toResponse(League league) {
         return LeagueMapper.toResponse(league);
