@@ -2,6 +2,9 @@ package scoresense.app.controller;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -25,33 +28,40 @@ public class LeagueController {
     }
 
     @GetMapping
-    @Operation(summary = "Listar todas las ligas", description = "Devuelve una lista de todas las ligas")
+    @Operation(summary = "List all leagues", description = "Returns a list of all leagues")
     public ResponseEntity<List<LeagueResponse>> getAll() {
         return ResponseEntity.ok(leagueService.getAll());
     }
 
     @GetMapping("/{id}")
-    @Operation(summary = "Obtener liga por ID", description = "Devuelve los datos de una liga según su ID")
+    @Operation(summary = "Get league by ID", description = "Returns data from a specific league")
     public ResponseEntity<LeagueResponse> getById(@PathVariable Long id) {
         return ResponseEntity.ok(leagueService.getById(id));
     }
 
     @PostMapping
-    @Operation(summary = "Crear una nueva liga", description = "Crea una nueva liga")
+    @Operation(summary = "Create new league", description = "Create a new league")
     public ResponseEntity<LeagueResponse> create(@Valid @RequestBody LeagueRequest req) {
         LeagueResponse created = leagueService.create(req);
         return ResponseEntity.status(HttpStatus.CREATED).body(created);
     }
 
     @PutMapping("/{id}")
-    @Operation(summary = "Actualizar una liga", description = "Actualiza la información de una liga existente")
+    @Operation(summary = "Update league", description = "Update league information")
     public ResponseEntity<LeagueResponse> update(@PathVariable Long id, @Valid @RequestBody LeagueRequest req) {
         LeagueResponse updated = leagueService.update(id, req);
         return ResponseEntity.ok(updated);
     }
 
+
+    @GetMapping("/paged")
+    @Operation(summary = "List leagues with pagination", description = "Returns leagues in a paginated format")
+    public ResponseEntity<Page<LeagueResponse>> getAllPaged(Pageable pageable) {
+        return ResponseEntity.ok(leagueService.getAllPaged(pageable));
+    }
+
     @DeleteMapping("/{id}")
-    @Operation(summary = "Eliminar una liga", description = "Elimina una liga por su ID")
+    @Operation(summary = "Delete league", description = "Delete a league by ID")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         leagueService.delete(id);
         return ResponseEntity.noContent().build();
