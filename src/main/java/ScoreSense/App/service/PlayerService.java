@@ -1,7 +1,8 @@
-package ScoreSense.App.service;
+package scoresense.app.service;
 
 import java.util.List;
-import ScoreSense.App.model.Player;
+
+import scoresense.app.model.Player;
 
 public interface PlayerService {
     List<Player> findAll();

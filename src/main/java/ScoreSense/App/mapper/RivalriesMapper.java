@@ -1,11 +1,11 @@
-package ScoreSense.App.mapper;
+package scoresense.app.mapper;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-import ScoreSense.App.dto.RivalriesRequest;
-import ScoreSense.App.dto.RivalriesResponse;
-import ScoreSense.App.model.Rivalries;
+import scoresense.app.dto.RivalriesRequest;
+import scoresense.app.dto.RivalriesResponse;
+import scoresense.app.model.Rivalries;
 
 public final class RivalriesMapper {
 

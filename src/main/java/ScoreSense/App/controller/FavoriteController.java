@@ -1,10 +1,12 @@
-package ScoreSense.App.controller;
+package scoresense.app.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import scoresense.app.model.Favorite;
+import scoresense.app.repository.FavoriteRepository;
+
 import java.util.List;
-import ScoreSense.App.model.Favorite;
-import ScoreSense.App.repository.FavoriteRepository;
 
 @RestController
 @RequestMapping("/favorites")

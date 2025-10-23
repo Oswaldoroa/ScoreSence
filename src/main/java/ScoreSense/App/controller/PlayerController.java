@@ -1,8 +1,10 @@
-package ScoreSense.App.controller;
+package scoresense.app.controller;
 
-import ScoreSense.App.model.Player;
-import ScoreSense.App.repository.PlayerRepository;
 import org.springframework.web.bind.annotation.*;
+
+import scoresense.app.model.Player;
+import scoresense.app.repository.PlayerRepository;
+
 import java.util.List;
 @RestController
 @RequestMapping("/api/players")

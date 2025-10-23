@@ -1,11 +1,11 @@
-package ScoreSense.App.mapper;
+package scoresense.app.mapper;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-import ScoreSense.App.dto.MatchRequest;
-import ScoreSense.App.dto.MatchResponse;
-import ScoreSense.App.model.Match;
+import scoresense.app.dto.MatchRequest;
+import scoresense.app.dto.MatchResponse;
+import scoresense.app.model.Match;
 
 public final class MatchMapper {
     public static MatchResponse toResponse(Match match) {

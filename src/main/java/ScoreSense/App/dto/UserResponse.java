@@ -1,4 +1,4 @@
-package ScoreSense.App.dto;
+package scoresense.app.dto;
 
 import java.time.LocalDateTime;
 import java.util.List;

@@ -1,9 +1,10 @@
-package ScoreSense.App.controller;
+package scoresense.app.controller;
 
-import ScoreSense.App.model.User;
-import ScoreSense.App.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import scoresense.app.model.User;
+import scoresense.app.repository.UserRepository;
 
 import java.util.List;
 

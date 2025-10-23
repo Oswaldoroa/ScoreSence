@@ -1,4 +1,4 @@
-package ScoreSense.App.controller;
+package scoresense.app.controller;
 
 import java.util.List;
 
@@ -6,12 +6,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import ScoreSense.App.dto.TeamRequest;
-import ScoreSense.App.dto.TeamResponse;
-import ScoreSense.App.service.TeamService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
+import scoresense.app.dto.TeamRequest;
+import scoresense.app.dto.TeamResponse;
+import scoresense.app.service.TeamService;
 
 @RestController
 @RequestMapping("/api/teams")

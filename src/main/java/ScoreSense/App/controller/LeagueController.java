@@ -1,4 +1,4 @@
-package ScoreSense.App.controller;
+package scoresense.app.controller;
 
 import java.util.List;
 
@@ -6,12 +6,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import ScoreSense.App.dto.LeagueRequest;
-import ScoreSense.App.dto.LeagueResponse;
-import ScoreSense.App.service.LeagueService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
+import scoresense.app.dto.LeagueRequest;
+import scoresense.app.dto.LeagueResponse;
+import scoresense.app.service.LeagueService;
 
 @RestController
 @RequestMapping("/api/leagues")

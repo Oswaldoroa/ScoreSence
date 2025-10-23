@@ -1,8 +1,10 @@
-package ScoreSense.App.controller;
+package scoresense.app.controller;
 
-import ScoreSense.App.model.News;
-import ScoreSense.App.repository.NewsRepository;
 import org.springframework.web.bind.annotation.*;
+
+import scoresense.app.model.News;
+import scoresense.app.repository.NewsRepository;
+
 import java.util.List;
 
 @RestController

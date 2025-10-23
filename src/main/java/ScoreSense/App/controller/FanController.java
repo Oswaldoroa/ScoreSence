@@ -1,7 +1,8 @@
-package ScoreSense.App.controller;
-import ScoreSense.App.model.Fan;
-import ScoreSense.App.repository.FanRepository;
+package scoresense.app.controller;
 import org.springframework.web.bind.annotation.*;
+
+import scoresense.app.model.Fan;
+import scoresense.app.repository.FanRepository;
 
 @RestController
 @RequestMapping("/api/fans")

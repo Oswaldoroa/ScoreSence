@@ -1,4 +1,4 @@
-package ScoreSense.App.service;
+package scoresense.app.service;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -6,14 +6,15 @@ import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import ScoreSense.App.dto.CoachRequest;
-import ScoreSense.App.dto.CoachResponse;
-import ScoreSense.App.exception.ResourceNotFoundException;
-import ScoreSense.App.mapper.CoachMapper;
-import ScoreSense.App.model.Coach;
-import ScoreSense.App.model.Team;
-import ScoreSense.App.repository.CoachRepository;
-import ScoreSense.App.repository.TeamRepository;
+import scoresense.app.dto.CoachRequest;
+import scoresense.app.dto.CoachResponse;
+import scoresense.app.exception.ResourceNotFoundException;
+import scoresense.app.mapper.CoachMapper;
+import scoresense.app.model.Coach;
+import scoresense.app.model.Team;
+import scoresense.app.repository.CoachRepository;
+import scoresense.app.repository.TeamRepository;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 

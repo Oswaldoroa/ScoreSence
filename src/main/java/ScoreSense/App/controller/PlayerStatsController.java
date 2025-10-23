@@ -1,8 +1,10 @@
-package ScoreSense.App.controller;
+package scoresense.app.controller;
 
-import ScoreSense.App.model.PlayerStats;
-import ScoreSense.App.repository.PlayerStatRepository;
 import org.springframework.web.bind.annotation.*;
+
+import scoresense.app.model.PlayerStats;
+import scoresense.app.repository.PlayerStatRepository;
+
 import java.util.List;
 
 @RestController

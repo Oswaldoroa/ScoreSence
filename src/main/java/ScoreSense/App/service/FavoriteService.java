@@ -1,6 +1,7 @@
-package ScoreSense.App.service;
+package scoresense.app.service;
 import java.util.List;
-import ScoreSense.App.model.Favorite;
+
+import scoresense.app.model.Favorite;
 
 public interface FavoriteService {
     List<Favorite> findAll();

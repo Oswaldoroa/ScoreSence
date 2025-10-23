@@ -1,8 +1,8 @@
-package ScoreSense.App.repository;
+package scoresense.app.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import ScoreSense.App.model.TrendingTopic;
+import scoresense.app.model.TrendingTopic;
 
 public interface TrendingTopicRepository extends JpaRepository<TrendingTopic, Long> {
     

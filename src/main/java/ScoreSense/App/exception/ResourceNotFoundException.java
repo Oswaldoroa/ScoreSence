@@ -1,4 +1,4 @@
-package ScoreSense.App.exception;
+package scoresense.app.exception;
 
 public class ResourceNotFoundException extends RuntimeException {
 

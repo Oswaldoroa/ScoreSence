@@ -1,4 +1,4 @@
-package ScoreSense.App.service;
+package scoresense.app.service;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -6,12 +6,12 @@ import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import ScoreSense.App.dto.LeagueRequest;
-import ScoreSense.App.dto.LeagueResponse;
-import ScoreSense.App.exception.ResourceNotFoundException;
-import ScoreSense.App.mapper.LeagueMapper;
-import ScoreSense.App.model.League;
-import ScoreSense.App.repository.LeagueRepository;
+import scoresense.app.dto.LeagueRequest;
+import scoresense.app.dto.LeagueResponse;
+import scoresense.app.exception.ResourceNotFoundException;
+import scoresense.app.mapper.LeagueMapper;
+import scoresense.app.model.League;
+import scoresense.app.repository.LeagueRepository;
 
 @Service
 @Transactional

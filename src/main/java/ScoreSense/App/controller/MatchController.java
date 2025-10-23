@@ -1,4 +1,4 @@
-package ScoreSense.App.controller;
+package scoresense.app.controller;
 
 import java.util.List;
 
@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import ScoreSense.App.model.Match;
-import ScoreSense.App.repository.MatchRepository;
+import scoresense.app.model.Match;
+import scoresense.app.repository.MatchRepository;
 
 @RestController
 @RequestMapping("/api/matches")
