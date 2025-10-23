@@ -1,8 +1,7 @@
 package ScoreSense.App.service;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,11 +22,9 @@ public class LeagueService {
         this.leagueRepository = leagueRepository;
     }
 
-    public List<LeagueResponse> getAll() {
-        return leagueRepository.findAll()
-                .stream()
-                .map(this::toResponse)
-                .collect(Collectors.toList());
+    public Page<LeagueResponse> findAll(Pageable pageable) {
+        return leagueRepository.findAll(pageable)
+                .map(LeagueMapper::toResponse);
     }
 
     public LeagueResponse getById(Long id) {
@@ -35,30 +32,42 @@ public class LeagueService {
                 .orElseThrow(() -> new ResourceNotFoundException("League", "id", id));
         return toResponse(league);
     }
-
-    public LeagueResponse create(LeagueRequest req) {
-        League league = new League();
-        league.setName(req.getName());
-        league.setCountry(req.getCountry());
-        league.setSeason(req.getSeason());
-        league.setLevel(req.getLevel());
-
-        League saved = leagueRepository.save(league);
-        return toResponse(saved);
+    public LeagueResponse create(LeagueRequest req){
+        League league= LeagueMapper.toEntity(req);
+        League saved= leagueRepository.save(league);
+        return LeagueMapper.toResponse(saved);
     }
 
-    public LeagueResponse update(Long id, LeagueRequest req) {
-        League league = leagueRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("League", "id", id));
+    // public LeagueResponse create(LeagueRequest req) {
+    //     League league = new League();
+    //     league.setName(req.getName());
+    //     league.setCountry(req.getCountry());
+    //     league.setSeason(req.getSeason());
+    //     league.setLevel(req.getLevel());
 
-        league.setName(req.getName());
-        league.setCountry(req.getCountry());
-        league.setSeason(req.getSeason());
-        league.setLevel(req.getLevel());
-
-        League updated = leagueRepository.save(league);
-        return toResponse(updated);
+    //     League saved = leagueRepository.save(league);
+    //     return toResponse(saved);
+    // }
+    public LeagueResponse update(Long id, LeagueRequest req){
+        League league= leagueRepository.findById(id)
+        .orElseThrow(()->new ResourceNotFoundException("League", "id", id));
+        LeagueMapper.copyToEntity(req, league);
+        League updated= leagueRepository.save(league);
+        return LeagueMapper.toResponse(updated);
     }
+
+    // public LeagueResponse update(Long id, LeagueRequest req) {
+    //     League league = leagueRepository.findById(id)
+    //             .orElseThrow(() -> new ResourceNotFoundException("League", "id", id));
+
+    //     league.setName(req.getName());
+    //     league.setCountry(req.getCountry());
+    //     league.setSeason(req.getSeason());
+    //     league.setLevel(req.getLevel());
+
+    //     League updated = leagueRepository.save(league);
+    //     return toResponse(updated);
+    // }
 
     public void delete(Long id) {
         League league = leagueRepository.findById(id)

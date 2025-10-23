@@ -1,7 +1,8 @@
 package ScoreSense.App.controller;
 
-import java.util.List;
-
+import org.springframework.data.domain.Page; 
+import org.springframework.data.domain.Pageable; 
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -26,8 +27,8 @@ public class LeagueController {
 
     @GetMapping
     @Operation(summary = "Listar todas las ligas", description = "Devuelve una lista de todas las ligas")
-    public ResponseEntity<List<LeagueResponse>> getAll() {
-        return ResponseEntity.ok(leagueService.getAll());
+    public ResponseEntity<Page<LeagueResponse>> getAll(Pageable pageable) {
+        return ResponseEntity.ok(leagueService.findAll(pageable));
     }
 
     @GetMapping("/{id}")
