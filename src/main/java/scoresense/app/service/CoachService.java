@@ -107,4 +107,14 @@ public class CoachService {
                 .map(CoachMapper::toResponse)
                 .collect(Collectors.toList());
     }
+
+
+    public List<CoachResponse> getAll() {
+        return coachRepository.findAll()
+                .stream()
+                .map(CoachMapper::toResponse)
+                .collect(Collectors.toList());
+    }
+
+
 }
