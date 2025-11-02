@@ -12,4 +12,5 @@ public class Poll_voteResponse {
     private Long userId;
     private Boolean voteOption;
     private LocalDateTime votedAt;
+    private String optionSelected;
 }

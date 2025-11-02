@@ -10,5 +10,8 @@ public class MerchandiseResponse {
     private String name;
     private String category;
     private Double price;
+    private Integer stock;
+    private String imageUrl;
+    private String type;
     private Long teamId;
 }

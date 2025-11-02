@@ -13,4 +13,5 @@ public class Poll_voteRequest {
 
     @NotNull
     private Boolean voteOption;
+    private String optionSelected;
 }

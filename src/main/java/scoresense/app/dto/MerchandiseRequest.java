@@ -14,12 +14,11 @@ public class MerchandiseRequest {
 
     @NotBlank
     @Size(max = 50)
-    private String category;
+    private String type;
 
     @NotNull
-    @Positive
     private Double price;
 
     @NotNull
-    private Long teamId;
+    private Integer stock;
 }

@@ -17,10 +17,11 @@ import scoresense.app.model.Team;
 @Table(name = "merchandise")
 
 public class Merchandise {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "product_id")
-    private Long productId;
+    @Column(name = "merchandise_id")
+    private Long merchandiseId;
 
     @ManyToOne
     @JoinColumn(name = "team_id")
@@ -40,4 +41,7 @@ public class Merchandise {
 
     @Column(name = "image_url")
     private String imageUrl;
+
+    @Column(name = "type")
+    private String type;
 }

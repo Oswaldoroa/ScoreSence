@@ -11,6 +11,8 @@ import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
+
 @Getter
 @Setter
 @Entity
@@ -18,8 +20,8 @@ import lombok.Setter;
 public class Poll_vote {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "vote_id")
-    private Long voteId;
+    @Column(name = "poll_vote_id")
+    private Long pollvoteId;
 
     @ManyToOne
     @JoinColumn(name = "poll_id")
@@ -31,4 +33,7 @@ public class Poll_vote {
 
     @Column(name = "option_selected")
     private String optionSelected;
+
+    @Column(name = "voted_at")
+    private LocalDateTime votedAt = LocalDateTime.now();
 }

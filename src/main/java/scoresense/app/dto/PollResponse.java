@@ -9,6 +9,6 @@ import lombok.Data;
 public class PollResponse {
     private Long pollId;
     private String question;
-    private Long createdByUserId;
     private LocalDateTime createdAt;
+    private LocalDateTime expiresAt;
 }

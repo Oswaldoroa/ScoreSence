@@ -44,4 +44,8 @@ public class Contract {
 
     @Column(name = "release_clause")
     private Double releaseClause;
+
+    @ManyToOne
+    @JoinColumn(name = "player_id", nullable = false)
+    private Player player;
 }
