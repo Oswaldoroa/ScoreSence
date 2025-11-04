@@ -1,7 +1,7 @@
-package scoresense.app.service;
+package ScoreSense.App.service;
 
 import java.util.List;
-import scoresense.app.model.User;
+import ScoreSense.App.model.User;
 public interface UserService {
     List<User> findAll();
     User findById(Long id);

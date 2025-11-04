@@ -1,11 +1,11 @@
-package scoresense.app.mapper;
+package ScoreSense.App.mapper;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-import scoresense.app.dto.RefereeRequest;
-import scoresense.app.dto.RefereeResponse;
-import scoresense.app.model.Referee;
+import ScoreSense.App.dto.RefereeRequest;
+import ScoreSense.App.dto.RefereeResponse;
+import ScoreSense.App.model.Referee;
 
 public final class RefereeMapper {
     private RefereeMapper() {}  // Prevent instantiation

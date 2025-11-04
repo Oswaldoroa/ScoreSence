@@ -1,7 +1,7 @@
-package scoresense.app.service;
+package ScoreSense.App.service;
 
 import java.util.List;
-import scoresense.app.model.TrendingTopic;
+import ScoreSense.App.model.TrendingTopic;
 public interface TrendingTopicService {
     List<TrendingTopic> findAll();
     TrendingTopic findById(Long id);

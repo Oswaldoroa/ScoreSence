@@ -1,11 +1,11 @@
-package scoresense.app.repository;
+package ScoreSense.App.repository;
 
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import scoresense.app.model.Coach;
+import ScoreSense.App.model.Coach;
 
 public interface CoachRepository extends JpaRepository<Coach, Long> {
     List<Coach> findByNameIgnoreCase(String name);

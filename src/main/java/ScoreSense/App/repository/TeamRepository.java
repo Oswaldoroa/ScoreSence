@@ -1,9 +1,9 @@
-package scoresense.app.repository;
+package ScoreSense.App.repository;
 
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import scoresense.app.model.Team;
+import ScoreSense.App.model.Team;
 
 public interface TeamRepository extends JpaRepository<Team, Long> {
 

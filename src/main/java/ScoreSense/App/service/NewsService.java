@@ -1,7 +1,7 @@
-package scoresense.app.service;
+package ScoreSense.App.service;
 
 import java.util.List;
-import scoresense.app.model.News;
+import ScoreSense.App.model.News;
 
 public interface NewsService {
     List<News> findAll();

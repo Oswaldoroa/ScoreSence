@@ -1,11 +1,11 @@
-package scoresense.app.mapper;
+package ScoreSense.App.mapper;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-import scoresense.app.dto.TeamRequest;
-import scoresense.app.dto.TeamResponse;
-import scoresense.app.model.Team;
+import ScoreSense.App.dto.TeamRequest;
+import ScoreSense.App.dto.TeamResponse;
+import ScoreSense.App.model.Team;
 
 public final class TeamMapper {
 

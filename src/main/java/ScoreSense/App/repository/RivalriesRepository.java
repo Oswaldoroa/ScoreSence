@@ -1,8 +1,8 @@
-package scoresense.app.repository;
+package ScoreSense.App.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import scoresense.app.model.Rivalries;
+import ScoreSense.App.model.Rivalries;
 
 public interface RivalriesRepository  extends JpaRepository<Rivalries, Long> {
     

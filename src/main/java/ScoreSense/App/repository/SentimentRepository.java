@@ -1,8 +1,8 @@
-package scoresense.app.repository;
+package ScoreSense.App.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import scoresense.app.model.Sentiment;
+import ScoreSense.App.model.Sentiment;
 
 public interface SentimentRepository extends JpaRepository<Sentiment, Long> {
     

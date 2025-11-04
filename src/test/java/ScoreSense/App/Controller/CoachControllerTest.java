@@ -1,10 +1,10 @@
-package scoresense.app.Controller;
+package ScoreSense.App.Controller;
 
-import scoresense.app.dto.CoachRequest;
-import scoresense.app.model.League;
-import scoresense.app.model.Team;
-import scoresense.app.repository.LeagueRepository;
-import scoresense.app.repository.TeamRepository;
+import ScoreSense.App.dto.CoachRequest;
+import ScoreSense.App.model.League;
+import ScoreSense.App.model.Team;
+import ScoreSense.App.repository.LeagueRepository;
+import ScoreSense.App.repository.TeamRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,7 +1,7 @@
-package scoresense.app.service;
+package ScoreSense.App.service;
 
 import java.util.List;
-import scoresense.app.model.PlayerStats;
+import ScoreSense.App.model.PlayerStats;
 public interface PlayerStatsService {
     List<PlayerStats> findAll();
     PlayerStats findById(Long id);

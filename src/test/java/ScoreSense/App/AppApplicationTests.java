@@ -1,4 +1,4 @@
-package scoresense.app;
+package ScoreSense.App;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

@@ -1,8 +1,8 @@
-package scoresense.app.repository;
+package ScoreSense.App.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import scoresense.app.model.Player;
+import ScoreSense.App.model.Player;
 
 public interface PlayerRepository extends JpaRepository<Player, Long> {
 

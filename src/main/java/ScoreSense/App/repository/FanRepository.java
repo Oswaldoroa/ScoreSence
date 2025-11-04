@@ -1,8 +1,8 @@
-package scoresense.app.repository;
+package ScoreSense.App.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import scoresense.app.model.Fan;
+import ScoreSense.App.model.Fan;
 
 public interface FanRepository extends JpaRepository<Fan, Long> {
     

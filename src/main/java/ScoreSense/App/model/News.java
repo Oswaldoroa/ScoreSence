@@ -1,4 +1,4 @@
-package scoresense.app.model;
+package ScoreSense.App.model;
 
 import jakarta.persistence.*;
 import java.time.LocalDateTime;

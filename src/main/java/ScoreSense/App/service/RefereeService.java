@@ -1,16 +1,16 @@
-package scoresense.app.service;
+package ScoreSense.App.service;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import scoresense.app.dto.RefereeRequest;
-import scoresense.app.dto.RefereeResponse;
-import scoresense.app.exception.ResourceNotFoundException;
-import scoresense.app.mapper.RefereeMapper;
-import scoresense.app.model.Referee;
-import scoresense.app.repository.RefereeRepository;
+import ScoreSense.App.dto.RefereeRequest;
+import ScoreSense.App.dto.RefereeResponse;
+import ScoreSense.App.exception.ResourceNotFoundException;
+import ScoreSense.App.mapper.RefereeMapper;
+import ScoreSense.App.model.Referee;
+import ScoreSense.App.repository.RefereeRepository;
 
 @Service
 @Transactional

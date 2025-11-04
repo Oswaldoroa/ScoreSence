@@ -1,4 +1,4 @@
-package scoresense.app.Controller;
+package ScoreSense.App.Controller;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +11,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import scoresense.app.dto.RefereeRequest;
+import ScoreSense.App.dto.RefereeRequest;
 
 @SpringBootTest
 @AutoConfigureMockMvc

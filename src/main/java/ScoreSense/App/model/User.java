@@ -1,4 +1,4 @@
-package scoresense.app.model;
+package ScoreSense.App.model;
 
 import java.time.LocalDateTime;
 import java.util.List;

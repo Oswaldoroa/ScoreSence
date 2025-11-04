@@ -1,10 +1,10 @@
-package scoresense.app.mapper;
+package ScoreSense.App.mapper;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import scoresense.app.dto.FavoriteRequest;
-import scoresense.app.dto.FavoriteResponse;
-import scoresense.app.model.Favorite;
+import ScoreSense.App.dto.FavoriteRequest;
+import ScoreSense.App.dto.FavoriteResponse;
+import ScoreSense.App.model.Favorite;
 
 public final class FavoriteMapper {
     public static FavoriteResponse toResponse(Favorite favorite) {

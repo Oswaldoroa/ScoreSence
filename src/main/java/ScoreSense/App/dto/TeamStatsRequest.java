@@ -1,4 +1,4 @@
-package scoresense.app.dto;
+package ScoreSense.App.dto;
 
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PositiveOrZero;

@@ -1,11 +1,11 @@
-package scoresense.app.mapper;
+package ScoreSense.App.mapper;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-import scoresense.app.dto.SentimentRequest;
-import scoresense.app.dto.SentimentResponse;
-import scoresense.app.model.Sentiment;
+import ScoreSense.App.dto.SentimentRequest;
+import ScoreSense.App.dto.SentimentResponse;
+import ScoreSense.App.model.Sentiment;
 
 public final class SentimentMapper {
 

@@ -1,4 +1,4 @@
-package scoresense.app.dto;
+package ScoreSense.App.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;

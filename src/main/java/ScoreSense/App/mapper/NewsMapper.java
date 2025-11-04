@@ -1,11 +1,11 @@
-package scoresense.app.mapper;
+package ScoreSense.App.mapper;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-import scoresense.app.dto.NewsRequest;
-import scoresense.app.dto.NewsResponse;
-import scoresense.app.model.News;
+import ScoreSense.App.dto.NewsRequest;
+import ScoreSense.App.dto.NewsResponse;
+import ScoreSense.App.model.News;
 
 public final class NewsMapper {
     public static NewsResponse toResponse(News news) {

@@ -1,11 +1,11 @@
-package scoresense.app.mapper;
+package ScoreSense.App.mapper;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-import scoresense.app.dto.TrendingTopicRequest;
-import scoresense.app.dto.TrendingTopicResponse;
-import scoresense.app.model.TrendingTopic;
+import ScoreSense.App.dto.TrendingTopicRequest;
+import ScoreSense.App.dto.TrendingTopicResponse;
+import ScoreSense.App.model.TrendingTopic;
 
 public final class TrendingTopicMapper {
     public static TrendingTopicResponse toResponse(TrendingTopic topic) {

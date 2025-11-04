@@ -1,11 +1,11 @@
-package scoresense.app.mapper;
+package ScoreSense.App.mapper;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-import scoresense.app.dto.UserRequest;
-import scoresense.app.dto.UserResponse;
-import scoresense.app.model.User;
+import ScoreSense.App.dto.UserRequest;
+import ScoreSense.App.dto.UserResponse;
+import ScoreSense.App.model.User;
 
 public final class UserMapper {
     public static UserResponse toResponse(User user) {

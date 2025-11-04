@@ -1,4 +1,4 @@
-package scoresense.app;
+package ScoreSense.App;
 
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;

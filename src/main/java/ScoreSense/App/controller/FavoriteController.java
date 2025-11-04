@@ -1,13 +1,10 @@
-package scoresense.app.controller;
+package ScoreSense.App.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import io.swagger.v3.oas.annotations.Operation;
-
 import java.util.List;
-import scoresense.app.model.Favorite;
-import scoresense.app.repository.FavoriteRepository;
+import ScoreSense.App.model.Favorite;
+import ScoreSense.App.repository.FavoriteRepository;
 
 @RestController
 @RequestMapping("/favorites")
@@ -20,7 +17,6 @@ public class FavoriteController {
 
 
     @GetMapping
-    @Operation(summary = "Get all favorites", description = "Get all favorites from the DB")
     public List<Favorite> getAllFavorites() {
         return favoriteRepository.findAll();
     }
@@ -31,7 +27,6 @@ public class FavoriteController {
 //    }
 
     @PostMapping
-    @Operation(summary = "Create a favorite", description = "Create a favorite by ID")
     public Favorite createFavorite(@RequestBody Favorite favorite) {
         return favoriteRepository.save(favorite);
     }
@@ -48,7 +43,6 @@ public class FavoriteController {
 
 
     @DeleteMapping("/{id}")
-    @Operation(summary = "Delete a favorite", description = "Delete a favorite by ID")
     public void deleteFavorite(@PathVariable Long id) {
         favoriteRepository.deleteById(id);
     }
