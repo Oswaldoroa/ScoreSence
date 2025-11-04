@@ -2,6 +2,7 @@ package scoresense.app.controller;
 
 import org.springframework.web.bind.annotation.*;
 
+import io.swagger.v3.oas.annotations.Operation;
 import scoresense.app.model.PlayerStats;
 import scoresense.app.repository.PlayerStatRepository;
 
@@ -18,20 +19,24 @@ public class PlayerStatsController {
     }
 
     @GetMapping
+    @Operation(summary = "Get players stats", description = "Get all player stats")
     public List<PlayerStats> getAllPlayerStats() {
         return playerStatRepository.findAll();
     }
     @GetMapping("/{id}")
+    @Operation(summary = "Get a player stat", description = "Get player stat by ID")
     public PlayerStats getPlayerStatById(@PathVariable Long id) {
         return playerStatRepository.findById(id).orElse(null);
     }
 
     @PostMapping
+    @Operation(summary = "Create a player stat", description = "Create a new player stat")
     public PlayerStats createPlayerStat(@RequestBody PlayerStats playerStats) {
         return playerStatRepository.save(playerStats);
     }
 
     @PutMapping("/{id}")
+    @Operation(summary = "Update a player stat", description = "Update player stat by ID")
     public PlayerStats updatePlayerStat(@PathVariable Long id, @RequestBody PlayerStats updatedStats) {
         return playerStatRepository.findById(id).map(stats -> {
             stats.setGoals(updatedStats.getGoals());
@@ -44,7 +49,9 @@ public class PlayerStatsController {
             return playerStatRepository.save(stats); }).orElse(null);
     }
 
-    @DeleteMapping("/{id}") public void deletePlayerStat(@PathVariable Long id) {
+    @DeleteMapping("/{id}")
+    @Operation(summary = "Delete player stat", description = "Delete player stat by ID")
+    public void deletePlayerStat(@PathVariable Long id) {
         playerStatRepository.deleteById(id);
     }
 

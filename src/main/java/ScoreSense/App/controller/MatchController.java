@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.swagger.v3.oas.annotations.Operation;
 import scoresense.app.model.Match;
 import scoresense.app.repository.MatchRepository;
 
@@ -22,11 +23,13 @@ public class MatchController {
     }
 
     @GetMapping
+    @Operation(summary = "Get matches", description = "Get all matches")
     public List<Match> getAllMatches() {
         return matchRepository.findAll();
     }
 
     @GetMapping("/{id}")
+    @Operation(summary = "Get matche", description = "Get match by ID")
     public Match getMatchById(@PathVariable Long id) {
         return matchRepository.findById(id).orElse(null);
     }

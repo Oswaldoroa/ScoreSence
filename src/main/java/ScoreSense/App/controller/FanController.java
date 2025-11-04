@@ -1,6 +1,7 @@
 package scoresense.app.controller;
 import org.springframework.web.bind.annotation.*;
 
+import io.swagger.v3.oas.annotations.Operation;
 import scoresense.app.model.Fan;
 import scoresense.app.repository.FanRepository;
 
@@ -14,16 +15,19 @@ public class FanController {
         this.fanRepository = fanRepository;
     }
     @GetMapping("/{id}")
+    @Operation(summary = "Get fan", description = "Get fan by ID")
     public Fan getFanById(@PathVariable Long id){
         return fanRepository.findById(id).orElse(null);
     }
 
     @PostMapping
+    @Operation(summary = "Create fan", description = "Create a new fan")
     public Fan createFan(@RequestBody Fan fan) {
         return fanRepository.save(fan);
     }
 
     @PutMapping("/{id}")
+    @Operation(summary = "Update fan", description = "Update fan by ID")
     public Fan updateFan(@PathVariable Long id, @RequestBody Fan fanDetails) {
         return fanRepository.findById(id).map(fan -> {
             fan.setUsername(fanDetails.getUsername());
@@ -35,6 +39,7 @@ public class FanController {
 
 
     @DeleteMapping("/{id}")
+    @Operation(summary = "Delete fan", description = "Delete fan by ID")
     public void deleteFan(@PathVariable Long id) {
         fanRepository.deleteById(id);
     }

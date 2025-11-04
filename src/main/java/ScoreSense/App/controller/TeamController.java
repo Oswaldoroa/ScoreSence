@@ -15,7 +15,7 @@ import scoresense.app.service.TeamService;
 
 @RestController
 @RequestMapping("/api/teams")
-@Tag(name = "Teams", description = "Operaciones CRUD sobre equipos")
+@Tag(name = "Teams", description = "CRUD Operations for teams")
 public class TeamController {
 
     private final TeamService teamService;
@@ -25,33 +25,33 @@ public class TeamController {
     }
 
     @GetMapping
-    @Operation(summary = "Listar todos los equipos", description = "Devuelve una lista de todos los equipos")
+    @Operation(summary = "Get teams", description = "Devuelve una lista de todos los equipos")
     public ResponseEntity<List<TeamResponse>> getAll() {
         return ResponseEntity.ok(teamService.getAll());
     }
 
     @GetMapping("/{id}")
-    @Operation(summary = "Obtener equipo por ID", description = "Devuelve los datos de un equipo según su ID")
+    @Operation(summary = "Get a team", description = "Devuelve los datos de un equipo específico")
     public ResponseEntity<TeamResponse> getById(@PathVariable Long id) {
         return ResponseEntity.ok(teamService.getById(id));
     }
 
     @PostMapping
-    @Operation(summary = "Crear un nuevo equipo", description = "Crea un nuevo equipo asociado a una liga existente")
+    @Operation(summary = "Create a team", description = "Crea un nuevo equipo")
     public ResponseEntity<TeamResponse> create(@Valid @RequestBody TeamRequest req) {
         TeamResponse created = teamService.create(req);
         return ResponseEntity.status(HttpStatus.CREATED).body(created);
     }
 
     @PutMapping("/{id}")
-    @Operation(summary = "Actualizar un equipo", description = "Actualiza la información de un equipo existente")
+    @Operation(summary = "Update a team", description = "Actualiza la información de un equipo por su ID")
     public ResponseEntity<TeamResponse> update(@PathVariable Long id, @Valid @RequestBody TeamRequest req) {
         TeamResponse updated = teamService.update(id, req);
         return ResponseEntity.ok(updated);
     }
 
     @DeleteMapping("/{id}")
-    @Operation(summary = "Eliminar un equipo", description = "Elimina un equipo por su ID")
+    @Operation(summary = "Delete a team", description = "Elimina un equipo por su ID")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         teamService.delete(id);
         return ResponseEntity.noContent().build();
