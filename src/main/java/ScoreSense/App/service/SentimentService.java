@@ -1,6 +1,6 @@
-package ScoreSense.App.service;
+package scoresense.app.service;
 import java.util.List;
-import ScoreSense.App.model.Sentiment;
+import scoresense.app.model.Sentiment;
 
 public interface SentimentService {
     List<Sentiment> findAll();

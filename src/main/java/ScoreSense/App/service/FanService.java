@@ -1,6 +1,6 @@
-package ScoreSense.App.service;
+package scoresense.app.service;
 import java.util.List;
-import ScoreSense.App.model.Fan;
+import scoresense.app.model.Fan;
 
 public interface FanService {
 

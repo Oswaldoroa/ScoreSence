@@ -1,4 +1,4 @@
-package ScoreSense.App.controller;
+package scoresense.app.controller;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -14,9 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import ScoreSense.App.dto.RefereeRequest;
-import ScoreSense.App.dto.RefereeResponse;
-import ScoreSense.App.service.RefereeService;
+import scoresense.app.dto.RefereeRequest;
+import scoresense.app.dto.RefereeResponse;
+import scoresense.app.service.RefereeService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;

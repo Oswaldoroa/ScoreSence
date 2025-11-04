@@ -1,6 +1,6 @@
-package ScoreSense.App.repository;
+package scoresense.app.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
-import ScoreSense.App.model.User;
+import scoresense.app.model.User;
 
 public interface UserRepository extends JpaRepository<User, Long> {
 }

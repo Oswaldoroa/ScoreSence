@@ -1,4 +1,4 @@
-package ScoreSense.App.model;
+package scoresense.app.model;
 
 import jakarta.persistence.*;
 import lombok.Getter;

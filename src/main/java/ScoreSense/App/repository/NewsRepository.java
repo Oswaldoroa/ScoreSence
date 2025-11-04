@@ -1,8 +1,8 @@
-package ScoreSense.App.repository;
+package scoresense.app.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import ScoreSense.App.model.News;
+import scoresense.app.model.News;
 
 public interface NewsRepository extends JpaRepository<News, Long> {
     

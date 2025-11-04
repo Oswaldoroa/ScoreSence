@@ -1,9 +1,11 @@
-package ScoreSense.App.controller;
+package scoresense.app.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import ScoreSense.App.model.TrendingTopic;
-import ScoreSense.App.repository.TrendingTopicRepository;
+
+import io.swagger.v3.oas.annotations.Operation;
+import scoresense.app.model.TrendingTopic;
+import scoresense.app.repository.TrendingTopicRepository;
 
 import java.util.List;
 import java.util.Optional;
@@ -17,21 +19,25 @@ public class TrendingTopicController {
 
 
     @GetMapping
+    @Operation(summary = "Get trending topics", description = "Get all trending topics")
     public List<TrendingTopic> getAllTrendingTopics() {
         return trendingTopicRepository.findAll();
     }
 
     @GetMapping("/{id}")
+    @Operation(summary = "Get a trendign topic", description = "Get a trending topic by ID")
     public Optional<TrendingTopic> getTrendingTopicById(@PathVariable Long id) {
         return trendingTopicRepository.findById(id);
     }
 
     @PostMapping
+    @Operation(summary = "Create a trending topic", description = "Create a trending topic by ID")
     public TrendingTopic createTrendingTopic(@RequestBody TrendingTopic trendingTopic) {
         return trendingTopicRepository.save(trendingTopic);
     }
 
     @PutMapping("/{id}")
+    @Operation(summary = "Update a trending topic", description = "Update a trending topic by ID")
     public TrendingTopic updateTrendingTopic(@PathVariable Long id, @RequestBody TrendingTopic updatedTopic) {
         return trendingTopicRepository.findById(id)
                 .map(topic -> {
@@ -47,6 +53,7 @@ public class TrendingTopicController {
     }
 
     @DeleteMapping("/{id}")
+    @Operation(summary = "Delete a trending topic", description = "Delete a trending topic by ID")
     public void deleteTrendingTopic(@PathVariable Long id) {
         trendingTopicRepository.deleteById(id);
     }

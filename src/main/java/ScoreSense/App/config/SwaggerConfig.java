@@ -1,4 +1,4 @@
-package ScoreSense.App.config;
+package scoresense.app.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,8 +13,8 @@ public class SwaggerConfig {
     public OpenAPI apiInfo() {
         return new OpenAPI()
                 .info(new Info()
-                        .title("ScoreSense API")
-                        .description("Documentation for ScoreSense Project")
+                        .title("scoresense API")
+                        .description("Documentation for scoresense Project")
                         .version("1.0"));
     }
 }

@@ -1,8 +1,8 @@
-package ScoreSense.App.repository;
+package scoresense.app.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import ScoreSense.App.model.TeamStats;
+import scoresense.app.model.TeamStats;
 
 public interface TeamStatRepository extends JpaRepository<TeamStats, Long> {
     

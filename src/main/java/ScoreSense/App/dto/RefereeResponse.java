@@ -1,4 +1,4 @@
-package ScoreSense.App.dto;
+package scoresense.app.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

@@ -1,11 +1,11 @@
-package ScoreSense.App.mapper;
+package scoresense.app.mapper;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-import ScoreSense.App.dto.FanRequest;
-import ScoreSense.App.dto.FanResponse;
-import ScoreSense.App.model.Fan;
+import scoresense.app.dto.FanRequest;
+import scoresense.app.dto.FanResponse;
+import scoresense.app.model.Fan;
 
 public final class FanMapper {
     public static FanResponse toResponse(Fan fan) {
