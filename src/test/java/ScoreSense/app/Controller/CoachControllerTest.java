@@ -1,4 +1,4 @@
-package scoresense.app.Controller;
+package ScoreSense.app.Controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
