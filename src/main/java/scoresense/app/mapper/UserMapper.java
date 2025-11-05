@@ -18,9 +18,6 @@ public final class UserMapper {
         response.setUsername(user.getUsername());
         response.setEmail(user.getEmail());
         response.setCreatedAt(user.getCreatedAt());
-        response.setFavoriteIds(user.getFavorites() != null
-                ? user.getFavorites().stream().map(f -> f.getFavoriteId()).toList()
-                : List.of());
         response.setRoleId(user.getRole() != null ? user.getRole().getRoleId() : null);
         response.setRoleName(user.getRole() != null ? user.getRole().getName() : null);
 
