@@ -4,7 +4,6 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -17,13 +16,23 @@ import lombok.NoArgsConstructor;
 public class UserResponse {
 
     @JsonProperty("user_id")
-    Long userId;
+    private Long userId;
+
     @JsonProperty("username")
-    String username;
+    private String username;
+
     @JsonProperty("email")
-    String email;
+    private String email;
+
     @JsonProperty("created_at")
-    LocalDateTime createdAt;
+    private LocalDateTime createdAt;
+
     @JsonProperty("favorite_ids")
-    List<Long> favoriteIds;
+    private List<Long> favoriteIds;
+
+    @JsonProperty("role_id")
+    private Long roleId;
+
+    @JsonProperty("role_name")
+    private String roleName;
 }

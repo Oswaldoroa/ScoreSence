@@ -18,7 +18,8 @@ public class UserRequest {
     private String email;
 
     @NotBlank
-    @Size(min = 6, max = 255)
+    @Size(max = 255)
     private String password;
 
+    private Long roleId;
 }

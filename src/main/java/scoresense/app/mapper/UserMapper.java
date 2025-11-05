@@ -6,8 +6,10 @@ import java.util.stream.Collectors;
 import scoresense.app.dto.UserRequest;
 import scoresense.app.dto.UserResponse;
 import scoresense.app.model.User;
+import scoresense.app.model.RoleEntity;
 
 public final class UserMapper {
+
     public static UserResponse toResponse(User user) {
         if (user == null) return null;
 
@@ -19,6 +21,8 @@ public final class UserMapper {
         response.setFavoriteIds(user.getFavorites() != null
                 ? user.getFavorites().stream().map(f -> f.getFavoriteId()).toList()
                 : List.of());
+        response.setRoleId(user.getRole() != null ? user.getRole().getRoleId() : null);
+        response.setRoleName(user.getRole() != null ? user.getRole().getName() : null);
 
         return response;
     }
@@ -30,22 +34,24 @@ public final class UserMapper {
                 .collect(Collectors.toList());
     }
 
-    public static User toEntity(UserRequest request) {
+    public static User toEntity(UserRequest request, RoleEntity role) {
         if (request == null) return null;
 
         User user = new User();
         user.setUsername(request.getUsername());
         user.setEmail(request.getEmail());
-        user.setPassword_hash(request.getPassword()); // mapeamos password directamente al hash
+        user.setPassword_hash(request.getPassword());
+        user.setRole(role);
 
         return user;
     }
 
-    public static void copyToEntity(UserRequest request, User entity) {
+    public static void copyToEntity(UserRequest request, User entity, RoleEntity role) {
         if (request == null || entity == null) return;
 
         entity.setUsername(request.getUsername());
         entity.setEmail(request.getEmail());
         entity.setPassword_hash(request.getPassword());
+        entity.setRole(role);
     }
 }
