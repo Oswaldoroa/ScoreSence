@@ -31,8 +31,8 @@ public class SecurityConfig {
     @Bean
     public UserDetailsService userDetailsService() {
         var userDetailsManager = new InMemoryUserDetailsManager();
-        userDetailsManager.createUser(User.withUsername("userOne")
-                .password(passwordEncoder().encode("userOne"))
+        userDetailsManager.createUser(User.withUsername("usePrueba")
+                .password(passwordEncoder().encode("userPrueba"))
                 .roles("USER")
                 .build());
         userDetailsManager.createUser(User.withUsername("admin")
@@ -41,7 +41,6 @@ public class SecurityConfig {
                 .build());
         return userDetailsManager;
     }
-
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
