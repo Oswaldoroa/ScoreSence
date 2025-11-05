@@ -29,7 +29,7 @@ public class MatchController {
     }
 
     @GetMapping("/{id}")
-    @Operation(summary = "Get matche", description = "Get match by ID")
+    @Operation(summary = "Get matches", description = "Get match by ID")
     public Match getMatchById(@PathVariable Long id) {
         return matchRepository.findById(id).orElse(null);
     }
