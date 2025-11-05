@@ -35,7 +35,7 @@ public class CoachController {
     }
 
     @GetMapping("/{id}")
-    @Operation(summary = "Get Coach by ID", description = "Return coach by using ID")
+    @Operation(summary = "Get coach by ID", description = "Return coach by using ID")
     public ResponseEntity<CoachResponse> getById(@PathVariable Long id) {
         return ResponseEntity.ok(coachService.getById(id));
     }
@@ -62,24 +62,25 @@ public class CoachController {
     }
 
     @GetMapping("/search")
-    @Operation(summary = "Search coaches by name")
+    @Operation(summary = "Search coaches by name", description = "Search coaches using their name")
     public ResponseEntity<List<CoachResponse>> searchByName(@RequestParam String name) {
         return ResponseEntity.ok(coachService.findByName(name));
     }
 
     @GetMapping("/experienced")
-    @Operation(summary = "Search coache with minimum experience years")
+    @Operation(summary = "Search coach with minimum experience years", description = "Search coaches with at least the specified number of experience years")
     public ResponseEntity<List<CoachResponse>> searchByExperience(@RequestParam int years) {
         return ResponseEntity.ok(coachService.findExperiencedCoaches(years));
     }
 
 
     @GetMapping("/paged")
+    @Operation(summary = "Page coaches", description = "Get a paginated list of coaches")
     public ResponseEntity<Page<CoachResponse>> getAllPaged(Pageable pageable) {
         return ResponseEntity.ok(coachService.getAllPaged(pageable));
     }
     @GetMapping("/by-nationality")
-    @Operation(summary = "Serach coachs by nationality")
+    @Operation(summary = "Search coaches by nationality", description = "Search coaches using their nationality")
     public ResponseEntity<List<CoachResponse>> getByNationality(@RequestParam String nationality) {
         return ResponseEntity.ok(coachService.findByNationality(nationality));
     }

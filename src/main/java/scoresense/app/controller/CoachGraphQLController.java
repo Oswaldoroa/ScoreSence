@@ -4,6 +4,8 @@ import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.MutationMapping;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.stereotype.Controller;
+
+import io.swagger.v3.oas.annotations.Operation;
 import scoresense.app.dto.CoachRequest;
 import scoresense.app.dto.CoachResponse;
 import scoresense.app.service.CoachService;
@@ -20,11 +22,13 @@ public class CoachGraphQLController {
 
 
     @QueryMapping
+    @Operation(summary = "Get coaches", description = "Get all coaches")
     public List<CoachResponse> coaches() {
         return coachService.getAll();
     }
 
     @QueryMapping
+    @Operation(summary = "Get coach by ID", description = "Get coach by ID")
     public CoachResponse coachById(@Argument Long id) {
         return coachService.getById(id);
     }

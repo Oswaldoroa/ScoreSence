@@ -2,6 +2,7 @@ package scoresense.app.controller;
 
 import org.springframework.web.bind.annotation.*;
 
+import io.swagger.v3.oas.annotations.Operation;
 import scoresense.app.model.News;
 import scoresense.app.repository.NewsRepository;
 
@@ -18,21 +19,25 @@ public class NewsController {
     }
 
     @GetMapping
+    @Operation(summary = "Get news", description = "Get all news")
     public List<News> getAllNews() {
         return newsRepository.findAll();
     }
 
     @GetMapping("/{id}")
+    @Operation(summary = "Get a new", description = "Get news by ID")
     public News getNewsById(@PathVariable Long id) {
         return newsRepository.findById(id).orElse(null);
     }
 
     @PostMapping
+    @Operation(summary = "Create a new", description = "Create a new news")
     public News createNews(@RequestBody News news) {
         return newsRepository.save(news);
     }
 
     @PutMapping("/{id}")
+    @Operation(summary = "Update a new", description = "Update news by ID")
     public News updateNews(@PathVariable Long id, @RequestBody News newsDetails) {
         return newsRepository.findById(id).map(news -> {
             news.setTitle(newsDetails.getTitle());
@@ -46,6 +51,7 @@ public class NewsController {
     }
 
     @DeleteMapping("/{id}")
+    @Operation(summary = "Delete new", description = "Delete news by ID")
     public void deleteNews(@PathVariable Long id)
     {
         newsRepository.deleteById(id);
