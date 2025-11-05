@@ -1,59 +1,67 @@
 package scoresense.app.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
+import scoresense.app.dto.UserRequest;
+import scoresense.app.dto.UserResponse;
+import scoresense.app.mapper.UserMapper;
+import scoresense.app.model.RoleEntity;
 import scoresense.app.model.User;
+import scoresense.app.repository.RoleRepository;
 import scoresense.app.repository.UserRepository;
 
-import java.util.List;
-
 @RestController
-@RequestMapping("/users")
-
+@RequestMapping("/api/users")
+@Tag(name = "Users", description = "User API Endpoints")
 public class UserController {
 
-    @Autowired
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
+    private final RoleRepository roleRepository;
 
-
-    @GetMapping
-    @Operation(summary = "Get users", description = "Get all users")
-    public List<User> getAllUsers() {
-        return userRepository.findAll();
+    public UserController(UserRepository userRepository, RoleRepository roleRepository) {
+        this.userRepository = userRepository;
+        this.roleRepository = roleRepository;
     }
-
 
     @GetMapping("/{id}")
-    @Operation(summary = "Get a user", description = "Get user by ID")
-    public User getUserById(@PathVariable Long id) {
-        return userRepository.findById(id).orElse(null);
+    @Operation(summary = "Get user by ID", description = "Return user by using ID")
+    public ResponseEntity<UserResponse> getById(@PathVariable Long id) {
+        return userRepository.findById(id)
+                .map(UserMapper::toResponse)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
-
 
     @PostMapping
-    @Operation(summary = "Create user", description = "Create a new user")
-    public User createUser(@RequestBody User user) {
-        return userRepository.save(user);
+    @Operation(summary = "Create a new user", description = "Create a new user with the provided information and assigned role")
+    public ResponseEntity<UserResponse> create(@Valid @RequestBody UserRequest req) {
+        RoleEntity role = roleRepository.findById(req.getRoleId()).orElse(null);
+        User user = UserMapper.toEntity(req, role);
+        User saved = userRepository.save(user);
+        UserResponse created = UserMapper.toResponse(saved);
+        return ResponseEntity.status(HttpStatus.CREATED).body(created);
     }
-
 
     @PutMapping("/{id}")
-    @Operation(summary = "Update user", description = "Update user by ID")
-    public User updateUser(@PathVariable Long id, @RequestBody User userDetails) {
+    @Operation(summary = "Update user", description = "Update user information by ID")
+    public ResponseEntity<UserResponse> update(@PathVariable Long id, @Valid @RequestBody UserRequest req) {
+        RoleEntity role = roleRepository.findById(req.getRoleId()).orElse(null);
         return userRepository.findById(id).map(user -> {
-            user.setUsername(userDetails.getUsername());
-            user.setEmail(userDetails.getEmail());
-            user.setPassword_hash(userDetails.getPassword_hash());
-            return userRepository.save(user);
-        }).orElse(null);
+            UserMapper.copyToEntity(req, user, role);
+            User updated = userRepository.save(user);
+            return ResponseEntity.ok(UserMapper.toResponse(updated));
+        }).orElse(ResponseEntity.notFound().build());
     }
 
-
     @DeleteMapping("/{id}")
-    @Operation(summary = "Delete user", description = "Delete user by ID")
-    public void deleteUser(@PathVariable Long id) {
+    @Operation(summary = "Delete a user", description = "Delete a user by ID")
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
         userRepository.deleteById(id);
+        return ResponseEntity.noContent().build();
     }
 }
