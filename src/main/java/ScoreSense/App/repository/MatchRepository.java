@@ -1,8 +1,8 @@
-package ScoreSense.App.repository;
+package scoresense.app.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import ScoreSense.App.model.Match;
+import scoresense.app.model.Match;
 
 public interface MatchRepository extends JpaRepository<Match, Long> {
 

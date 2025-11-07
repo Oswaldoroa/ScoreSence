@@ -1,4 +1,4 @@
-package ScoreSense.App.config;
+package scoresense.app.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

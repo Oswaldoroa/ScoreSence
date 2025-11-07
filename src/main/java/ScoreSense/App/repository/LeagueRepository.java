@@ -1,7 +1,8 @@
-package ScoreSense.App.repository;
+package scoresense.app.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import ScoreSense.App.model.League;
+
+import scoresense.app.model.League;
 
 public interface LeagueRepository extends JpaRepository<League, Long> {
 }

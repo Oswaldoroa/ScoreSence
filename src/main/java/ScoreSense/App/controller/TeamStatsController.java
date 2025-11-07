@@ -1,9 +1,10 @@
-package ScoreSense.App.controller;
+package scoresense.app.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import ScoreSense.App.model.TeamStats;
-import ScoreSense.App.repository.TeamStatRepository;
+
+import scoresense.app.model.TeamStats;
+import scoresense.app.repository.TeamStatRepository;
 
 import java.util.List;
 import java.util.Optional;

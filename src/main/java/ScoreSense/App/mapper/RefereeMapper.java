@@ -1,14 +1,14 @@
-package ScoreSense.App.mapper;
+package scoresense.app.mapper;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-import ScoreSense.App.dto.RefereeRequest;
-import ScoreSense.App.dto.RefereeResponse;
-import ScoreSense.App.model.Referee;
+import scoresense.app.dto.RefereeRequest;
+import scoresense.app.dto.RefereeResponse;
+import scoresense.app.model.Referee;
 
 public final class RefereeMapper {
-    private RefereeMapper() {}  // Prevent instantiation
+    private RefereeMapper() {} 
       
     
     public static RefereeResponse toResponse(Referee referee) {

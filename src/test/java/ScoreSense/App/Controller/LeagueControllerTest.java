@@ -1,7 +1,9 @@
-package ScoreSense.App.Controller;
+package scoresense.app.Controller;
 
-import ScoreSense.App.dto.LeagueRequest;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
+import scoresense.app.dto.LeagueRequest;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;

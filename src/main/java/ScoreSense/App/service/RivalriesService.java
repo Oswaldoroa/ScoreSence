@@ -1,7 +1,8 @@
-package ScoreSense.App.service;
+package scoresense.app.service;
 
 import java.util.List;
-import ScoreSense.App.model.Rivalries;
+
+import scoresense.app.model.Rivalries;
 public interface RivalriesService {
     List<Rivalries> findAll();
     Rivalries findById(Long id);

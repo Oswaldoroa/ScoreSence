@@ -1,16 +1,19 @@
-package ScoreSense.App.service;
+package scoresense.app.service;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import ScoreSense.App.dto.RefereeRequest;
-import ScoreSense.App.dto.RefereeResponse;
-import ScoreSense.App.exception.ResourceNotFoundException;
-import ScoreSense.App.mapper.RefereeMapper;
-import ScoreSense.App.model.Referee;
-import ScoreSense.App.repository.RefereeRepository;
+import scoresense.app.dto.RefereeRequest;
+import scoresense.app.dto.RefereeResponse;
+import scoresense.app.exception.ResourceNotFoundException;
+import scoresense.app.mapper.RefereeMapper;
+import scoresense.app.model.Referee;
+import scoresense.app.repository.RefereeRepository;
 
 @Service
 @Transactional
@@ -54,5 +57,20 @@ public class RefereeService {
             throw new ResourceNotFoundException("Referee", "id", id);
         }
         refereeRepository.deleteById(id);
+    }
+
+    public List<RefereeResponse> findByNationality(String nationality){
+        List<Referee> referees= refereeRepository.findByNationality(nationality);
+
+        return referees.stream()
+        .map(RefereeMapper::toResponse)
+        .collect(Collectors.toList());
+    }
+    public List<RefereeResponse> findByExperienceRange(int minYears, int maxYears) {
+        List<Referee> referees = refereeRepository.findByExperienceYearsBetween(minYears, maxYears);
+
+        return referees.stream()
+            .map(RefereeMapper::toResponse)
+            .collect(Collectors.toList());
     }
 }

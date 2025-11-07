@@ -1,4 +1,6 @@
-package ScoreSense.App.controller;
+package scoresense.app.controller;
+
+import java.util.List;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -14,31 +16,47 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import ScoreSense.App.dto.RefereeRequest;
-import ScoreSense.App.dto.RefereeResponse;
-import ScoreSense.App.service.RefereeService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
+import scoresense.app.dto.RefereeRequest;
+import scoresense.app.dto.RefereeResponse;
+import scoresense.app.service.RefereeService;
+
+import org.springframework.web.bind.annotation.RequestParam;
 
 @RestController
 @RequestMapping("/api/referees")
 
-@Tag(name = "Referees", description = "Referee API Endpoints") 
+@Tag(name = "Referees", description = "Referee API Endpoints")
 public class RefereeController {
-    
+
     private final RefereeService refereeService;
 
     public RefereeController(RefereeService refereeService) {
         this.refereeService = refereeService;
     }
 
-    
-    @GetMapping 
-    @Operation(summary = "Get all Referees with pagination", 
-               description = "Return a page of referees. Use query params: page, size, and sort.")
+    @GetMapping
+    @Operation(summary = "Get all Referees with pagination", description = "Return a page of referees. Use query params: page, size, and sort.")
     public ResponseEntity<Page<RefereeResponse>> getAllReferees(Pageable pageable) {
         return ResponseEntity.ok(refereeService.findAll(pageable));
+    }
+
+    @GetMapping("/search/nationality")
+    @Operation(summary = "search referee by nationality", description = "return a list of referees")
+    public ResponseEntity<List<RefereeResponse>> findByNationality(@RequestParam String nationality) {
+        List<RefereeResponse> referees = refereeService.findByNationality(nationality);
+        return ResponseEntity.ok(referees);
+    }
+
+    @GetMapping("/search/experience")
+    @Operation(summary = "search referee by experience range", description = "retun A list of referees by experiencie years range")
+    public ResponseEntity<List<RefereeResponse>> findByExperienceRange(
+            @RequestParam int minYears,
+            @RequestParam int maxYears) {
+        List<RefereeResponse> referees = refereeService.findByExperienceRange(minYears, maxYears);
+        return ResponseEntity.ok(referees);
     }
 
     @GetMapping("/{id}")

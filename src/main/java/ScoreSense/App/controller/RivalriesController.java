@@ -1,9 +1,11 @@
-package ScoreSense.App.controller;
+package scoresense.app.controller;
 
-import ScoreSense.App.model.Rivalries;
-import ScoreSense.App.repository.RivalriesRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import scoresense.app.model.Rivalries;
+import scoresense.app.repository.RivalriesRepository;
+
 import java.util.List;
 
 @RestController

@@ -1,7 +1,8 @@
-package ScoreSense.App.service;
+package scoresense.app.service;
 
 import java.util.List;
-import ScoreSense.App.model.Match;
+
+import scoresense.app.model.Match;
 public interface MatchService {
     List<Match> findAll();
     Match findById(Long id);

@@ -1,4 +1,4 @@
-package ScoreSense.App.controller;
+package scoresense.app.controller;
 
 import java.util.List;
 
@@ -15,12 +15,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import ScoreSense.App.dto.CoachRequest;
-import ScoreSense.App.dto.CoachResponse;
-import ScoreSense.App.service.CoachService;
+
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
+import scoresense.app.dto.CoachRequest;
+import scoresense.app.dto.CoachResponse;
+import scoresense.app.service.CoachService;
 
 @RestController
 @RequestMapping("/api/coaches")

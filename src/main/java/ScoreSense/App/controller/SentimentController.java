@@ -1,10 +1,11 @@
-package ScoreSense.App.controller;
+package scoresense.app.controller;
 
-import ScoreSense.App.model.Sentiment;
-import ScoreSense.App.repository.SentimentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import scoresense.app.model.Sentiment;
+import scoresense.app.repository.SentimentRepository;
 
 import java.util.List;
 @RestController

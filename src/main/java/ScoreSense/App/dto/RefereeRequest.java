@@ -1,4 +1,4 @@
-package ScoreSense.App.dto;
+package scoresense.app.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -21,6 +21,6 @@ public class RefereeRequest {
 
     @NotNull
     @Positive
-    @JsonProperty("experience_years")
+    @JsonProperty("experience years")
     private Integer experienceYears;
 }

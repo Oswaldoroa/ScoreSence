@@ -1,9 +1,10 @@
-package ScoreSense.App.controller;
+package scoresense.app.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import ScoreSense.App.model.TrendingTopic;
-import ScoreSense.App.repository.TrendingTopicRepository;
+
+import scoresense.app.model.TrendingTopic;
+import scoresense.app.repository.TrendingTopicRepository;
 
 import java.util.List;
 import java.util.Optional;

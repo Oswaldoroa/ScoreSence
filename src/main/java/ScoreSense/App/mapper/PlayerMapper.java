@@ -1,11 +1,11 @@
-package ScoreSense.App.mapper;
+package scoresense.app.mapper;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-import ScoreSense.App.dto.PlayerRequest;
-import ScoreSense.App.dto.PlayerResponse;
-import ScoreSense.App.model.Player;
+import scoresense.app.dto.PlayerRequest;
+import scoresense.app.dto.PlayerResponse;
+import scoresense.app.model.Player;
 
 public final class PlayerMapper {
     public static PlayerResponse toResponse(Player player) {

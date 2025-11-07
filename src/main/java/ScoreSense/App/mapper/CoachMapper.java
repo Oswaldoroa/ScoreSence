@@ -1,11 +1,11 @@
-package ScoreSense.App.mapper;
+package scoresense.app.mapper;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-import ScoreSense.App.dto.CoachRequest;
-import ScoreSense.App.dto.CoachResponse;
-import ScoreSense.App.model.Coach;
+import scoresense.app.dto.CoachRequest;
+import scoresense.app.dto.CoachResponse;
+import scoresense.app.model.Coach;
 
 public final class CoachMapper {
 

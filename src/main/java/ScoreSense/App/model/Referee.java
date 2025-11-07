@@ -1,4 +1,4 @@
-package ScoreSense.App.model;
+package scoresense.app.model;
 
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -21,6 +21,6 @@ public class Referee {
     @Column(name = "nationality", length = 30)
     private String nationality;
 
-    @Column(name = "experience_years")
+    @Column(name = "experience years")
     private Integer experienceYears;
 }
