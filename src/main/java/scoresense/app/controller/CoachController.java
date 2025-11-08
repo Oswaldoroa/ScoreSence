@@ -34,6 +34,12 @@ public class CoachController {
         this.coachService = coachService;
     }
 
+    @GetMapping
+    @Operation(summary = "List all coaches", description = "Returns a list of all coaches")
+    public ResponseEntity<List<CoachResponse>> getAll() {
+        return ResponseEntity.ok(coachService.getAll());
+    }
+
     @GetMapping("/{id}")
     @Operation(summary = "Get coach by ID", description = "Return coach by using ID")
     public ResponseEntity<CoachResponse> getById(@PathVariable Long id) {
@@ -61,6 +67,7 @@ public class CoachController {
         return ResponseEntity.noContent().build();
     }
 
+
     @GetMapping("/search")
     @Operation(summary = "Search coaches by name", description = "Search coaches using their name")
     public ResponseEntity<List<CoachResponse>> searchByName(@RequestParam String name) {
@@ -79,6 +86,7 @@ public class CoachController {
     public ResponseEntity<Page<CoachResponse>> getAllPaged(Pageable pageable) {
         return ResponseEntity.ok(coachService.getAllPaged(pageable));
     }
+    
     @GetMapping("/by-nationality")
     @Operation(summary = "Search coaches by nationality", description = "Search coaches using their nationality")
     public ResponseEntity<List<CoachResponse>> getByNationality(@RequestParam String nationality) {

@@ -31,6 +31,13 @@ public class CoachService {
         this.teamRepository = teamRepository;
     }
 
+    public List<CoachResponse> getAll() {
+        return coachRepository.findAll()
+                .stream()
+                .map(this::toResponse)
+                .collect(Collectors.toList());
+    }
+
     public CoachResponse getById(Long id) {
         Coach coach = coachRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Coach", "id", id));
@@ -101,20 +108,11 @@ public class CoachService {
     return coachRepository.findAll(pageable)
             .map(CoachMapper::toResponse);
     }
+    
     public List<CoachResponse> findByNationality(String nationality) {
         return coachRepository.findByNationalityIgnoreCase(nationality)
                 .stream()
                 .map(CoachMapper::toResponse)
                 .collect(Collectors.toList());
     }
-
-
-    public List<CoachResponse> getAll() {
-        return coachRepository.findAll()
-                .stream()
-                .map(CoachMapper::toResponse)
-                .collect(Collectors.toList());
-    }
-
-
 }
