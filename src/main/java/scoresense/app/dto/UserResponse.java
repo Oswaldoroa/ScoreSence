@@ -1,7 +1,6 @@
 package scoresense.app.dto;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
@@ -26,9 +25,6 @@ public class UserResponse {
 
     @JsonProperty("created_at")
     private LocalDateTime createdAt;
-
-    @JsonProperty("favorite_ids")
-    private List<Long> favoriteIds;
 
     @JsonProperty("role_id")
     private Long roleId;
