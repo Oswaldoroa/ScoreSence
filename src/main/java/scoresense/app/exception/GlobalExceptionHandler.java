@@ -19,8 +19,10 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 
+import io.swagger.v3.oas.annotations.Hidden;
 import jakarta.validation.ConstraintViolationException;
 
+@Hidden
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
