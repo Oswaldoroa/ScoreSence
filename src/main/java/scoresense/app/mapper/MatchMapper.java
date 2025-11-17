@@ -1,16 +1,31 @@
 package scoresense.app.mapper;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 import scoresense.app.dto.MatchRequest;
 import scoresense.app.dto.MatchResponse;
 import scoresense.app.model.Match;
+import scoresense.app.model.Team;
 
-public final class MatchMapper {
+public class MatchMapper {
+
+    public static Match toEntity(MatchRequest req, Team homeTeam, Team awayTeam) {
+        Match match = new Match();
+        match.setMatchDate(req.getMatchDate());
+        match.setHomeScore(req.getHomeScore());
+        match.setAwayScore(req.getAwayScore());
+        match.setHomeTeam(homeTeam);
+        match.setAwayTeam(awayTeam);
+        return match;
+    }
+
+    public static void copyToEntity(MatchRequest req, Match match, Team homeTeam, Team awayTeam) {
+        match.setMatchDate(req.getMatchDate());
+        match.setHomeScore(req.getHomeScore());
+        match.setAwayScore(req.getAwayScore());
+        match.setHomeTeam(homeTeam);
+        match.setAwayTeam(awayTeam);
+    }
+
     public static MatchResponse toResponse(Match match) {
-        if (match == null) return null;
-
         return MatchResponse.builder()
                 .matchId(match.getMatchId())
                 .matchDate(match.getMatchDate())
@@ -19,34 +34,5 @@ public final class MatchMapper {
                 .homeTeamId(match.getHomeTeam() != null ? match.getHomeTeam().getTeamId() : null)
                 .awayTeamId(match.getAwayTeam() != null ? match.getAwayTeam().getTeamId() : null)
                 .build();
-    }
-
-
-    public static List<MatchResponse> toResponseList(List<Match> matches) {
-        if (matches == null) return List.of();
-        return matches.stream()
-                .map(MatchMapper::toResponse)
-                .collect(Collectors.toList());
-    }
-
-
-    public static Match toEntity(MatchRequest request) {
-        if (request == null) return null;
-
-        Match match = new Match();
-        match.setMatchDate(request.getMatchDate());
-        match.setHomeScore(request.getHomeScore());
-        match.setAwayScore(request.getAwayScore());
-        return match;
-    }
-
-
-    public static void copyToEntity(MatchRequest request, Match entity) {
-        if (request == null || entity == null) return;
-
-        entity.setMatchDate(request.getMatchDate());
-        entity.setHomeScore(request.getHomeScore());
-        entity.setAwayScore(request.getAwayScore());
-
     }
 }
