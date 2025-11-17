@@ -1,0 +1,30 @@
+scalar DateTime
+
+type TrendingTopic {
+    topicId: ID!
+    socialMedia: String!
+    topic: String!
+    createdAt: DateTime!
+}
+
+extend type Query {
+    trendingTopics: [TrendingTopic]
+    trendingTopicById(id: ID!): TrendingTopic
+    pagedTrendingTopics(page: Int!, size: Int!): [TrendingTopic]
+    searchTrendingTopicsBySocialMedia(socialMedia: String!): [TrendingTopic]
+    searchTrendingTopicsByTopic(topic: String!): [TrendingTopic]
+    trendingTopicsCreatedWithinDays(days: Int!): [TrendingTopic]
+}
+
+extend type Mutation {
+    createTrendingTopic(
+        socialMedia: String!
+        topic: String!
+    ): TrendingTopic
+
+    updateTrendingTopic(
+        topicId: ID!
+        socialMedia: String
+        topic: String
+    ): TrendingTopic
+}

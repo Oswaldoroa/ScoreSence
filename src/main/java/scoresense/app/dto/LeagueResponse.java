@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class LeagueResponse {
 
-    @JsonProperty("leagueid")
+    @JsonProperty("league_id")
     private Long leagueId;
 
     @JsonProperty("name")

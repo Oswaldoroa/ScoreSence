@@ -1,13 +1,13 @@
 package scoresense.app.dto;
 
-import java.time.LocalDateTime;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 
 @Data
 @Builder
@@ -16,14 +16,14 @@ import lombok.NoArgsConstructor;
 public class TrendingTopicResponse {
 
     @JsonProperty("topic_id")
-    Long topicId;
+    private Long topicId;
 
     @JsonProperty("social_media")
-    String socialMedia;
+    private String socialMedia;
 
     @JsonProperty("topic")
-    String topic;
+    private String topic;
 
     @JsonProperty("created_at")
-    LocalDateTime createdAt;
+    private OffsetDateTime  createdAt;
 }
