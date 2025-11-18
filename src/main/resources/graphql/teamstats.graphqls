@@ -1,13 +1,3 @@
-type Match {
-    matchId: ID!
-    matchDate: DateTime
-    homeScore: Int
-    awayScore: Int
-    location: String
-    homeTeam: Team
-    awayTeam: Team
-}
-
 type TeamStats {
     teamStatId: ID!
     possesion: Int
@@ -15,7 +5,7 @@ type TeamStats {
     fouls: Int
     corners: Int
     team: Team
-    match: Match
+    match: Match   # referencia al tipo definido en match.graphqls
 }
 
 extend type Query {
