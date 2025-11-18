@@ -11,6 +11,8 @@ public class MatchResponse {
     private LocalDate matchDate;
     private Integer homeScore;
     private Integer awayScore;
-    private Long homeTeamId;
-    private Long awayTeamId;
+
+    private TeamResponse homeTeam;  // objeto completo
+    private TeamResponse awayTeam;  // objeto completo
+    private String location;        // si tu entidad Match tiene este campo
 }

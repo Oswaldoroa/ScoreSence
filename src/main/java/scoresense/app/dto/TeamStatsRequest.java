@@ -1,21 +1,20 @@
 package scoresense.app.dto;
 
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.PositiveOrZero;
 import lombok.Data;
 
 @Data
 public class TeamStatsRequest {
-    @PositiveOrZero
+    @NotNull
     private Integer possesion;
 
-    @PositiveOrZero
+    @NotNull
     private Integer shots;
 
-    @PositiveOrZero
+    @NotNull
     private Integer fouls;
 
-    @PositiveOrZero
+    @NotNull
     private Integer corners;
 
     @NotNull

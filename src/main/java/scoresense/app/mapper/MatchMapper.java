@@ -26,13 +26,15 @@ public class MatchMapper {
     }
 
     public static MatchResponse toResponse(Match match) {
-        return MatchResponse.builder()
-                .matchId(match.getMatchId())
-                .matchDate(match.getMatchDate())
-                .homeScore(match.getHomeScore())
-                .awayScore(match.getAwayScore())
-                .homeTeamId(match.getHomeTeam() != null ? match.getHomeTeam().getTeamId() : null)
-                .awayTeamId(match.getAwayTeam() != null ? match.getAwayTeam().getTeamId() : null)
-                .build();
+    if (match == null) return null;
+
+    return MatchResponse.builder()
+        .matchId(match.getMatchId())
+        .matchDate(match.getMatchDate())
+        .homeScore(match.getHomeScore())
+        .awayScore(match.getAwayScore())
+        .homeTeam(match.getHomeTeam() != null ? TeamMapper.toResponse(match.getHomeTeam()) : null)
+        .awayTeam(match.getAwayTeam() != null ? TeamMapper.toResponse(match.getAwayTeam()) : null)
+        .build();
     }
 }

@@ -1,0 +1,51 @@
+type Match {
+    matchId: ID!
+    matchDate: DateTime
+    homeScore: Int
+    awayScore: Int
+    location: String
+    homeTeam: Team
+    awayTeam: Team
+}
+
+type TeamStats {
+    teamStatId: ID!
+    possesion: Int
+    shots: Int
+    fouls: Int
+    corners: Int
+    team: Team
+    match: Match
+}
+
+extend type Query {
+    teamStats: [TeamStats]
+    teamStatById(id: ID!): TeamStats
+    teamStatsByFouls(fouls: Int!): [TeamStats]
+    teamStatsByShots(shots: Int!): [TeamStats]
+    teamStatsByTeam(teamId: ID!): [TeamStats]
+    pagedTeamStats(page: Int!, size: Int!): [TeamStats]
+}
+
+extend type Mutation {
+    createTeamStat(
+        possesion: Int!
+        shots: Int!
+        fouls: Int!
+        corners: Int!
+        teamId: ID!
+        matchId: ID!
+    ): TeamStats
+
+    updateTeamStat(
+        teamStatId: ID!
+        possesion: Int
+        shots: Int
+        fouls: Int
+        corners: Int
+        teamId: ID
+        matchId: ID
+    ): TeamStats
+
+    deleteTeamStat(teamStatId: ID!): String
+}
