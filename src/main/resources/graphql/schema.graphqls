@@ -1,38 +1,7 @@
-
-type Coach {
-    coachId: ID!
-    name: String!
-    nationality: String
-    experiencedYears: Int
-    team: Team
+schema {
+    query: Query
+    mutation: Mutation
 }
-type Team {
-    teamId: ID!
-    name: String!
-    country: String
-    foundedYear: Int
-}
-type Query {
 
-    coaches: [Coach]
-
-
-    coachById(id: ID!): Coach
-}
-type Mutation {
-
-    createCoach(
-        name: String!
-        nationality: String
-        experiencedYears: Int
-        teamId: ID
-    ): Coach
-    updateCoach(
-        coachId: ID!
-        name: String
-        nationality: String
-        experiencedYears: Int
-        teamId: ID
-    ): Coach
-    deleteCoach(coachId: ID!): String
-}
+type Query
+type Mutation

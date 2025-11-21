@@ -1,0 +1,30 @@
+type League {
+    leagueId: ID!
+    name: String!
+    country: String!
+    season: String!
+    level: String!
+}
+
+extend type Query {
+    leagues: [League]
+    leagueById(id: ID!): League
+    pagedLeagues(page: Int!, size: Int!): [League]
+}
+
+extend type Mutation {
+    createLeague(
+        name: String!
+        country: String!
+        season: String!
+        level: String!
+    ): League
+
+    updateLeague(
+        leagueId: ID!
+        name: String
+        country: String
+        season: String
+        level: String
+    ): League
+}

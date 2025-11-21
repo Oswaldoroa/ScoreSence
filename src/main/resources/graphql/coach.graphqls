@@ -1,0 +1,35 @@
+type Coach {
+    coachId: ID!
+    name: String!
+    nationality: String
+    experiencedYears: Int
+    teamId: ID
+}
+
+extend type Query {
+    coaches: [Coach]
+    coachById(id: ID!): Coach
+    searchCoachesByName(name: String!): [Coach]
+    searchCoachesByExperience(years: Int!): [Coach]
+    coachesByNationality(nationality: String!): [Coach]
+    pagedCoaches(page: Int!, size: Int!): [Coach]
+}
+
+extend type Mutation {
+    createCoach(
+        name: String!
+        nationality: String
+        experiencedYears: Int
+        teamId: ID
+    ): Coach
+
+    updateCoach(
+        coachId: ID!
+        name: String
+        nationality: String
+        experiencedYears: Int
+        teamId: ID
+    ): Coach
+
+    deleteCoach(coachId: ID!): String
+}

@@ -5,15 +5,17 @@ import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import scoresense.app.dto.TeamRequest;
 import scoresense.app.dto.TeamResponse;
 import scoresense.app.exception.ResourceNotFoundException;
 import scoresense.app.mapper.TeamMapper;
-import scoresense.app.model.League;
 import scoresense.app.model.Team;
-import scoresense.app.repository.LeagueRepository;
+import scoresense.app.model.League;
 import scoresense.app.repository.TeamRepository;
+import scoresense.app.repository.LeagueRepository;
 
 @Service
 @Transactional
@@ -30,14 +32,14 @@ public class TeamService {
     public List<TeamResponse> getAll() {
         return teamRepository.findAll()
                 .stream()
-                .map(this::toResponse)
+                .map(TeamMapper::toResponse)
                 .collect(Collectors.toList());
     }
 
     public TeamResponse getById(Long id) {
         Team team = teamRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Team", "id", id));
-        return toResponse(team);
+        return TeamMapper.toResponse(team);
     }
 
     public TeamResponse create(TeamRequest req) {
@@ -48,7 +50,7 @@ public class TeamService {
         team.setLeague(league);
 
         Team saved = teamRepository.save(team);
-        return toResponse(saved);
+        return TeamMapper.toResponse(saved);
     }
 
     public TeamResponse update(Long id, TeamRequest req) {
@@ -62,16 +64,34 @@ public class TeamService {
         team.setLeague(league);
 
         Team updated = teamRepository.save(team);
-        return toResponse(updated);
+        return TeamMapper.toResponse(updated);
     }
 
-    public void delete(Long id) {
-        Team team = teamRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Team", "id", id));
-        teamRepository.delete(team);
+
+    // --- Métodos especializados ---
+    public Page<TeamResponse> getAllPaged(Pageable pageable) {
+        return teamRepository.findAll(pageable)
+                .map(TeamMapper::toResponse);
     }
 
-    private TeamResponse toResponse(Team team) {
-        return TeamMapper.toResponse(team);
+    public List<TeamResponse> findByName(String name) {
+        return teamRepository.findByNameIgnoreCase(name)
+                .stream()
+                .map(TeamMapper::toResponse)
+                .collect(Collectors.toList());
+    }
+
+    public List<TeamResponse> findByLeagueName(String leagueName) {
+        return teamRepository.findByLeague_NameIgnoreCase(leagueName)
+                .stream()
+                .map(TeamMapper::toResponse)
+                .collect(Collectors.toList());
+    }
+
+    public List<TeamResponse> findByCountry(String country) {
+        return teamRepository.findByCountryIgnoreCase(country)
+                .stream()
+                .map(TeamMapper::toResponse)
+                .collect(Collectors.toList());
     }
 }

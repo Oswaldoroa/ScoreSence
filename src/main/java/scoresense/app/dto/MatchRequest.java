@@ -1,24 +1,15 @@
 package scoresense.app.dto;
 
-import jakarta.validation.constraints.NotNull;
-import lombok.Data;
 import java.time.LocalDate;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
-
+@Getter
+@Setter
 public class MatchRequest {
-    @NotNull
     private LocalDate matchDate;
-
-    @NotNull
     private Integer homeScore;
-
-    @NotNull
     private Integer awayScore;
-
-    @NotNull
     private Long homeTeamId;
-
-    @NotNull
     private Long awayTeamId;
 }

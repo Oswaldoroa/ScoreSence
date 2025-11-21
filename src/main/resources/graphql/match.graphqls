@@ -1,0 +1,38 @@
+type Match {
+    matchId: ID!
+    matchDate: DateTime
+    homeScore: Int
+    awayScore: Int
+    location: String
+    homeTeam: Team
+    awayTeam: Team
+}
+
+extend type Query {
+    matches: [Match]
+    matchById(id: ID!): Match
+    pagedMatches(page: Int!, size: Int!): [Match]
+}
+
+extend type Mutation {
+    createMatch(
+        matchDate: DateTime!
+        homeScore: Int
+        awayScore: Int
+        location: String
+        homeTeamId: ID!
+        awayTeamId: ID!
+    ): Match
+
+    updateMatch(
+        matchId: ID!
+        matchDate: DateTime
+        homeScore: Int
+        awayScore: Int
+        location: String
+        homeTeamId: ID
+        awayTeamId: ID
+    ): Match
+
+    deleteMatch(matchId: ID!): String
+}

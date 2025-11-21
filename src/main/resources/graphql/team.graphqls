@@ -1,0 +1,39 @@
+type Team {
+    teamId: ID!
+    name: String!
+    country: String!
+    foundedYear: Int!
+    stadium: String!
+    logoUrl: String
+    league: League
+}
+
+extend type Query {
+    teams: [Team]
+    teamById(id: ID!): Team
+    searchTeamsByName(name: String!): [Team]
+    searchTeamsByLeagueName(leagueName: String!): [Team]
+    searchTeamsByCountry(country: String!): [Team]
+    pagedTeams(page: Int!, size: Int!): [Team]
+}
+
+extend type Mutation {
+    createTeam(
+        name: String!
+        country: String!
+        foundedYear: Int!
+        stadium: String!
+        logoUrl: String
+        leagueId: ID!
+    ): Team
+
+    updateTeam(
+        teamId: ID!
+        name: String
+        country: String
+        foundedYear: Int
+        stadium: String
+        logoUrl: String
+        leagueId: ID
+    ): Team
+}

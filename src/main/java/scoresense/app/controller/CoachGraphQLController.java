@@ -4,11 +4,12 @@ import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.MutationMapping;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.stereotype.Controller;
+import org.springframework.data.domain.PageRequest;
 
-import io.swagger.v3.oas.annotations.Operation;
 import scoresense.app.dto.CoachRequest;
 import scoresense.app.dto.CoachResponse;
 import scoresense.app.service.CoachService;
+
 import java.util.List;
 
 @Controller
@@ -20,20 +21,38 @@ public class CoachGraphQLController {
         this.coachService = coachService;
     }
 
-
+    // --- QUERIES ---
     @QueryMapping
-    @Operation(summary = "Get coaches", description = "Get all coaches")
     public List<CoachResponse> coaches() {
         return coachService.getAll();
     }
 
     @QueryMapping
-    @Operation(summary = "Get coach by ID", description = "Get coach by ID")
     public CoachResponse coachById(@Argument Long id) {
         return coachService.getById(id);
     }
 
+    @QueryMapping
+    public List<CoachResponse> searchCoachesByName(@Argument String name) {
+        return coachService.findByName(name);
+    }
 
+    @QueryMapping
+    public List<CoachResponse> searchCoachesByExperience(@Argument int years) {
+        return coachService.findExperiencedCoaches(years);
+    }
+
+    @QueryMapping
+    public List<CoachResponse> coachesByNationality(@Argument String nationality) {
+        return coachService.findByNationality(nationality);
+    }
+
+    @QueryMapping
+    public List<CoachResponse> pagedCoaches(@Argument int page, @Argument int size) {
+        return coachService.getAllPaged(PageRequest.of(page, size)).getContent();
+    }
+
+    // --- MUTATIONS ---
     @MutationMapping
     public CoachResponse createCoach(
             @Argument String name,
