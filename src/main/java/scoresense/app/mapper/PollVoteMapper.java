@@ -5,7 +5,6 @@ import java.util.stream.Collectors;
 
 import scoresense.app.dto.PollVoteRequest;
 import scoresense.app.dto.PollVoteResponse;
-import scoresense.app.dto.PollResponse;
 import scoresense.app.dto.UserResponse;
 import scoresense.app.model.Poll_vote;
 import scoresense.app.model.Poll;
