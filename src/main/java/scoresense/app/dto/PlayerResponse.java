@@ -1,7 +1,6 @@
 package scoresense.app.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -12,21 +11,27 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class PlayerResponse {
-
     @JsonProperty("player_id")
-    Long playerId;
+    private Long playerId;
+
     @JsonProperty("name")
-    String name;
+    private String name;
+
     @JsonProperty("position")
-    String position;
+    private String position;
+
     @JsonProperty("age")
-    int age;
+    private Integer age;
+
     @JsonProperty("nationality")
-    String nationality;
+    private String nationality;
+
     @JsonProperty("height")
-    int height;
+    private Integer height;
+
     @JsonProperty("weight")
-    int weight;
-    @JsonProperty("team_id")
-    Long teamId;
+    private Integer weight;
+
+    @JsonProperty("team")
+    private TeamResponse team; // objeto completo
 }

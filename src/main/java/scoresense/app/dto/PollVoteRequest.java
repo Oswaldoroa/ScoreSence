@@ -1,17 +1,18 @@
 package scoresense.app.dto;
 
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 @Data
-public class Poll_voteRequest {
+public class PollVoteRequest {
+
     @NotNull
     private Long pollId;
 
     @NotNull
     private Long userId;
 
-    @NotNull
-    private Boolean voteOption;
+    @NotBlank
     private String optionSelected;
 }

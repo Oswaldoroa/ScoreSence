@@ -1,14 +1,17 @@
 package scoresense.app.dto;
 
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Positive;
 import lombok.Data;
 import java.time.LocalDate;
 
 @Data
 public class ContractRequest {
+
     @NotNull
-    private Long playerId;
+    private String entityType;
+
+    @NotNull
+    private Long entityId;
 
     @NotNull
     private Long teamId;
@@ -19,6 +22,12 @@ public class ContractRequest {
     @NotNull
     private LocalDate endDate;
 
-    @Positive
+    @NotNull
     private Double salary;
+
+    @NotNull
+    private Double releaseClause;
+
+    @NotNull
+    private Long playerId;
 }

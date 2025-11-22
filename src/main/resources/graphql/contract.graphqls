@@ -1,0 +1,47 @@
+type Contract {
+    contractId: ID!
+    entityType: String!
+    entityId: ID!
+    team: Team
+    player: Player
+    startDate: String!
+    endDate: String!
+    salary: Float!
+    releaseClause: Float!
+}
+
+extend type Query {
+    contracts: [Contract]
+    contractById(id: ID!): Contract
+    contractsByTeam(teamId: ID!): [Contract]
+    contractsBySalary(salary: Float!): [Contract]
+    contractsByReleaseClause(releaseClause: Float!): [Contract]
+    pagedContracts(page: Int!, size: Int!): [Contract]
+}
+
+extend type Mutation {
+    createContract(
+        entityType: String!
+        entityId: ID!
+        teamId: ID!
+        playerId: ID!
+        startDate: String!
+        endDate: String!
+        salary: Float!
+        releaseClause: Float!
+    ): Contract
+
+    updateContract(
+        contractId: ID!
+        entityType: String
+        entityId: ID
+        teamId: ID
+        playerId: ID
+        startDate: String
+        endDate: String
+        salary: Float
+        releaseClause: Float
+    ): Contract
+
+    deleteContract(contractId: ID!): String
+}

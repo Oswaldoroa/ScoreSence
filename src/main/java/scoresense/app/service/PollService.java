@@ -4,6 +4,8 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,44 +26,6 @@ public class PollService {
         this.pollRepository = pollRepository;
     }
 
-    // Obtener una encuesta por ID
-    public PollResponse getById(Long id) {
-        Poll poll = pollRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Poll", "id", id));
-        return PollMapper.toResponse(poll);
-    }
-
-    // Crear una nueva encuesta
-    public PollResponse create(PollRequest req) {
-        Poll poll = new Poll();
-        poll.setQuestion(req.getQuestion());
-        poll.setCreatedAt(LocalDateTime.now());
-        poll.setExpiresAt(LocalDateTime.now().plusDays(7)); // Por defecto expira en 7 días
-
-        Poll saved = pollRepository.save(poll);
-        return PollMapper.toResponse(saved);
-    }
-
-    // Actualizar una encuesta existente
-    public PollResponse update(Long id, PollRequest req) {
-        Poll poll = pollRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Poll", "id", id));
-
-        poll.setQuestion(req.getQuestion());
-        poll.setExpiresAt(LocalDateTime.now().plusDays(7)); // Reinicia vencimiento
-
-        Poll updated = pollRepository.save(poll);
-        return PollMapper.toResponse(updated);
-    }
-
-    // Eliminar una encuesta
-    public void delete(Long id) {
-        Poll poll = pollRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Poll", "id", id));
-        pollRepository.delete(poll);
-    }
-
-    // Obtener todas las encuestas
     public List<PollResponse> getAll() {
         return pollRepository.findAll()
                 .stream()
@@ -69,13 +33,59 @@ public class PollService {
                 .collect(Collectors.toList());
     }
 
-    // Obtener solo encuestas activas (no vencidas)
-    public List<PollResponse> getActivePolls() {
-        return pollRepository.findAll()
+    public PollResponse getById(Long id) {
+        Poll poll = pollRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Poll", "id", id));
+        return PollMapper.toResponse(poll);
+    }
+
+    public PollResponse create(PollRequest req) {
+        Poll poll = PollMapper.toEntity(req);
+        Poll saved = pollRepository.save(poll);
+        return PollMapper.toResponse(saved);
+    }
+
+    public PollResponse update(Long id, PollRequest req) {
+        Poll poll = pollRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Poll", "id", id));
+
+        PollMapper.copyToEntity(req, poll);
+        Poll updated = pollRepository.save(poll);
+        return PollMapper.toResponse(updated);
+    }
+
+    public void delete(Long id) {
+        Poll poll = pollRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Poll", "id", id));
+        pollRepository.delete(poll);
+    }
+
+    // --- MÉTODOS ESPECIALIZADOS ---
+    public Page<PollResponse> getAllPaged(Pageable pageable) {
+        return pollRepository.findAll(pageable)
+                .map(PollMapper::toResponse);
+    }
+
+    public List<PollResponse> findByQuestion(String question) {
+        return pollRepository.findByQuestionContainingIgnoreCase(question)
                 .stream()
-                .filter(poll -> poll.getExpiresAt().isAfter(LocalDateTime.now()))
                 .map(PollMapper::toResponse)
                 .collect(Collectors.toList());
     }
 
+    public List<PollResponse> findByCreatedWithin(int days) {
+        LocalDateTime cutoff = LocalDateTime.now().minusDays(days);
+        return pollRepository.findByCreatedAtAfter(cutoff)
+                .stream()
+                .map(PollMapper::toResponse)
+                .collect(Collectors.toList());
+    }
+
+    public List<PollResponse> findByExpiredWithin(int days) {
+        LocalDateTime cutoff = LocalDateTime.now().plusDays(days);
+        return pollRepository.findByExpiresAtBefore(cutoff)
+                .stream()
+                .map(PollMapper::toResponse)
+                .collect(Collectors.toList());
+    }
 }
