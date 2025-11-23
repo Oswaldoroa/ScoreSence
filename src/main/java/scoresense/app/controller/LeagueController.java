@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -52,10 +53,35 @@ public class LeagueController {
         return ResponseEntity.ok(updated);
     }
 
-    // --- Método especializado: paginación ---
+    @DeleteMapping("/{id}")
+    @Operation(summary = "Delete league")
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+        leagueService.delete(id);
+        return ResponseEntity.noContent().build();
+    }
+
+    // --- MÉTODOS ESPECIALIZADOS ---
     @GetMapping("/paged")
     @Operation(summary = "Page leagues")
     public ResponseEntity<Page<LeagueResponse>> getAllPaged(Pageable pageable) {
         return ResponseEntity.ok(leagueService.getAllPaged(pageable));
+    }
+
+    @GetMapping("/by-name")
+    @Operation(summary = "Search leagues by name")
+    public ResponseEntity<List<LeagueResponse>> getByName(@RequestParam String name) {
+        return ResponseEntity.ok(leagueService.findByName(name));
+    }
+
+    @GetMapping("/by-country")
+    @Operation(summary = "Search leagues by country")
+    public ResponseEntity<List<LeagueResponse>> getByCountry(@RequestParam String country) {
+        return ResponseEntity.ok(leagueService.findByCountry(country));
+    }
+
+    @GetMapping("/by-season")
+    @Operation(summary = "Search leagues by season")
+    public ResponseEntity<List<LeagueResponse>> getBySeason(@RequestParam String season) {
+        return ResponseEntity.ok(leagueService.findBySeason(season));
     }
 }

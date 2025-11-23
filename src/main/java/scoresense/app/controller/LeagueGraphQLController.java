@@ -1,8 +1,8 @@
 package scoresense.app.controller;
 
 import org.springframework.graphql.data.method.annotation.Argument;
-import org.springframework.graphql.data.method.annotation.MutationMapping;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
+import org.springframework.graphql.data.method.annotation.MutationMapping;
 import org.springframework.stereotype.Controller;
 import org.springframework.data.domain.PageRequest;
 
@@ -30,6 +30,21 @@ public class LeagueGraphQLController {
     @QueryMapping
     public LeagueResponse leagueById(@Argument Long id) {
         return leagueService.getById(id);
+    }
+
+    @QueryMapping
+    public List<LeagueResponse> leaguesByName(@Argument String name) {
+        return leagueService.findByName(name);
+    }
+
+    @QueryMapping
+    public List<LeagueResponse> leaguesByCountry(@Argument String country) {
+        return leagueService.findByCountry(country);
+    }
+
+    @QueryMapping
+    public List<LeagueResponse> leaguesBySeason(@Argument String season) {
+        return leagueService.findBySeason(season);
     }
 
     @QueryMapping
@@ -67,5 +82,11 @@ public class LeagueGraphQLController {
         req.setSeason(season);
         req.setLevel(level);
         return leagueService.update(leagueId, req);
+    }
+
+    @MutationMapping
+    public String deleteLeague(@Argument Long leagueId) {
+        leagueService.delete(leagueId);
+        return "League deleted successfully";
     }
 }
