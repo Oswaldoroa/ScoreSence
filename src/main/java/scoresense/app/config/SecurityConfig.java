@@ -55,6 +55,7 @@ public class SecurityConfig {
             .formLogin(form -> form
                 .loginPage("/login")       // <-- tu página personalizada
                 .permitAll()
+                .defaultSuccessUrl("/swagger-ui/index.html", true)
             )
             .logout(logout -> logout.permitAll())
 
