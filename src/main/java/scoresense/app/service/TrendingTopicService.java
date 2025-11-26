@@ -26,6 +26,8 @@ public class TrendingTopicService {
         this.repository = repository;
     }
 
+
+
     public List<TrendingTopicResponse> getAll() {
         return repository.findAll()
                 .stream()

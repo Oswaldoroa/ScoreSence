@@ -24,4 +24,5 @@ public class TrendingTopicResponse {
 
     @JsonProperty("created_at")
     private OffsetDateTime  createdAt;
+
 }
