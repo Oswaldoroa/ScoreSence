@@ -1,7 +1,6 @@
 package scoresense.app.controller;
 
 import java.util.List;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,6 +13,7 @@ import jakarta.validation.Valid;
 import scoresense.app.dto.TrendingTopicRequest;
 import scoresense.app.dto.TrendingTopicResponse;
 import scoresense.app.service.TrendingTopicService;
+import scoresense.app.service.ia.TopicAnalysisService;
 
 @RestController
 @RequestMapping("/api/trending-topics")
@@ -21,9 +21,12 @@ import scoresense.app.service.TrendingTopicService;
 public class TrendingTopicController {
 
     private final TrendingTopicService trendingTopicService;
+    private final TopicAnalysisService topicAnalysisService;
 
-    public TrendingTopicController(TrendingTopicService trendingTopicService) {
+    public TrendingTopicController(TrendingTopicService trendingTopicService,
+                                   TopicAnalysisService topicAnalysisService) {
         this.trendingTopicService = trendingTopicService;
+        this.topicAnalysisService = topicAnalysisService;
     }
 
     @GetMapping
@@ -39,16 +42,33 @@ public class TrendingTopicController {
     }
 
     @PostMapping
-    @Operation(summary = "Create a new trending topic")
+    @Operation(summary = "Create a new trending topic with Azure AI entity detection")
     public ResponseEntity<TrendingTopicResponse> create(@Valid @RequestBody TrendingTopicRequest req) {
+
+        // 1. Crear el trending topic normalmente
         TrendingTopicResponse created = trendingTopicService.create(req);
+
+        // 2. Analizar con Azure IA
+        List<String> persons = topicAnalysisService.detectarPersonas(req.getTopic());
+
+        // 3. Agregar a la respuesta
+        created.setDetectedPersons(persons);
+
         return ResponseEntity.status(HttpStatus.CREATED).body(created);
     }
 
     @PutMapping("/{id}")
     @Operation(summary = "Update trending topic")
-    public ResponseEntity<TrendingTopicResponse> update(@PathVariable Long id, @Valid @RequestBody TrendingTopicRequest req) {
+    public ResponseEntity<TrendingTopicResponse> update(
+            @PathVariable Long id,
+            @Valid @RequestBody TrendingTopicRequest req) {
+
         TrendingTopicResponse updated = trendingTopicService.update(id, req);
+
+        // Re-analizar el topic actualizado
+        List<String> persons = topicAnalysisService.detectarPersonas(req.getTopic());
+        updated.setDetectedPersons(persons);
+
         return ResponseEntity.ok(updated);
     }
 
