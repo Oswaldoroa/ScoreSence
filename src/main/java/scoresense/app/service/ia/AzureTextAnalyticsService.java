@@ -1,3 +1,4 @@
+/* 
 package scoresense.app.service.ia;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.client.RestTemplateBuilder;
@@ -50,3 +51,4 @@ public class AzureTextAnalyticsService {
             .collect(Collectors.toList());
     }
 }
+*/

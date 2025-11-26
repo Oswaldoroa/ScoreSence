@@ -42,6 +42,7 @@ public class TrendingTopicController {
         return ResponseEntity.ok(trendingTopicService.getById(id));
     }
 
+    /*
     //Para extraer las entidades usando Azure Text Analytics
     @GetMapping("/{id}/entities")
     @Operation(summary = "Get entities mentioned in a trending topic",
@@ -51,7 +52,7 @@ public class TrendingTopicController {
         List<String> entities = azureTextAnalyticsService.extractEntities(topic.getTopic());
         return ResponseEntity.ok(entities);
     }
-
+    */
 
     @PostMapping
     @Operation(summary = "Create a new trending topic")
