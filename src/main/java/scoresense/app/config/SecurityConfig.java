@@ -42,11 +42,8 @@ public class SecurityConfig {
 
 
                 // Endpoints protegidos
-                .requestMatchers("/api/coaches/**").hasRole("ADMIN")
-                .requestMatchers("/api/teams/**").hasRole("ADMIN")
-                .requestMatchers("/api/trending-topics**").hasRole("ADMIN")
-                .requestMatchers("/api/team-stats/**").hasRole("ADMIN")
-                .requestMatchers("/api/rivalries/**").hasRole("ADMIN")
+                .requestMatchers("/api/roles/**").hasRole("ADMIN")
+                .requestMatchers("/api/users/**").hasRole("ADMIN")
                 .requestMatchers("/api/v3/learningResources/**").hasRole("USER")
                 .requestMatchers("/graphql/**").permitAll()
                 .requestMatchers("/services/**").hasRole("ADMIN")
@@ -55,6 +52,7 @@ public class SecurityConfig {
             .formLogin(form -> form
                 .loginPage("/login")       // <-- tu página personalizada
                 .permitAll()
+                .defaultSuccessUrl("/swagger-ui/index.html", true)
             )
             .logout(logout -> logout.permitAll())
 
