@@ -42,11 +42,7 @@ public class SecurityConfig {
 
 
                 // Endpoints protegidos
-                .requestMatchers("/api/coaches/**").hasRole("ADMIN")
-                .requestMatchers("/api/teams/**").hasRole("ADMIN")
-                .requestMatchers("/api/trending-topics**").hasRole("ADMIN")
-                .requestMatchers("/api/team-stats/**").hasRole("ADMIN")
-                .requestMatchers("/api/rivalries/**").hasRole("ADMIN")
+                .requestMatchers("/api/contracts/**").hasRole("ADMIN")
                 .requestMatchers("/api/v3/learningResources/**").hasRole("USER")
                 .requestMatchers("/graphql/**").permitAll()
                 .requestMatchers("/services/**").hasRole("ADMIN")
