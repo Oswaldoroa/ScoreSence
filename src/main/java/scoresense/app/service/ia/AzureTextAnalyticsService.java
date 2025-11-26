@@ -1,4 +1,5 @@
 package scoresense.app.service.ia;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -6,6 +7,8 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+
+
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -14,12 +17,17 @@ import java.util.stream.Collectors;
 public class AzureTextAnalyticsService {
 
     private final RestTemplate restTemplate;
-    private final String endpoint = "https://scoresence-recognizeteam.cognitiveservices.azure.com/";
-    private final String apiKey = "9A2x6AHl2BB7qGQbY1Bn1syU6ETrgXspviBuflOMycsnDefIEwlRJQQJ99BKAC4f1cMXJ3w3AAAaACOGwHTM";
+    private final String endpoint;
+    private final String apiKey;
 
-    public AzureTextAnalyticsService(RestTemplateBuilder builder) {
+    public AzureTextAnalyticsService(RestTemplateBuilder builder,
+                                     @Value("${azure.textanalytics.endpoint}") String endpoint,
+                                     @Value("${azure.textanalytics.key}") String apiKey) {
         this.restTemplate = builder.build();
+        this.endpoint = endpoint;
+        this.apiKey = apiKey;
     }
+
 
     public List<String> extractEntities(String text) {
         HttpHeaders headers = new HttpHeaders();
