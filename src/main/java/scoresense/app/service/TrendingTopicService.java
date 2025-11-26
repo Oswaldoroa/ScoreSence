@@ -29,7 +29,13 @@ public class TrendingTopicService {
         this.repository = repository;
         this.topicAnalysisService = topicAnalysisService;
     }
+<<<<<<< HEAD
     
+=======
+
+
+
+>>>>>>> 1336442903eb0c3140ef43af9fb253f2c7a25787
     public List<TrendingTopicResponse> getAll() {
         return repository.findAll()
                 .stream()
