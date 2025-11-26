@@ -26,9 +26,6 @@ public class TrendingTopicResponse {
     @JsonProperty("created_at")
     private OffsetDateTime  createdAt;
 
-<<<<<<< HEAD
     private List<String> detectedPersons;
 
-=======
->>>>>>> 1336442903eb0c3140ef43af9fb253f2c7a25787
 }

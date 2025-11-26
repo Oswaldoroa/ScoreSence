@@ -13,6 +13,7 @@ import jakarta.validation.Valid;
 import scoresense.app.dto.TrendingTopicRequest;
 import scoresense.app.dto.TrendingTopicResponse;
 import scoresense.app.service.TrendingTopicService;
+import scoresense.app.service.ia.TopicAnalysisService;
 
 @RestController
 @RequestMapping("/api/trending-topics")
@@ -20,9 +21,12 @@ import scoresense.app.service.TrendingTopicService;
 public class TrendingTopicController {
 
     private final TrendingTopicService trendingTopicService;
+    private final TopicAnalysisService topicAnalysisService;
 
-    public TrendingTopicController(TrendingTopicService trendingTopicService) {
+    public TrendingTopicController(TrendingTopicService trendingTopicService,
+                                   TopicAnalysisService topicAnalysisService) {
         this.trendingTopicService = trendingTopicService;
+        this.topicAnalysisService = topicAnalysisService;
     }
 
     @GetMapping
@@ -36,18 +40,6 @@ public class TrendingTopicController {
     public ResponseEntity<TrendingTopicResponse> getById(@PathVariable Long id) {
         return ResponseEntity.ok(trendingTopicService.getById(id));
     }
-
-    /*
-    //Para extraer las entidades usando Azure Text Analytics
-    @GetMapping("/{id}/entities")
-    @Operation(summary = "Get entities mentioned in a trending topic",
-            description = "Uses Azure Text Analytics to extract named entities (persons, teams, organizations) from the topic text.")
-    public ResponseEntity<List<String>> getEntities(@PathVariable Long id) {
-        TrendingTopicResponse topic = trendingTopicService.getById(id);
-        List<String> entities = azureTextAnalyticsService.extractEntities(topic.getTopic());
-        return ResponseEntity.ok(entities);
-    }
-    */
 
     @PostMapping
     @Operation(summary = "Create a new trending topic with Azure AI entity detection")
