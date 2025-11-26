@@ -14,7 +14,7 @@ import jakarta.validation.Valid;
 import scoresense.app.dto.TrendingTopicRequest;
 import scoresense.app.dto.TrendingTopicResponse;
 import scoresense.app.service.TrendingTopicService;
-import scoresense.app.service.ia.AzureTextAnalyticsService;
+//import scoresense.app.service.ia.AzureTextAnalyticsService;
 
 @RestController
 @RequestMapping("/api/trending-topics")
@@ -22,12 +22,12 @@ import scoresense.app.service.ia.AzureTextAnalyticsService;
 public class TrendingTopicController {
 
     private final TrendingTopicService trendingTopicService;
-    private final AzureTextAnalyticsService azureTextAnalyticsService;
+    //private final AzureTextAnalyticsService azureTextAnalyticsService;
 
 
-    public TrendingTopicController(TrendingTopicService trendingTopicService, AzureTextAnalyticsService azureTextAnalyticsService) {
+    public TrendingTopicController(TrendingTopicService trendingTopicService /*, AzureTextAnalyticsService azureTextAnalyticsService*/) {
         this.trendingTopicService = trendingTopicService;
-        this.azureTextAnalyticsService = azureTextAnalyticsService;
+        //this.azureTextAnalyticsService = azureTextAnalyticsService;
     }
 
     @GetMapping
