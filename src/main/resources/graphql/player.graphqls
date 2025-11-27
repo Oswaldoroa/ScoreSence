@@ -1,0 +1,40 @@
+type Player {
+    playerId: ID!
+    name: String!
+    position: String!
+    age: Int!
+    nationality: String!
+    height: Int
+    weight: Int
+    team: Team
+}
+
+extend type Query {
+    players: [Player]
+    playerById(id: ID!): Player
+}
+
+extend type Mutation {
+    createPlayer(
+        name: String!
+        position: String!
+        age: Int!
+        nationality: String!
+        height: Int
+        weight: Int
+        teamId: ID!
+    ): Player
+
+    updatePlayer(
+        playerId: ID!
+        name: String
+        position: String
+        age: Int
+        nationality: String
+        height: Int
+        weight: Int
+        teamId: ID
+    ): Player
+
+    deletePlayer(playerId: ID!): String
+}

@@ -1,0 +1,30 @@
+type Poll {
+    pollId: ID!
+    question: String!
+    createdAt: String!
+    expiresAt: String!
+}
+
+extend type Query {
+    polls: [Poll]
+    pollById(id: ID!): Poll
+    pollsByQuestion(question: String!): [Poll]
+    pollsByCreatedWithin(days: Int!): [Poll]
+    pollsByExpiredWithin(days: Int!): [Poll]
+    pagedPolls(page: Int!, size: Int!): [Poll]
+}
+
+extend type Mutation {
+    createPoll(
+        question: String!
+        expiresAt: String!
+    ): Poll
+
+    updatePoll(
+        pollId: ID!
+        question: String
+        expiresAt: String
+    ): Poll
+
+    deletePoll(pollId: ID!): String
+}

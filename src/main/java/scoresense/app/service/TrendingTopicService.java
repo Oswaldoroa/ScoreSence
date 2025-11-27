@@ -15,19 +15,15 @@ import scoresense.app.exception.ResourceNotFoundException;
 import scoresense.app.mapper.TrendingTopicMapper;
 import scoresense.app.model.TrendingTopic;
 import scoresense.app.repository.TrendingTopicRepository;
-import scoresense.app.service.ia.TopicAnalysisService;
 
 @Service
 @Transactional
 public class TrendingTopicService {
 
     private final TrendingTopicRepository repository;
-    private final TopicAnalysisService topicAnalysisService;
 
-    public TrendingTopicService(TrendingTopicRepository repository,
-                                TopicAnalysisService topicAnalysisService) {
+    public TrendingTopicService(TrendingTopicRepository repository) {
         this.repository = repository;
-        this.topicAnalysisService = topicAnalysisService;
     }
     
     public List<TrendingTopicResponse> getAll() {
@@ -57,13 +53,6 @@ public class TrendingTopicService {
 
         TrendingTopic updated = repository.save(topic);
         return TrendingTopicMapper.toResponse(updated);
-    }
-
-    // -------- Análisis IA --------
-    private TrendingTopicResponse enrichWithEntities(TrendingTopicResponse resp) {
-        List<String> persons = topicAnalysisService.detectarPersonas(resp.getTopic());
-        resp.setDetectedPersons(persons);
-        return resp;
     }
 
     // --- Métodos especializados ---

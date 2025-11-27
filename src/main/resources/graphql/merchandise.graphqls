@@ -1,0 +1,44 @@
+type Merchandise {
+    merchandiseId: ID!
+    team: Team
+    name: String!
+    category: String!
+    price: Float!
+    stock: Int!
+    imageUrl: String
+    type: String!
+}
+
+extend type Query {
+    merchandise: [Merchandise]
+    merchandiseById(id: ID!): Merchandise
+    merchandiseByTeam(teamId: ID!): [Merchandise]
+    merchandiseByName(name: String!): [Merchandise]
+    merchandiseByCategory(category: String!): [Merchandise]
+    pagedMerchandise(page: Int!, size: Int!): [Merchandise]
+}
+
+extend type Mutation {
+    createMerchandise(
+        teamId: ID!
+        name: String!
+        category: String!
+        price: Float!
+        stock: Int!
+        imageUrl: String
+        type: String!
+    ): Merchandise
+
+    updateMerchandise(
+        merchandiseId: ID!
+        teamId: ID
+        name: String
+        category: String
+        price: Float
+        stock: Int
+        imageUrl: String
+        type: String
+    ): Merchandise
+
+    deleteMerchandise(merchandiseId: ID!): String
+}

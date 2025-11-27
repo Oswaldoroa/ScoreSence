@@ -1,0 +1,39 @@
+type User {
+  id: ID!
+  name: String!
+  email: String
+}
+
+type PollVote {
+    pollVoteId: ID!
+    poll: Poll
+    user: User
+    optionSelected: String!
+    votedAt: String!
+}
+
+extend type Query {
+    pollVotes: [PollVote]
+    pollVoteById(id: ID!): PollVote
+    pollVotesByUser(userId: ID!): [PollVote]
+    pollVotesByOption(option: String!): [PollVote]
+    pollVotesByVotedWithin(days: Int!): [PollVote]
+    pagedPollVotes(page: Int!, size: Int!): [PollVote]
+}
+
+extend type Mutation {
+    createPollVote(
+        pollId: ID!
+        userId: ID!
+        optionSelected: String!
+    ): PollVote
+
+    updatePollVote(
+        pollVoteId: ID!
+        pollId: ID
+        userId: ID
+        optionSelected: String
+    ): PollVote
+
+    deletePollVote(pollVoteId: ID!): String
+}
