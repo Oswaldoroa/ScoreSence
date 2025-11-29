@@ -1,10 +1,8 @@
 package scoresense.app.dto;
-
 import lombok.Data;
 
 @Data
-public class UserRequest {
+public class UserLoginRequest {
     private String email;
     private String password;
-    private String role;
 }

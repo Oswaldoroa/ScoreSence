@@ -14,7 +14,7 @@ public final class FavoriteMapper {
                 .favoriteId(favorite.getFavoriteId())
                 .entity_type(favorite.getEntity_type())
                 .entity_id(favorite.getEntity_id())
-                .userId(favorite.getUser() != null ? favorite.getUser().getUserId() : null)
+                .userId(favorite.getUser() != null ? favorite.getUser().getId() : null)
                 .build();
     }
 

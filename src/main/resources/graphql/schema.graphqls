@@ -1,0 +1,55 @@
+schema {
+  query: Query
+  mutation: Mutation
+}
+
+# Tipos de respuesta (Basados en Entidades para permitir anidamiento)
+
+type League {
+  leagueId: ID!
+  name: String
+  country: String
+  season: String
+  level: String
+}
+
+type Team {
+  teamId: ID!
+  name: String
+  country: String
+  foundedYear: Int
+  stadium: String
+  logoUrl: String
+  # GraphQL resolverá esto automáticamente si devolvemos la Entidad Team
+  league: League 
+}
+
+# Input Type (Similar a TeamRequest DTO)
+input TeamRequestInput {
+  name: String!
+  country: String!
+  foundedYear: Int!
+  stadium: String!
+  logoUrl: String
+  leagueId: ID!
+}
+
+# ----------------- OPERACIONES -----------------
+
+type Query {
+  # Devuelve entidades para poder navegar a 'league'
+  findAllTeams: [Team] 
+
+  teamById(id: ID!): Team 
+  
+  teamsByCountry(country: String!): [Team]
+}
+
+type Mutation {
+  # Usamos el input type definido
+  createTeam(req: TeamRequestInput!): Team
+  
+  updateTeam(id: ID!, req: TeamRequestInput!): Team
+  
+  deleteTeam(id: ID!): Boolean
+}

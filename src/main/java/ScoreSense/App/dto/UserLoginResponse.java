@@ -1,5 +1,4 @@
 package scoresense.app.dto;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -9,7 +8,9 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserResponse {
+public class UserLoginResponse {
     private String email;
     private String role;
+    private String token;
+    private long expiresIn;
 }

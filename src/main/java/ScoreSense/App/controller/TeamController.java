@@ -14,7 +14,7 @@ import scoresense.app.dto.TeamResponse;
 import scoresense.app.service.TeamService;
 
 @RestController
-@RequestMapping("/api/teams")
+@RequestMapping("/api/v1/teams")
 @Tag(name = "Teams", description = "Operaciones CRUD sobre equipos")
 public class TeamController {
 

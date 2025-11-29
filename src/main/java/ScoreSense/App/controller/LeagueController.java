@@ -15,7 +15,7 @@ import scoresense.app.dto.LeagueResponse;
 import scoresense.app.service.LeagueService;
 
 @RestController
-@RequestMapping("/api/leagues")
+@RequestMapping("/api/v1/leagues")
 @Tag(name = "Leagues", description = "Operaciones CRUD sobre ligas")
 public class LeagueController {
 

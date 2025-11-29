@@ -1,55 +1,48 @@
 package scoresense.app.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import lombok.RequiredArgsConstructor;
+import scoresense.app.dto.UserLoginRequest;
+import scoresense.app.dto.UserLoginResponse;
+import scoresense.app.dto.UserRequest;
+import scoresense.app.dto.UserResponse;
+import scoresense.app.mapper.UserLoginMapper;
+import scoresense.app.service.JwtService;
 import scoresense.app.model.User;
-import scoresense.app.repository.UserRepository;
-
-import java.util.List;
+import scoresense.app.service.UserService;
 
 @RestController
-@RequestMapping("/users")
-
+@RequestMapping("/api/v1/users")
+@RequiredArgsConstructor
 public class UserController {
-
-    @Autowired
-    private UserRepository userRepository;
-
-
-    @GetMapping
-    public List<User> getAllUsers() {
-        return userRepository.findAll();
-    }
-
-
-    @GetMapping("/{id}")
-    public User getUserById(@PathVariable Long id) {
-        return userRepository.findById(id).orElse(null);
-    }
-
+    
+    private final UserService service;
+    private final JwtService jwtService;
+    // Ya no necesitamos PasswordEncoder aquí
 
     @PostMapping
-    public User createUser(@RequestBody User user) {
-        return userRepository.save(user);
+    public UserResponse create(@RequestBody UserRequest user) {
+        // SIMPLIFICADO: Solo llamamos al servicio. Él se encarga de la seguridad.
+        return service.create(user);
     }
 
+    @PostMapping("/login")
+    public ResponseEntity<UserLoginResponse> authenticate(@RequestBody UserLoginRequest loginRequest) {
+        // Autenticamos
+        User authenticatedUser = service.authenticate(loginRequest);
+        
+        // Preparamos la respuesta
+        UserLoginResponse userLoginResponse = UserLoginMapper.toResponse(authenticatedUser);
 
-    @PutMapping("/{id}")
-    public User updateUser(@PathVariable Long id, @RequestBody User userDetails) {
-        return userRepository.findById(id).map(user -> {
-            user.setUsername(userDetails.getUsername());
-            user.setEmail(userDetails.getEmail());
-            user.setPassword_hash(userDetails.getPassword_hash());
-            return userRepository.save(user);
-        }).orElse(null);
+        // Generamos el Token JWT
+        String jwtToken = jwtService.generateToken(authenticatedUser);
+        userLoginResponse.setToken(jwtToken);
+        userLoginResponse.setExpiresIn(jwtService.getExpirationTime());
+        
+        return ResponseEntity.ok(userLoginResponse);
     }
-
-
-    @DeleteMapping("/{id}")
-    public void deleteUser(@PathVariable Long id) {
-        userRepository.deleteById(id);
-    }
-
-
 }
