@@ -44,3 +44,29 @@ bin/
 
 ### VS Code ###
 .vscode/
+/target/
+
+# Ignorar logs
+*.log
+
+# Ignorar archivos temporales y configuraciones de IDE
+.vscode/
+.idea/
+*.iml
+
+# Ignorar variables de entorno, claves secretas o passwords (CRUCIAL para seguridad)
+# Si tienes tu archivo application.properties/yml con las claves de Neon, es mejor ignorarlo y usar
+# variables de entorno en Render.
+application.properties
+application.yml
+
+# Ignorar archivos de docker
+.dockerignore
+
+# Ignorar archivos WAR y JAR específicos si el packaging es JAR
+*.war
+*.jar
+
+# Ignorar archivos de sistema
+Thumbs.db
+.DS_Store
