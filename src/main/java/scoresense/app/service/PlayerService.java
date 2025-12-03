@@ -14,6 +14,7 @@ import scoresense.app.model.Player;
 import scoresense.app.model.Team;
 import scoresense.app.repository.PlayerRepository;
 import scoresense.app.repository.TeamRepository;
+import scoresense.app.service.ia.TopicAnalysisService;
 
 @Service
 @Transactional
@@ -21,10 +22,12 @@ public class PlayerService {
 
     private final PlayerRepository playerRepository;
     private final TeamRepository teamRepository;
+    private final TopicAnalysisService topicAnalysisService;
 
-    public PlayerService(PlayerRepository playerRepository, TeamRepository teamRepository) {
+    public PlayerService(PlayerRepository playerRepository, TeamRepository teamRepository, TopicAnalysisService topicAnalysisService) {
         this.playerRepository = playerRepository;
         this.teamRepository = teamRepository;
+        this.topicAnalysisService = topicAnalysisService;
     }
 
     public List<PlayerResponse> getAll() {
@@ -38,6 +41,13 @@ public class PlayerService {
         Player player = playerRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Player", "id", id));
         return PlayerMapper.toResponse(player);
+    }
+
+    // -------- Análisis IA --------
+    private PlayerResponse enrichWithEntities(PlayerResponse resp) {
+        List<String> persons = topicAnalysisService.detectarPersonas(resp.getName());
+        resp.setDetectedPersons(persons);
+        return resp;
     }
 
     public PlayerResponse create(PlayerRequest req) {

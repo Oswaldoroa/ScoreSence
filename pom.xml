@@ -122,6 +122,12 @@
             <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>com.azure</groupId>
+            <artifactId>azure-ai-textanalytics</artifactId>
+            <version>5.4.0</version>
+        </dependency>
+
     </dependencies>
 
     <dependencyManagement>

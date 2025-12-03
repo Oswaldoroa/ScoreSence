@@ -1,5 +1,7 @@
 package scoresense.app.dto;
 
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -34,4 +36,6 @@ public class PlayerResponse {
 
     @JsonProperty("team")
     private TeamResponse team; // objeto completo
+
+    private List<String> detectedPersons;
 }
