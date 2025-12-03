@@ -27,12 +27,9 @@ public class PlayerController {
         this.topicAnalysisService = topicAnalysisService;
     }
 
-    
-
     @PostMapping
     @Operation(summary = "Create a new player with Azure AI entity detection")
     public ResponseEntity<PlayerResponse> create(@Valid @RequestBody PlayerRequest req) {
-        // 1. Crear el jugador normalmente
         PlayerResponse created = playerService.create(req);
 
         // 2. Analizar con Azure IA (sobre el nombre del jugador)
