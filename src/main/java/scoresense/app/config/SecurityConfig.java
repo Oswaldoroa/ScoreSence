@@ -48,10 +48,12 @@ public class SecurityConfig {
                 .requestMatchers("/services/**").hasRole("ADMIN")
                 .anyRequest().authenticated()
             )
+            /* 
             .formLogin(form -> form
                 .loginPage("/login")       // <-- tu página personalizada
                 .permitAll()
             )
+                */
             .logout(logout -> logout.permitAll())
 
 
