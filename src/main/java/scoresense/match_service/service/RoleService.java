@@ -15,7 +15,7 @@ import scoresense.match_service.repository.RoleRepository;
 
 @Service
 @RequiredArgsConstructor
-@Transactional // Applies transactions to all methods.
+@Transactional
 public class RoleService {
 
     private final RoleRepository roleRepository;
@@ -29,7 +29,6 @@ public class RoleService {
 
     public RoleResponse getRoleById(Long id) {
         RoleEntity role = roleRepository.findById(id)
-                // Throws an exception if the resource is not found.
                 .orElseThrow(() -> new ResourceNotFoundException("Role", "id", id));
         return mapToResponse(role);
     }

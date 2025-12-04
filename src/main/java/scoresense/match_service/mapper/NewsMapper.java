@@ -21,8 +21,7 @@ public final class NewsMapper {
                 .author(news.getAuthor())
                 .sourceUrl(news.getSourceUrl())
                 .imageUrl(news.getImageUrl())
-                .teamId(news.getTeamId()) // Lectura directa
-                .build();
+                .teamId(news.getTeamId())                .build();
     }
 
     public static List<NewsResponse> toResponseList(List<News> newsList) {
@@ -45,8 +44,8 @@ public final class NewsMapper {
         news.setAuthor(request.getAuthor());
         news.setSourceUrl(request.getSourceUrl());
         news.setImageUrl(request.getImageUrl());
-        news.setTeamId(request.getTeamId()); // Asignación directa
-        return news;
+        news.setTeamId(request.getTeamId());    
+            return news;
     }
 
     public static void copyToEntity(NewsRequest request, News entity) {
@@ -59,6 +58,5 @@ public final class NewsMapper {
         entity.setAuthor(request.getAuthor());
         entity.setSourceUrl(request.getSourceUrl());
         entity.setImageUrl(request.getImageUrl());
-        entity.setTeamId(request.getTeamId()); // Actualización directa
-    }
+        entity.setTeamId(request.getTeamId());    }
 }

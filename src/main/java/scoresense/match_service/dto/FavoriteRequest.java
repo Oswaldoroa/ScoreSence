@@ -8,13 +8,13 @@ import lombok.Data;
 @Data
 public class FavoriteRequest {
 
-    @NotNull(message = "El ID del usuario es obligatorio")
+    @NotNull(message = "User ID is required")
     private Long userId;
 
-    @NotBlank(message = "El tipo de entidad es obligatorio")
-    @Pattern(regexp = "^(team|player)$", message = "El tipo de entidad debe ser 'team' o 'player'")
+    @NotBlank(message = "Entity type is required")
+    @Pattern(regexp = "^(team|player)$", message = "Entity type must be 'team' or 'player'")
     private String entityType;
 
-    @NotNull(message = "El ID de la entidad es obligatorio")
+    @NotNull(message = "Entity ID is required")
     private Long entityId;
 }

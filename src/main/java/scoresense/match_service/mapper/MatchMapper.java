@@ -16,8 +16,6 @@ public final class MatchMapper {
         match.setHomeScore(req.getHomeScore());
         match.setAwayScore(req.getAwayScore());
 
-        // Asignación directa de IDs
-        match.setHomeTeamId(req.getHomeTeamId());
         match.setAwayTeamId(req.getAwayTeamId());
         match.setRefereeId(req.getRefereeId());
 
@@ -34,9 +32,9 @@ public final class MatchMapper {
                 .matchDate(match.getMatchDate())
                 .homeScore(match.getHomeScore())
                 .awayScore(match.getAwayScore())
-                .homeTeamId(match.getHomeTeamId()) // Obtener ID directo
-                .awayTeamId(match.getAwayTeamId()) // Obtener ID directo
+                .homeTeamId(match.getHomeTeamId())
+                .awayTeamId(match.getAwayTeamId())
                 .refereeId(match.getRefereeId())
-                .build();
+.build();
     }
 }
