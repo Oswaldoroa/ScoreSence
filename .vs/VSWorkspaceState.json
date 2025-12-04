@@ -1,0 +1,14 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\src",
+    "\\src\\main",
+    "\\src\\main\\java",
+    "\\src\\main\\java\\scoresense",
+    "\\src\\main\\java\\scoresense\\match_service",
+    "\\src\\main\\java\\scoresense\\match_service\\config",
+    "\\src\\main\\java\\scoresense\\match_service\\controller"
+  ],
+  "SelectedNode": "\\src\\main\\java\\scoresense\\match_service\\controller\\FavoriteController.java",
+  "PreviewInSolutionExplorer": false
+}
