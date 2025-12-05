@@ -1,0 +1,33 @@
+type Rivalries {
+    rivalrieId: ID!
+    description: String
+    teamVisitor: Team
+    teamLocal: Team
+}
+
+extend type Query {
+    rivalries: [Rivalries]
+    rivalryById(id: ID!): Rivalries
+    pagedRivalries(page: Int!, size: Int!): [Rivalries]
+
+    searchRivalrieVisitor(visitorName: String!): [Rivalries]
+    searchRivalrieLocal(localName: String!): [Rivalries]
+    searchRivalrieByDescription(description: String!): [Rivalries]
+}
+
+extend type Mutation {
+    createRivalry(
+        description: String!
+        teamVisitorId: ID!
+        teamLocalId: ID!
+    ): Rivalries
+
+    updateRivalry(
+        rivalrieId: ID!
+        description: String
+        teamVisitorId: ID
+        teamLocalId: ID
+    ): Rivalries
+
+    deleteRivalry(rivalrieId: ID!): String
+}

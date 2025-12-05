@@ -22,7 +22,7 @@ public class TeamResponse {
     private String country;
 
     @JsonProperty("founded_year")
-    private Short foundedYear;
+    private Short foundedYear; // mantiene coherencia con el entity
 
     @JsonProperty("stadium")
     private String stadium;
@@ -31,5 +31,5 @@ public class TeamResponse {
     private String logoUrl;
 
     @JsonProperty("league_id")
-    private Long leagueId;
+    private LeagueResponse league;
 }

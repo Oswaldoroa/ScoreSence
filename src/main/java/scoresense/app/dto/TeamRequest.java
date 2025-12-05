@@ -13,14 +13,13 @@ public class TeamRequest {
     private String name;
 
     @NotBlank
-    @Size(max = 50)
+    @Size(max = 60)
     private String country;
 
     @NotNull
-    private Short foundedYear;
+    private Short foundedYear; // usa Short para alinearse con el modelo
 
     @NotBlank
-    @Size(max = 50)
     private String stadium;
 
     private String logoUrl;

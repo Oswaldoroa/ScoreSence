@@ -3,6 +3,7 @@ package scoresense.app.mapper;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import scoresense.app.dto.LeagueResponse;
 import scoresense.app.dto.TeamRequest;
 import scoresense.app.dto.TeamResponse;
 import scoresense.app.model.Team;
@@ -19,9 +20,16 @@ public final class TeamMapper {
                 .foundedYear(team.getFoundedYear())
                 .stadium(team.getStadium())
                 .logoUrl(team.getLogoUrl())
-                .leagueId(team.getLeague() != null ? team.getLeague().getLeagueId() : null)
+                .league(team.getLeague() != null ? LeagueResponse.builder()
+                        .leagueId(team.getLeague().getLeagueId())
+                        .name(team.getLeague().getName())
+                        .country(team.getLeague().getCountry())
+                        .season(team.getLeague().getSeason())
+                        .level(team.getLeague().getLevel())
+                        .build() : null)
                 .build();
     }
+
 
     public static Team toEntity(TeamRequest request) {
         if (request == null) return null;
